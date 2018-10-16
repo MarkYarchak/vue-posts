@@ -1,27 +1,28 @@
 <template>
   <div class="post-item">
-    <High
+    <HighPost
       :post="post"
     />
-    <Content
+    <ContentPost
       :post="post"
     />
-    <Down
+    <DownPost
       :post="post"
     />
   </div>
 </template>
 
 <script>
-import High from './High';
-import Content from './Content';
-import Down from './Down';
+import HighPost from './HighPost';
+import ContentPost from './ContentPost';
+import DownPost from './DownPost';
 
 export default {
+  name: 'PostItem',
   components: {
-    High,
-    Content,
-    Down,
+    HighPost,
+    ContentPost,
+    DownPost,
   },
   props: {
     post: {

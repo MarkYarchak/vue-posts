@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Content',
+  name: 'ContentPost',
   props: {
     post: {
       type: Object,

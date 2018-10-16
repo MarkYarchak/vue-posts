@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Posts from './components/Posts';
+import Posts from './components/UsersPosts';
 
 export default {
   name: 'App',

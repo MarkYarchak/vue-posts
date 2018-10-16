@@ -16,28 +16,11 @@
       <div class="high__time">{{ post.createDate }}</div>
     </div>
   </div>
-
-  <!-- <div class="derek-post__header header">
-        <div class="header__left">
-            <div class="header__avatar-box">
-                <div class="header__avatar-derek"></div>
-            </div>
-            <div class="header__title-box">
-                <div class="header__title">Derek Russell</div>
-                <div class="header__sub-title">@derek.russell </div>
-            </div>
-        </div>
-        <div class="header__right">
-            <div class="header__time">
-                16m
-            </div>
-        </div>
-    </div> -->
 </template>
 
 <script>
 export default {
-  name: 'High',
+  name: 'HighPost',
   props: {
     post: {
       type: Object,

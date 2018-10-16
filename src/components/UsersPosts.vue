@@ -14,6 +14,7 @@
 import PostItem from './PostItem';
 
 export default {
+  name: 'UserPosts',
   components: {
     PostItem,
   },

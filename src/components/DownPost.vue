@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'Down',
+  name: 'DownPost',
   props: {
     post: {
       type: Object,
