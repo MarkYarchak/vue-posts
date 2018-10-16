@@ -1,22 +1,23 @@
 <template>
-    <div class="high">
-      <div class="high__left">
-          <div class="high__avatar-box">
-            <div class="high__avatar"
-                :style="{'background-image': `url(${post.author.avatar})`}"
-            ></div>
-          </div>
-          <div class="high__title-box">
-              <div class="high__title">{{ post.author.displayName }}</div>
-              <div class="high__sub-title">{{ post.author.username }}</div>
-          </div>
+  <div class="high">
+    <div class="high__left">
+      <div class="high__avatar-box">
+        <div
+          :style="{'background-image': `url(${post.author.avatar})`}"
+          class="high__avatar"
+        />
       </div>
-      <div class="high__right">
-          <div class="high__time">{{ post.createDate }}</div>
+      <div class="high__title-box">
+        <div class="high__title">{{ post.author.displayName }}</div>
+        <div class="high__sub-title">{{ post.author.username }}</div>
       </div>
     </div>
+    <div class="high__right">
+      <div class="high__time">{{ post.createDate }}</div>
+    </div>
+  </div>
 
-    <!-- <div class="derek-post__header header">
+  <!-- <div class="derek-post__header header">
         <div class="header__left">
             <div class="header__avatar-box">
                 <div class="header__avatar-derek"></div>
@@ -36,19 +37,19 @@
 
 <script>
 export default {
-  name: "High",
+  name: 'High',
   props: {
     post: {
       type: Object,
-      default:() => ({}),
+      default: () => ({}),
     },
   },
   data() {
-    return  {
+    return {
 
     };
   },
-}
+};
 </script>
 
 <style scoped>

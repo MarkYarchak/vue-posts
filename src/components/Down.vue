@@ -1,42 +1,42 @@
 <template>
-    <div class="down">
-        <div class="down__left">
-            <div class="down__avatars-box">
-                <div class="down__avatars">
-                    <div
-                      v-for="(comment, index) in post.comments"
-                      :key="index"
-                      v-if="index < 3"
-                      class="avatar"
-                      :style="{'background-image': `url(${ comment.author.avatar })`}"
-                    />
-                </div>
-            </div>
-            <div class="down__comments">
-                {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
-            </div>
+  <div class="down">
+    <div class="down__left">
+      <div class="down__avatars-box">
+        <div class="down__avatars">
+          <div
+            v-for="(comment, index) in post.comments"
+            v-if="index < 3"
+            :key="index"
+            :style="{'background-image': `url(${ comment.author.avatar })`}"
+            class="avatar"
+          />
         </div>
-        <div class="down__right">
-            <div class="down__like">
-                <template v-if="post.likes.length">
-                {{ post.likes.length }}
-                </template>
-                <i class="far fa-heart"/>
-            </div>
-        </div>
+      </div>
+      <div class="down__comments">
+        {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
+      </div>
     </div>
+    <div class="down__right">
+      <div class="down__like">
+        <template v-if="post.likes.length">
+          {{ post.likes.length }}
+        </template>
+        <i class="far fa-heart"/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "Down",
-        props: {
-            post: {
-                type: Object,
-                default:() => ({}),
-            },
-        },
-    }
+export default {
+  name: 'Down',
+  props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+};
 </script>
 
 <style scoped>

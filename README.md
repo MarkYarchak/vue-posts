@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # f-pr
 
 ## Project setup
@@ -28,4 +27,3 @@ npm run lint
 =======
 # application
 posts of application
->>>>>>> 35c69a8e68cc0e03cbb65a26426fdef7586bd2f3

@@ -1,25 +1,26 @@
 <template>
-    <div class="content">
-        <p v-if="post.content.text">
-            {{ post.content.text }}
-        </p>
-        <div v-if="post.content.imageUrl"
-             class="image"
-             :style="{'background-image': `url(${ post.content.imageUrl })`}"
-        />
-    </div>
+  <div class="content">
+    <p v-if="post.content.text">
+      {{ post.content.text }}
+    </p>
+    <div
+      v-if="post.content.imageUrl"
+      :style="{'background-image': `url(${ post.content.imageUrl })`}"
+      class="image"
+    />
+  </div>
 </template>
 
 <script>
 export default {
-    name: "Content",
-    props: {
-        post: {
-            type: Object,
-            default:() => ({}),
-        },
+  name: 'Content',
+  props: {
+    post: {
+      type: Object,
+      default: () => ({}),
     },
-}
+  },
+};
 </script>
 
 <style scoped>
