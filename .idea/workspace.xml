@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6cce3c2-290d-4872-b3e1-1f10bd4b698e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/dist/css/app.a30e18b0.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/app.6eb68cf8.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/app.6eb68cf8.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.6c9cb6ef.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/js/chunk-vendors.6c9cb6ef.js.map" beforeDir="false" />
-    </list>
+    <list default="true" id="b6cce3c2-290d-4872-b3e1-1f10bd4b698e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -118,8 +110,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+            <state relative-caret-position="960">
+              <caret line="64" lean-forward="true" selection-start-line="2" selection-end-line="64" />
             </state>
           </provider>
         </entry>
@@ -274,15 +266,16 @@
       <option name="presentableId" value="Default" />
       <updated>1539692285614</updated>
       <workItem from="1539692297540" duration="1203000" />
-      <workItem from="1539696271978" duration="7305000" />
+      <workItem from="1539696271978" duration="7564000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8508000" />
+    <option name="totallyTimeSpent" value="8767000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="56" y="-14" width="1311" height="783" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25335437" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -340,13 +333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.eslintrc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -371,6 +357,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintrc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -383,8 +376,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+        <state relative-caret-position="960">
+          <caret line="64" lean-forward="true" selection-start-line="2" selection-end-line="64" />
         </state>
       </provider>
     </entry>
