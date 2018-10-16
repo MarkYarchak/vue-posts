@@ -13,17 +13,14 @@
                 </div>
             </div>
             <div class="down__comments">
-                {{ post.comments.length }} {{ post.comments.length < 2 ? 'comment' : 'comments' }}
+                {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
             </div>
         </div>
         <div class="down__right">
             <div class="down__like">
-                <div
-                v-for="(like, index) in post.likes"
-                :key="index"
-                />
-                <!-- v-if="index > 0" -->
+                <template v-if="post.likes.length">
                 {{ post.likes.length }}
+                </template>
                 <i class="far fa-heart"/>
             </div>
         </div>
