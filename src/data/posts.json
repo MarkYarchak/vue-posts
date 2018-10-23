@@ -8,7 +8,7 @@
       "createDate": "16m",
       "content": {
         "text": "",
-        "imageUrl": "https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg"
+        "imageUrl": "http://diarioveaonline.com/wp-content/uploads/2018/06/excellent-wallpaper-full-hd-for-desktop-27.jpg"
       },
       "comments": [
         {
@@ -33,7 +33,7 @@
           "author": {
             "displayName": "Shea Elmer",
             "username": "",
-            "avatar": "http://diarioveaonline.com/wp-content/uploads/2018/06/excellent-wallpaper-full-hd-for-desktop-27.jpg"
+            "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
           },
           "comment": "",
           "createDate": ""
@@ -48,7 +48,8 @@
           "createDate": ""
         }
       ],
-      "likes": []
+      "likes": [],
+      "dislikes": []
     },
     {
       "author": {
@@ -75,7 +76,7 @@
           "author": {
             "displayName": "Darell Roeder",
             "username": "",
-            "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
+            "avatar": "https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg"
           },
           "comment": "",
           "createDate": ""
@@ -135,7 +136,8 @@
           "createDate": ""
         }
       ],
-      "likes": []
+      "likes": [],
+      "dislikes": []
     },
     {
       "author": {
@@ -183,6 +185,7 @@
           },
           "likeDate": ""
         }
-      ]
+      ],
+      "dislikes": []
     }
 ]

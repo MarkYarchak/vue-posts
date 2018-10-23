@@ -23,21 +23,22 @@ export default {
 };
 </script>
 
-<style scoped>
-    .image {
-        flex-grow: 1;
-        background: center center/cover no-repeat lightgoldenrodyellow;
-        width: 343px;
-        height: 176px;
-    }
-    p {
-        font-family: "Arial", Arial, sans-serif;
-        color: rgb(0, 0, 0);
-        font-size: 15px;
-        line-height: 20px;
-        letter-spacing: -0.2px;
-        padding: 10px;
-        margin: 0px;
-        padding-left: 16px;
-    }
+<style
+    lang="stylus"
+    scoped
+>
+    .image
+        flex-grow 1
+        background center center/cover no-repeat lightgoldenrodyellow
+        width 343px
+        height 176px
+    p
+        font-family "Arial", Arial, sans-serif
+        color rgb(0 0 0)
+        font-size 15px
+        line-height 20px
+        letter-spacing -0.2px
+        padding 10px
+        margin 0
+        padding-left 16px
 </style>
