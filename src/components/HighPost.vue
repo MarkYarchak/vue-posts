@@ -57,6 +57,7 @@ export default {
         height 36px
         width 36px
         border-radius 50%
+        cursor pointer
     .high__title-box
         display flex
         flex-direction column
@@ -66,12 +67,14 @@ export default {
         font-weight Normal
         letter-spacing -0.4pt
         line-height 22px
+        cursor pointer
     .high__sub-title
         font-size 13px
         font-family "Arial", Arial, sans-serif
         letter-spacing -0.1pt
         color rgb(153 153 153)
         line-height 18px
+        cursor pointer
     .high__right
         width 96px
         display flex
