@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Posts from './components/UsersPosts';
+// import Posts from './components/UsersPosts';
 
 export default {
   name: 'App',
   components: {
-    Posts,
+    Posts: () => import('./components/UsersPosts'),
   },
 };
 </script>

@@ -1,40 +1,88 @@
 <template>
-  <div class="down">
-    <div class="down__left">
-      <div class="down__avatars-box">
-        <div class="down__avatars">
-          <div
-            v-for="(comment, index) in post.comments"
-            v-if="index < 3"
-            :key="index"
-            :style="{'background-image': `url(${ comment.author.avatar })`}"
-            class="avatar"
-          />
+  <div class="downpluscom">
+    <div class="down">
+      <div class="down__left">
+        <div class="down__avatars-box">
+          <div class="down__avatars">
+            <div
+              v-for="(comment, index) in post.comments"
+              v-if="index < 3"
+              :key="index"
+              :style="{'background-image': `url(${ comment.author.avatar })`}"
+              class="avatar"
+            />
+          </div>
+        </div>
+        <div
+          class="down__comments"
+          @click="showCom()">
+          {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
         </div>
       </div>
-      <div class="down__comments">
-        {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
+      <div class="down__right">
+        <div class="down__like">
+          <template v-if="post.likes.length">
+            {{ post.likes.length }}
+          </template>
+          <i class="far fa-heart"/>
+        </div>
       </div>
     </div>
-    <div class="down__right">
-      <div class="down__like">
-        <template v-if="post.likes.length">
-          {{ post.likes.length }}
-        </template>
-        <i class="far fa-heart"/>
+    <template v-if="showComents">
+      <div
+        v-for="(comment, index) in post.comments"
+        v-if="index < countcom"
+        :key="index"
+        class="showcom">
+        <div class="onecom">
+          <div class="onecom__comment-box comment-box">
+            <div
+              :style="{'background-image': `url(${ comment.author.avatar })`}"
+              class="comment-box__avatar"
+            />
+            <div class="comment-box__username">
+              {{ comment.author.username }}
+            </div>
+            <div class="comment-box__comment">
+              {{ comment.comment }}
+            </div>
+          </div>
+          <div class="onecom__like"></div>
+        </div>
       </div>
-    </div>
+      <div
+        class="show-morecom"
+        @click="showMore"
+      >Show more</div>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DownPost',
+
   props: {
     post: {
       type: Object,
       default: () => ({}),
     },
+  },
+  data() {
+    return {
+      countcom: 2,
+      showComents: false,
+    };
+  },
+  methods: {
+    showCom() {
+      this.showComents = !this.showComents;
+    },
+    showMore() {
+      this.countcom += 2;
+    },
+  },
+  computed: {
   },
 };
 </script>
@@ -87,4 +135,29 @@ export default {
         font-size 18px
     .fa-heart
         font-size 20px
+    .comentshow
+        display flex
+        justify-content space-between
+        padding-left 5pt
+    .onecom
+        display flex
+        justify-content space-between
+        box-shadow 0 1px 2px 0 rgba(0 0 0 0.18),
+        0 1px 2px 0 rgba(0 0 0 0.04), 0 2px 6px 0 rgba(0 0 0 0.04)
+    .onecom__comment-box
+    .comment-box__avatar
+        display flex
+        flex-shrink 0
+        background center center/cover no-repeat grey
+        height 36px
+        width 36px
+        border-radius 50%
+    .comment-box__username
+    .comment-box__comment
+        font-family "Arial", Arial, sans-serif
+        letter-spacing -0.2px
+        font-size 15px
+    .show-morecom
+        height 36px
+        width 36px
 </style>
