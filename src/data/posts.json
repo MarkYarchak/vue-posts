@@ -17,8 +17,9 @@
             "username": "nartanesl",
             "avatar": "https://wallpaper.wiki/wp-content/uploads/2017/05/Free-HD-Corvette-Wallpapers-Images.jpg"
           },
-          "comment": "So good! its so beatiful xdxd yeah? get here for me!)) please",
-          "createDate": ""
+          "comment": "So good! its so beatiful, get here for me!)) please",
+          "createDate": "15m",
+          "likes": []
         },
         {
           "author": {
@@ -27,7 +28,8 @@
             "avatar": "https://jooinn.com/images/girl-162.jpg"
           },
           "comment": "the best",
-          "createDate": ""
+          "createDate": "13m",
+          "likes": []
         },
         {
           "author": {
@@ -36,7 +38,8 @@
             "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
           },
           "comment": "Wonderful picture",
-          "createDate": ""
+          "createDate": "13m",
+          "likes": []
         },
         {
           "author": {
@@ -45,11 +48,11 @@
             "avatar": "https://www.b17.ru/foto/uploaded/b69a564c47110acefb8c986f768210ac.jpg"
           },
           "comment": "nice!!",
-          "createDate": ""
+          "createDate": "10m",
+          "likes": []
         }
       ],
-      "likes": [],
-      "dislikes": []
+      "likes": []
     },
     {
       "author": {
@@ -69,8 +72,9 @@
             "username": "qwshllor",
             "avatar": "http://aspekty.net/wp-content/uploads/2017/05/vzglyad.jpeg"
           },
-          "comment": "Good wriring",
-          "createDate": ""
+          "comment": "Good writing",
+          "createDate": "40m",
+          "likes": []
         },
         {
           "author": {
@@ -79,7 +83,8 @@
             "avatar": "https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg"
           },
           "comment": "how long you think it?",
-          "createDate": ""
+          "createDate": "37m",
+          "likes": []
         },
         {
           "author": {
@@ -88,7 +93,8 @@
             "avatar": "http://www.kinyu-z.net/data/wallpapers/56/897774.jpg"
           },
           "comment": "good",
-          "createDate": ""
+          "createDate": "33m",
+          "likes": []
         },
         {
           "author": {
@@ -97,7 +103,8 @@
             "avatar": "http://gloria-mur.ru/wp-content/uploads/2017/05/avatar1-740x463.jpg"
           },
           "comment": "hey",
-          "createDate": ""
+          "createDate": "30m",
+          "likes": []
         },
         {
           "author": {
@@ -106,7 +113,8 @@
             "avatar": "http://demiart.ru/forum/uploads10/post-1670049-1336051076.jpg"
           },
           "comment": "With memory...",
-          "createDate": ""
+          "createDate": "25m",
+          "likes": []
         },
         {
           "author": {
@@ -115,7 +123,8 @@
             "avatar": "https://iso.500px.com/wp-content/uploads/2014/01/40434442-2048.jpeg"
           },
           "comment": "what?",
-          "createDate": ""
+          "createDate": "24m",
+          "likes": []
         },
         {
           "author": {
@@ -124,7 +133,8 @@
             "avatar": "https://shaadigrapher.com/wp-content/uploads/2013/09/best-wedding-photographer-india.jpg"
           },
           "comment": "lol)",
-          "createDate": ""
+          "createDate": "17m",
+          "likes": []
         },
         {
           "author": {
@@ -133,11 +143,11 @@
             "avatar": "https://files.brightside.me/files/news/part_4/46555/209005-3439210-1000-1446450434antarctic-1000-20e3fa6395-1484729696.jpg"
           },
           "comment": "interesting",
-          "createDate": ""
+          "createDate": "9m",
+          "likes": []
         }
       ],
-      "likes": [],
-      "dislikes": []
+      "likes": []
     },
     {
       "author": {
@@ -155,7 +165,17 @@
             "avatar": "https://www.stylecracker.com/blog/wp-content/uploads/2016/09/Slider-9-1.jpg"
           },
           "comment": "haha",
-          "createDate": ""
+          "createDate": "1h",
+          "likes": [
+            {
+              "like": {
+                "displayName": "Tatum Vine",
+                "username": "kalaminda",
+                "avatar": ""
+              },
+              "likeDate": ""
+            }
+          ]
         },
         {
           "author": {
@@ -164,7 +184,8 @@
             "avatar": "https://www.trickscity.com/wp-content/uploads/2016/12/a59b8c0c50f181e5bde6a76eff60abea.jpg"
           },
           "comment": "where is my comment",
-          "createDate": ""
+          "createDate": "37m",
+          "likes": []
         },
         {
           "author": {
@@ -173,7 +194,8 @@
             "avatar": "https://www.independent.ie/incoming/article35010156.ece/ALTERNATES/h342/iw%20IMG_9611_2.jpg"
           },
           "comment": "not bad",
-          "createDate": ""
+          "createDate": "20m",
+          "likes": []
         }
       ],
       "likes": [
@@ -185,7 +207,6 @@
           },
           "likeDate": ""
         }
-      ],
-      "dislikes": []
+      ]
     }
 ]
