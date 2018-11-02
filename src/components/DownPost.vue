@@ -24,7 +24,9 @@
           <div v-if="post.likes.length">
             {{ post.likes.length }}
           </div>
-          <div class="like__position" @click="likePos = !likePos">
+          <div
+            class="like__position"
+            @click="likePos = !likePos">
             <i
               v-if="!likePos"
               class="far fa-heart"
@@ -37,42 +39,20 @@
         </div>
       </div>
     </div>
-    <template v-if="showComents">
-      <div
-        v-for="(comment, index) in post.comments"
-        v-if="index < countcom"
-        :key="index"
-        class="showcom">
-        <div class="onecom">
-          <div class="onecom__comment-box comment-box">
-            <div
-              :style="{'background-image': `url(${ comment.author.avatar })`}"
-              class="comment-box__avatar"
-            />
-            <div class="comment-box__string-combox string-combox">
-              <div class="string-combox__username">
-                {{ comment.author.username }}
-              </div>
-              <div class="string-combox__comment">
-                {{ comment.comment }}
-              </div>
-            </div>
-          </div>
-          <div class="onecom__like"></div>
-        </div>
-      </div>
-      <div
-        class="show-morecom"
-        @click="showMore"
-      >Show more</div>
-    </template>
+    <PostComments
+      v-if="showComents"
+      :comments="post.comments"
+    />
   </div>
 </template>
 
 <script>
+import PostComments from './PostComments';
 export default {
   name: 'DownPost',
-
+  components: {
+    PostComments,
+  },
   props: {
     post: {
       type: Object,
@@ -81,7 +61,6 @@ export default {
   },
   data() {
     return {
-      countcom: 2,
       showComents: false,
       likePos: false,
     };
@@ -90,11 +69,6 @@ export default {
     showCom() {
       this.showComents = !this.showComents;
     },
-    showMore() {
-      this.countcom += 2;
-    },
-  },
-  computed: {
   },
 };
 </script>
@@ -153,35 +127,4 @@ export default {
     .like__position
         display flex
         margin-left 5px
-    .comentshow
-        display flex
-        justify-content space-between
-        padding-left 5pt
-    .onecom
-        display flex
-        justify-content space-between
-        box-shadow 0 1px 2px 0 rgba(0 0 0 0.18),
-        0 1px 2px 0 rgba(0 0 0 0.04), 0 2px 6px 0 rgba(0 0 0 0.04)
-    .onecom__comment-box
-    .comment-box__avatar
-        display flex
-        flex-shrink 0
-        background center center/cover no-repeat grey
-        height 36px
-        width 36px
-        border-radius 50%
-    .string-combox
-        display flex
-        flex-direction column
-    .string-combox__username
-        font-weight 600
-        font-size 15
-    .string-combox__comment
-        font-family "Arial", Arial, sans-serif
-        letter-spacing -0.2px
-        font-size 15px
-    .show-morecom
-        height 36px
-        width 36px
-        cursor pointer
 </style>
