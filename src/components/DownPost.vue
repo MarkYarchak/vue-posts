@@ -19,8 +19,8 @@
           {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
         </div>
       </div>
-      <div class="down__right">
-        <div class="down__like like">
+      <div class="down__right right">
+        <div class="right__like like">
           <div v-if="post.likes.length">
             {{ post.likes.length }}
           </div>
@@ -48,6 +48,7 @@
 
 <script>
 import PostComments from './PostComments';
+
 export default {
   name: 'DownPost',
   components: {
@@ -114,7 +115,7 @@ export default {
         display: flex
         padding-top 13px
         padding-right 11px
-    .down__like
+    .right__like
         display flex
         color rgb(162 55 243)
         align-items center
