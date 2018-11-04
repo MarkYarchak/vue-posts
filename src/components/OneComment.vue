@@ -116,6 +116,8 @@ export default {
         font-size 12px
     .box-answer_date__commentdate
         font-family "Arial", Arial, sans-serif
+        color #636363
+        padding-bottom 1px
     .box-answer_date__answer
     .onecom__right
         margin 0 5px 0 3px
