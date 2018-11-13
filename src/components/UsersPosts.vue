@@ -5,6 +5,7 @@
         v-for="(item, key) in posts"
         :key="key"
         :post="item"
+        @add-comment="createComment"
       />
     </ul>
   </div>
@@ -19,9 +20,25 @@ export default {
   components: {
     PostItem,
   },
-  computed: {
-    posts() {
-      return post;
+  data() {
+    return {
+      posts: [],
+    };
+  },
+  created() {
+    this.posts = post;
+  },
+  // computed: {
+  //   posts() {
+  //     return post;
+  //   },
+  // },
+  methods: {
+    createComment(selfComment, { id }) {
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === id);
+      console.log('tempPosts ', tempPosts);
+      // this.post.comments.push(selfComment.comment);
     },
   },
 };

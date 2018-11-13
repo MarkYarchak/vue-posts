@@ -1,5 +1,7 @@
 <template>
-  <div class="post-item">
+  <div
+    class="post-item"
+  >
     <HighPost
       :post="post"
     />
@@ -8,6 +10,7 @@
     />
     <DownPost
       :post="post"
+      @add-comment="createComment"
     />
   </div>
 </template>
@@ -34,6 +37,11 @@ export default {
     return {
 
     };
+  },
+  methods: {
+    createComment(selfComment) {
+      this.$emit('add-comment', selfComment, { id: this.post.id });
+    },
   },
 };
 </script>

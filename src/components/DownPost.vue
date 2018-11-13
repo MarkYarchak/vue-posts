@@ -43,16 +43,21 @@
       v-if="showComents"
       :comments="post.comments"
     />
+    <AddComment
+      v-if="showComents"
+      @add-comment="createComment"/>
   </div>
 </template>
 
 <script>
 import PostComments from './PostComments';
+import AddComment from './AddComment';
 
 export default {
   name: 'DownPost',
   components: {
     PostComments,
+    AddComment,
   },
   props: {
     post: {
@@ -69,6 +74,9 @@ export default {
   methods: {
     showCom() {
       this.showComents = !this.showComents;
+    },
+    createComment(selfComment) {
+      this.$emit('add-comment', selfComment);
     },
   },
 };
