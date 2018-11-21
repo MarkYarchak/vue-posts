@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     createComment(selfComment) {
-      this.$emit('add-comment', selfComment, { id: this.post.id });
+      this.$emit('add-comment', selfComment);
     },
   },
 };

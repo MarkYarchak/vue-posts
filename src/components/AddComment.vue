@@ -4,43 +4,55 @@
       <div class="avatar"/>
     </div>
     <div class="box-addcom__inpcom">
-      <form>
-        <input
-          id="inpcom"
-          v-model="selfComment"
-          type="text"
-          placeholder="Write your comment..."
-        >
-      </form>
+      <input
+        id="inpcom"
+        v-model="selfComment.comment"
+        type="text"
+        placeholder="Write your comment..."
+      >
+      <button
+        class="box-addcom__send"
+        @click="createComment"
+      >Send</button>
     </div>
-    <button
-      class="box-addcom__send"
-      @click="createComment"
-    >Send</button>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'AddComment',
+  props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
       selfComment: {
-        id: '16',
+        id: '',
         author: {
           displayName: 'Mark Yarchak',
-          username: '@markyarchak',
-          avatar: 'https://files.brightside.me/files/news/part_4/46555/209005-3439210-1000-1446450434antarctic-1000-20e3fa6395-1484729696.jpg',
+          username: 'markyarchak',
+          avatar: 'http://wallfon.com/walls/others/nice.jpg',
         },
         comment: '',
-        createDate: '30s',
+        createDate: '10s',
         likes: [],
       },
     };
   },
   methods: {
     createComment() {
-      this.$emit('add-comment', { comment: this.selfComment });
+      this.selfComment.postId = this.post.id;
+      if (this.selfComment.comment !== '') {
+        this.$emit('add-comment', this.selfComment);
+      }
+      if (this.createComment) {
+        this.selfComment.comment = '';
+      }
     },
   },
 };
@@ -63,8 +75,26 @@ export default {
         border-radius 50%
         padding 2px
     .box-addcom__inpcom
+        display flex
+        background-color rgb(162 55 243)
+        border-radius 10px
+        border 0.5px solid rgb(162 55 243)
     #inpcom
-        width 230px
+        margin 0.5px
+        border-radius 10px
+        padding 0 5px 0 5px
+        border 0.5px solid rgb(162 55 243)
+        width 220px
+    #inpcom:focus
+        outline none
     .box-addcom__send
         cursor pointer
+        border-radius 0 10px 10px 0
+        height 23px
+        width 50px
+        background-color rgb(162 55 243)
+        color white
+        border 1px solid rgb(162 55 243)
+    .box-addcom__send:focus
+      outline none
 </style>

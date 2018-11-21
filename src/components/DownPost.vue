@@ -45,6 +45,7 @@
     />
     <AddComment
       v-if="showComents"
+      :post="post"
       @add-comment="createComment"/>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="UsersPosts">
     <ul>
       <post-item
         v-for="(item, key) in posts"
@@ -34,11 +34,13 @@ export default {
   //   },
   // },
   methods: {
-    createComment(selfComment, { id }) {
+    createComment(comment) {
       const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === id);
-      console.log('tempPosts ', tempPosts);
-      // this.post.comments.push(selfComment.comment);
+      const idx = tempPosts.findIndex(p => p.id === comment.postId);
+      if (idx !== -1) {
+        tempPosts[idx].comments.push(comment);
+        this.posts = JSON.parse(JSON.stringify(tempPosts));
+      }
     },
   },
 };
