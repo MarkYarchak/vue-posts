@@ -13,12 +13,14 @@
       </div>
     </div>
     <div class="high__right">
-      <div class="high__time">{{ post.createDate }}</div>
+      <div class="high__time">{{ commentCreateTime }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'HighPost',
   props: {
@@ -29,8 +31,12 @@ export default {
   },
   data() {
     return {
-
     };
+  },
+  computed: {
+    commentCreateTime() {
+      return moment(this.post.createDate).fromNow(true);
+    },
   },
 };
 </script>

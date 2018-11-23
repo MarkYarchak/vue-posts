@@ -26,7 +26,7 @@
           </div>
           <div
             class="like__position"
-            @click="likePos = !likePos">
+            @click="likePos = !likePos, createPostLike">
             <i
               v-if="!likePos"
               class="far fa-heart"
@@ -70,6 +70,14 @@ export default {
     return {
       showComents: false,
       likePos: false,
+      selfLike: {
+        like: {
+          displayName: 'Mark Yarchak',
+          username: 'markyarchak',
+          avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        },
+        likeDate: '',
+      },
     };
   },
   methods: {
@@ -78,6 +86,9 @@ export default {
     },
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
+    },
+    createPostLike() {
+      this.$emit('add-post-like', this.selfLike);
     },
   },
 };

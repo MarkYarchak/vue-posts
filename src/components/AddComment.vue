@@ -39,20 +39,21 @@ export default {
           avatar: 'http://wallfon.com/walls/others/nice.jpg',
         },
         comment: '',
-        createDate: '10s',
+        createDate: '',
         likes: [],
       },
     };
   },
   methods: {
     createComment() {
+      if (this.selfComment.createDate === '') {
+        this.selfComment.createDate = moment();
+      }
       this.selfComment.postId = this.post.id;
       if (this.selfComment.comment !== '') {
         this.$emit('add-comment', this.selfComment);
       }
-      if (this.createComment) {
-        this.selfComment.comment = '';
-      }
+      this.selfComment.comment = '';
     },
   },
 };

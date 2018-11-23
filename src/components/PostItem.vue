@@ -11,6 +11,7 @@
     <DownPost
       :post="post"
       @add-comment="createComment"
+      @add-post-like="createPostLike"
     />
   </div>
 </template>
@@ -41,6 +42,9 @@ export default {
   methods: {
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
+    },
+    createPostLike(selfLike) {
+      this.$emit('add-like', selfLike);
     },
   },
 };

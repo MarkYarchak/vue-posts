@@ -18,7 +18,7 @@
         </div>
         <div class="userbox__box-answer_date box-answer_date">
           <div class="box-answer_date__commentdate">
-            {{ comment.createDate }}
+            {{ commentCreateTime }}
           </div>
         </div>
       </div>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'OneComment',
   props: {
@@ -62,7 +64,11 @@ export default {
       likePos: false,
     };
   },
-
+  computed: {
+    commentCreateTime() {
+      return moment(this.comment.createDate).fromNow(true);
+    },
+  },
 };
 </script>
 

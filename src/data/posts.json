@@ -6,7 +6,7 @@
         "username": "@derek.russell",
         "avatar": "http://posta-magazine.ru/images/stories/flexicontent2/1_DerekBlasberg-youtube_posta-magazine.jpg"
       },
-      "createDate": "16m",
+      "createDate": [2014, 0, 29],
       "content": {
         "text": "",
         "imageUrl": "http://diarioveaonline.com/wp-content/uploads/2018/06/excellent-wallpaper-full-hd-for-desktop-27.jpg"
@@ -20,7 +20,7 @@
             "avatar": "https://wallpaper.wiki/wp-content/uploads/2017/05/Free-HD-Corvette-Wallpapers-Images.jpg"
           },
           "comment": "So good! its so beatiful, get here for me!)) please",
-          "createDate": "15m",
+          "createDate": [2014, 0, 29],
           "likes": []
         },
         {
@@ -31,7 +31,7 @@
             "avatar": "https://jooinn.com/images/girl-162.jpg"
           },
           "comment": "the best",
-          "createDate": "13m",
+          "createDate": [2014, 5, 20],
           "likes": []
         },
         {
@@ -42,7 +42,7 @@
             "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
           },
           "comment": "Wonderful picture",
-          "createDate": "13m",
+          "createDate": [2014, 6, 15],
           "likes": []
         },
         {
@@ -53,7 +53,7 @@
             "avatar": "https://www.b17.ru/foto/uploaded/b69a564c47110acefb8c986f768210ac.jpg"
           },
           "comment": "nice!!",
-          "createDate": "10m",
+          "createDate": [2015, 0, 18],
           "likes": []
         }
       ],
@@ -66,7 +66,7 @@
         "username": "@jmitch",
         "avatar": "https://pbs.twimg.com/profile_images/943567052790534144/wOEOj_EB_400x400.jpg"
       },
-      "createDate": "42m",
+      "createDate": [2015, 10, 28],
       "content": {
         "text": "Anyone need a spare ticket for the Worry Dolls show at the Borderline?",
         "imageUrl": ""
@@ -80,7 +80,7 @@
             "avatar": "http://aspekty.net/wp-content/uploads/2017/05/vzglyad.jpeg"
           },
           "comment": "Good writing",
-          "createDate": "40m",
+          "createDate": [2016, 1, 11],
           "likes": []
         },
         {
@@ -91,7 +91,7 @@
             "avatar": "https://wallpaperbrowse.com/media/images/70258224-full-hd-wallpapers.jpeg"
           },
           "comment": "how long you think it?",
-          "createDate": "37m",
+          "createDate": [2016, 2, 29],
           "likes": []
         },
         {
@@ -102,7 +102,7 @@
             "avatar": "http://www.kinyu-z.net/data/wallpapers/56/897774.jpg"
           },
           "comment": "good",
-          "createDate": "33m",
+          "createDate": [2016, 7, 20],
           "likes": []
         },
         {
@@ -113,7 +113,7 @@
             "avatar": "http://gloria-mur.ru/wp-content/uploads/2017/05/avatar1-740x463.jpg"
           },
           "comment": "hey",
-          "createDate": "30m",
+          "createDate": [2017, 1, 12],
           "likes": []
         },
         {
@@ -124,7 +124,7 @@
             "avatar": "http://demiart.ru/forum/uploads10/post-1670049-1336051076.jpg"
           },
           "comment": "With memory...",
-          "createDate": "25m",
+          "createDate": [2017, 2, 28],
           "likes": []
         },
         {
@@ -135,7 +135,7 @@
             "avatar": "https://iso.500px.com/wp-content/uploads/2014/01/40434442-2048.jpeg"
           },
           "comment": "what?",
-          "createDate": "24m",
+          "createDate": [2017, 4, 16],
           "likes": []
         },
         {
@@ -146,7 +146,7 @@
             "avatar": "https://shaadigrapher.com/wp-content/uploads/2013/09/best-wedding-photographer-india.jpg"
           },
           "comment": "lol)",
-          "createDate": "17m",
+          "createDate": [2018, 2, 10],
           "likes": []
         },
         {
@@ -157,7 +157,7 @@
             "avatar": "https://files.brightside.me/files/news/part_4/46555/209005-3439210-1000-1446450434antarctic-1000-20e3fa6395-1484729696.jpg"
           },
           "comment": "interesting",
-          "createDate": "9m",
+          "createDate": [2018, 3, 9],
           "likes": []
         }
       ],
@@ -170,7 +170,7 @@
         "username": "@monicaaa",
         "avatar": "http://statementscene.com/wp-content/uploads/2014/01/IMG_8108-750x535.jpg"
       },
-      "createDate": "2h",
+      "createDate": [2018, 10, 14],
       "content": "",
       "comments": [
         {
@@ -181,7 +181,7 @@
             "avatar": "https://www.stylecracker.com/blog/wp-content/uploads/2016/09/Slider-9-1.jpg"
           },
           "comment": "haha",
-          "createDate": "1h",
+          "createDate": [2018, 10, 19],
           "likes": [
             {
               "like": {
@@ -201,7 +201,7 @@
             "avatar": "https://www.trickscity.com/wp-content/uploads/2016/12/a59b8c0c50f181e5bde6a76eff60abea.jpg"
           },
           "comment": "where is my comment",
-          "createDate": "37m",
+          "createDate": [2018, 10, 29],
           "likes": []
         },
         {
@@ -212,7 +212,7 @@
             "avatar": "https://www.independent.ie/incoming/article35010156.ece/ALTERNATES/h342/iw%20IMG_9611_2.jpg"
           },
           "comment": "not bad",
-          "createDate": "20m",
+          "createDate": [2018, 10, 17],
           "likes": []
         }
       ],
