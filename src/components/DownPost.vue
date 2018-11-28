@@ -26,7 +26,7 @@
           </div>
           <div
             class="like__position"
-            @click="likePos = !likePos, createPostLike">
+            @click="createPostLike">
             <i
               v-if="!likePos"
               class="far fa-heart"
@@ -40,11 +40,11 @@
       </div>
     </div>
     <PostComments
-      v-if="showComents"
+      v-if="showComments"
       :comments="post.comments"
     />
     <AddComment
-      v-if="showComents"
+      v-if="showComments"
       :post="post"
       @add-comment="createComment"/>
   </div>
@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      showComents: false,
+      showComments: false,
       likePos: false,
       selfLike: {
         like: {
@@ -77,18 +77,26 @@ export default {
           avatar: 'http://wallfon.com/walls/others/nice.jpg',
         },
         likeDate: '',
+        id: '',
       },
     };
   },
   methods: {
     showCom() {
-      this.showComents = !this.showComents;
+      this.showComments = !this.showComments;
     },
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
     },
     createPostLike() {
-      this.$emit('add-post-like', this.selfLike);
+      this.selfLike.likeId = this.post.id;
+      this.likePos = !this.likePos;
+      if (this.likePos) {
+        this.$emit('add-post-like', this.selfLike);
+      }
+      if (!this.likePos) {
+        this.$emit('del-post-like', this.selfLike);
+      }
     },
   },
 };

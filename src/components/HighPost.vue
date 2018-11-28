@@ -89,6 +89,6 @@ export default {
     .high__time
         font-family "Arial", Arial, sans-serif
         font-size 13px
-        padding 16pt
+        padding 21px 16px 0 0
         color rgb(153 153 153)
 </style>

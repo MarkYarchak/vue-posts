@@ -7,13 +7,13 @@
         :post="item"
         @add-comment="createComment"
         @add-post-like="createPostLike"
+        @del-post-like="deletePostLike"
       />
     </ul>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
 import post from '../data/posts';
 import PostItem from './PostItem';
 
@@ -41,7 +41,18 @@ export default {
     },
     createPostLike(selfLike) {
       const tempLike = this.posts.concat();
-      const idx = tempLike.findIndex();
+      const idx = tempLike.findIndex(p => p.id === selfLike.likeId);
+      if (idx !== -1) {
+        tempLike[idx].likes.push(selfLike);
+      }
+    },
+    deletePostLike(DelSelfLike) {
+      const tempLike = this.posts.concat();
+      const idx = tempLike.findIndex(p => p.id === DelSelfLike.likeId);
+      if (idx !== -1) {
+        const dislike = tempLike[idx].likes.indexOf(this.selfLike);
+        tempLike[idx].likes.splice(dislike, 1);
+      }
     },
   },
 };
