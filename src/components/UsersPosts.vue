@@ -8,6 +8,8 @@
         @add-comment="createComment"
         @add-post-like="createPostLike"
         @del-post-like="deletePostLike"
+        @add-comment-like="likeComment"
+        @del-comment-like="dislikeComment"
       />
     </ul>
   </div>
@@ -46,12 +48,36 @@ export default {
         tempLike[idx].likes.push(selfLike);
       }
     },
-    deletePostLike(DelSelfLike) {
+    deletePostLike(delSelfLike) {
       const tempLike = this.posts.concat();
-      const idx = tempLike.findIndex(p => p.id === DelSelfLike.likeId);
+      const idx = tempLike.findIndex(p => p.id === delSelfLike.likeId);
       if (idx !== -1) {
         const dislike = tempLike[idx].likes.indexOf(this.selfLike);
         tempLike[idx].likes.splice(dislike, 1);
+      }
+    },
+    likeComment(selfLike) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === selfLike.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === selfLike.commentId);
+      if (postidx !== -1) {
+        if (commentidx !== -1) {
+          tempComments[commentidx].likes.push(selfLike);
+        }
+      }
+    },
+    dislikeComment(delSelfLike) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === delSelfLike.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === delSelfLike.commentId);
+      if (postidx !== -1) {
+        if (commentidx !== -1) {
+          // console.log(this.selfLike);
+          const dislike = tempComments[commentidx].likes.indexOf(this.selfLike);
+          tempComments[commentidx].likes.splice(dislike, 1);
+        }
       }
     },
   },

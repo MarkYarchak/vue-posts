@@ -6,7 +6,10 @@
       :key="index"
       class="showcom">
       <OneComment
+        :post="post"
         :comment="comment"
+        @add-comment-like="LikeComment"
+        @del-comment-like="DislikeComment"
       />
     </div>
     <div class="box-show-morecom">
@@ -28,6 +31,10 @@ export default {
     OneComment,
   },
   props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
     comments: {
       type: Array,
       default: () => [],
@@ -41,6 +48,12 @@ export default {
   methods: {
     showMore() {
       this.countcom += 2;
+    },
+    LikeComment(selfLike) {
+      this.$emit('add-comment-like', selfLike);
+    },
+    DislikeComment(selfLike) {
+      this.$emit('del-comment-like', selfLike);
     },
   },
 };

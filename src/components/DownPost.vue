@@ -26,7 +26,7 @@
           </div>
           <div
             class="like__position"
-            @click="createPostLike">
+            @click="PostLike">
             <i
               v-if="!likePos"
               class="far fa-heart"
@@ -42,6 +42,9 @@
     <PostComments
       v-if="showComments"
       :comments="post.comments"
+      :post="post"
+      @add-comment-like="LikeComment"
+      @del-comment-like="DislikeComment"
     />
     <AddComment
       v-if="showComments"
@@ -88,7 +91,7 @@ export default {
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
     },
-    createPostLike() {
+    PostLike() {
       this.selfLike.likeId = this.post.id;
       this.likePos = !this.likePos;
       if (this.likePos) {
@@ -97,6 +100,12 @@ export default {
       if (!this.likePos) {
         this.$emit('del-post-like', this.selfLike);
       }
+    },
+    LikeComment(selfLike) {
+      this.$emit('add-comment-like', selfLike);
+    },
+    DislikeComment(selfLike) {
+      this.$emit('del-comment-like', selfLike);
     },
   },
 };

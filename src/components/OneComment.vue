@@ -33,7 +33,7 @@
         </div>
         <div
           class="like__position"
-          @click="likePos = !likePos">
+          @click="LikeComment">
           <i
             v-if="!likePos"
             class="far fa-heart"
@@ -54,6 +54,10 @@ import moment from 'moment';
 export default {
   name: 'OneComment',
   props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
     comment: {
       type: Object,
       default: () => {},
@@ -62,11 +66,33 @@ export default {
   data() {
     return {
       likePos: false,
+      selfLike: {
+        like: {
+          displayName: 'Mark Yarchak',
+          username: 'markyarchak',
+          avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        },
+        likeDate: '',
+        id: '',
+      },
     };
   },
   computed: {
     commentCreateTime() {
       return moment(this.comment.createDate).fromNow(true);
+    },
+  },
+  methods: {
+    LikeComment() {
+      this.selfLike.postId = this.post.id;
+      this.selfLike.commentId = this.comment.id;
+      this.likePos = !this.likePos;
+      if (this.likePos) {
+        this.$emit('add-comment-like', this.selfLike);
+      }
+      if (!this.likePos) {
+        this.$emit('del-comment-like', this.selfLike);
+      }
     },
   },
 };
