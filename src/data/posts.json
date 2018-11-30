@@ -184,13 +184,10 @@
           "createDate": [2018, 9, 19],
           "likes": [
             {
-              "like": {
                 "displayName": "Tatum Vine",
                 "username": "kalaminda",
-                "avatar": ""
-              },
-              "likeDate": "",
-              "likeId": "40"
+                "avatar": "",
+                "id": 385
             }
           ]
         },
@@ -219,13 +216,10 @@
       ],
       "likes": [
         {
-          "like": {
             "displayName": "Tatum Vine",
             "username": "kalaminda",
-            "avatar": ""
-          },
-          "likeDate": "",
-          "likeId": "40"
+            "avatar": "",
+            "id": 56789
         }
       ]
     }

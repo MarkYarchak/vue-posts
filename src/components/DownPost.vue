@@ -119,6 +119,12 @@ export default {
         display flex
         justify-content space-between
         height 44px
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
     .down__left
         display flex
         align-items center

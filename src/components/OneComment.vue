@@ -66,14 +66,11 @@ export default {
   data() {
     return {
       likePos: false,
-      selfLike: {
-        like: {
-          displayName: 'Mark Yarchak',
-          username: 'markyarchak',
-          avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        },
-        likeDate: '',
-        id: '',
+      user: {
+        displayName: 'Mark Yarchak',
+        username: 'markyarchak',
+        avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        id: 1,
       },
     };
   },
@@ -84,14 +81,20 @@ export default {
   },
   methods: {
     LikeComment() {
-      this.selfLike.postId = this.post.id;
-      this.selfLike.commentId = this.comment.id;
       this.likePos = !this.likePos;
       if (this.likePos) {
-        this.$emit('add-comment-like', this.selfLike);
+        this.$emit('add-comment-like', {
+          user: this.user,
+          commentId: this.comment.id,
+          postId: this.post.id,
+        });
       }
       if (!this.likePos) {
-        this.$emit('del-comment-like', this.selfLike);
+        this.$emit('del-comment-like', {
+          user: this.user,
+          commentId: this.comment.id,
+          postId: this.post.id,
+        });
       }
     },
   },
@@ -150,11 +153,23 @@ export default {
         font-family "Arial", Arial, sans-serif
         color #636363
         padding-bottom 1px
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
     .box-answer_date__answer
     .onecom__right
         margin 0 5px 0 3px
         display flex
         align-items center
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
     .right__like
         display flex
         color rgb(162 55 243)

@@ -91,4 +91,10 @@ export default {
         font-size 13px
         padding 21px 16px 0 0
         color rgb(153 153 153)
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
 </style>

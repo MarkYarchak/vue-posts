@@ -56,27 +56,26 @@ export default {
         tempLike[idx].likes.splice(dislike, 1);
       }
     },
-    likeComment(selfLike) {
+    likeComment(likeData) {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === selfLike.postId);
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === selfLike.commentId);
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
       if (postidx !== -1) {
         if (commentidx !== -1) {
-          tempComments[commentidx].likes.push(selfLike);
+          tempComments[commentidx].likes.push(likeData.user);
         }
       }
     },
-    dislikeComment(delSelfLike) {
+    dislikeComment(likeData) {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === delSelfLike.postId);
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === delSelfLike.commentId);
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
       if (postidx !== -1) {
         if (commentidx !== -1) {
-          // console.log(this.selfLike);
-          const dislike = tempComments[commentidx].likes.indexOf(this.selfLike);
-          tempComments[commentidx].likes.splice(dislike, 1);
+          tempComments[commentidx].likes = tempComments[commentidx].likes
+            .filter(l => l.id !== likeData.user.id);
         }
       }
     },
