@@ -73,14 +73,11 @@ export default {
     return {
       showComments: false,
       likePos: false,
-      selfLike: {
-        like: {
-          displayName: 'Mark Yarchak',
-          username: 'markyarchak',
-          avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        },
-        likeDate: '',
-        id: '',
+      user: {
+        displayName: 'Mark Yarchak',
+        username: 'markyarchak',
+        avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        id: 1,
       },
     };
   },
@@ -92,13 +89,18 @@ export default {
       this.$emit('add-comment', selfComment);
     },
     PostLike() {
-      this.selfLike.likeId = this.post.id;
       this.likePos = !this.likePos;
       if (this.likePos) {
-        this.$emit('add-post-like', this.selfLike);
+        this.$emit('add-post-like', {
+          user: this.user,
+          postId: this.post.id,
+        });
       }
       if (!this.likePos) {
-        this.$emit('del-post-like', this.selfLike);
+        this.$emit('del-post-like', {
+          user: this.user,
+          postId: this.post.id,
+        });
       }
     },
     LikeComment(selfLike) {

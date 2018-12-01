@@ -42,18 +42,18 @@ export default {
       }
     },
     createPostLike(selfLike) {
-      const tempLike = this.posts.concat();
-      const idx = tempLike.findIndex(p => p.id === selfLike.likeId);
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
       if (idx !== -1) {
-        tempLike[idx].likes.push(selfLike);
+        tempPosts[idx].likes.push(selfLike.user);
       }
     },
-    deletePostLike(delSelfLike) {
-      const tempLike = this.posts.concat();
-      const idx = tempLike.findIndex(p => p.id === delSelfLike.likeId);
+    deletePostLike(selfLike) {
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
       if (idx !== -1) {
-        const dislike = tempLike[idx].likes.indexOf(this.selfLike);
-        tempLike[idx].likes.splice(dislike, 1);
+        tempPosts[idx].likes = tempPosts[idx].likes
+          .filter(l => l.id !== selfLike.user.id);
       }
     },
     likeComment(likeData) {
