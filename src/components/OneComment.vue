@@ -70,7 +70,7 @@ export default {
         displayName: 'Mark Yarchak',
         username: 'markyarchak',
         avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        id: 1,
+        id: 0,
       },
     };
   },
@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     LikeComment() {
+      this.comment.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
         this.$emit('add-comment-like', {

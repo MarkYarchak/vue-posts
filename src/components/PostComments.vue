@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     showMore() {
-      this.countcom += 2;
+      this.countcom += 5;
     },
     LikeComment(selfLike) {
       this.$emit('add-comment-like', selfLike);
