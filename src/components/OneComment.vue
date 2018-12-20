@@ -1,6 +1,9 @@
 <template>
   <div class="onecom">
-    <div class="onecom__left left">
+    <div
+      class="onecom__left left"
+      @click="showParameters"
+    >
       <div class="left__avatar">
         <div
           :style="{'background-image': `url(${ comment.author.avatar })`}"
@@ -21,6 +24,13 @@
             {{ commentCreateTime }}
           </div>
         </div>
+        <CommentItems
+          v-if="showCommentItems"
+          :comment="comment"
+          :post="post"
+          @delete-comment="deleteComment"
+          @edit-comment="editComment"
+        />
       </div>
     </div>
     <div class="onecom__right right">
@@ -50,9 +60,13 @@
 
 <script>
 import moment from 'moment';
+import CommentItems from './CommentItems';
 
 export default {
   name: 'OneComment',
+  components: {
+    CommentItems,
+  },
   props: {
     post: {
       type: Object,
@@ -65,6 +79,8 @@ export default {
   },
   data() {
     return {
+      openParameters: null,
+      showCommentItems: false,
       likePos: false,
       user: {
         displayName: 'Mark Yarchak',
@@ -79,7 +95,24 @@ export default {
       return moment(this.comment.createDate).fromNow(true);
     },
   },
+  // watch: {
+  //   liveComment(newVal) {
+  //     if ()
+  //   },
+  // },
   methods: {
+    showParameters() {
+      this.showCommentItems = !this.showCommentItems;
+    },
+    deleteComment(allOfId) {
+      this.$emit('delete-comment', allOfId);
+    },
+    editComment(allOfId) {
+      this.$emit('edit-comment', {
+        allId: allOfId,
+        text: this.comment.comment,
+      });
+    },
     LikeComment() {
       this.comment.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;

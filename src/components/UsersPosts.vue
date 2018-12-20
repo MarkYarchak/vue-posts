@@ -10,6 +10,8 @@
         @del-post-like="deletePostLike"
         @add-comment-like="likeComment"
         @del-comment-like="dislikeComment"
+        @delete-comment="deleteComment"
+        @edit-comment="editComment"
       />
     </ul>
   </div>
@@ -27,6 +29,8 @@ export default {
   data() {
     return {
       posts: [],
+      temporaryPosts: 0,
+      temporaryComments: 0,
     };
   },
   created() {
@@ -37,10 +41,20 @@ export default {
       const tempPosts = this.posts.concat();
       const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
       if (idx !== -1) {
-        tempPosts[idx].comments.push(selfComment);
+        tempPosts[idx].comments.unshift(selfComment);// or push() if to end
         this.posts = JSON.parse(JSON.stringify(tempPosts));
       }
     },
+    deleteComment(comment) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === comment.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === comment.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempPosts[postidx].comments = tempComments.filter(c => c.id !== comment.commentId);
+      }
+    },
+    editComment(comment) {},
     createPostLike(selfLike) {
       const tempPosts = this.posts.concat();
       const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
@@ -61,10 +75,8 @@ export default {
       const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
       const tempComments = tempPosts[postidx].comments.concat();
       const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1) {
-        if (commentidx !== -1) {
-          tempComments[commentidx].likes.push(likeData.user);
-        }
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes.push(likeData.user);
       }
     },
     dislikeComment(likeData) {
@@ -72,11 +84,9 @@ export default {
       const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
       const tempComments = tempPosts[postidx].comments.concat();
       const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1) {
-        if (commentidx !== -1) {
-          tempComments[commentidx].likes = tempComments[commentidx].likes
-            .filter(l => l.id !== likeData.user.id);
-        }
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes = tempComments[commentidx].likes
+          .filter(l => l.id !== likeData.user.id);
       }
     },
   },

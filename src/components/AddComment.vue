@@ -14,6 +14,10 @@
         class="box-addcom__send"
         @click="createComment"
       >Send</button>
+      <button
+        class="box-addcom__save"
+        @click="saveComment"
+      >Save</button>
     </div>
   </div>
 </template>
@@ -24,6 +28,10 @@ import moment from 'moment';
 export default {
   name: 'AddComment',
   props: {
+    editcomment: {
+      type: Object,
+      default: () => ({}),
+    },
     post: {
       type: Object,
       default: () => ({}),
@@ -46,6 +54,7 @@ export default {
   },
   methods: {
     createComment() {
+      this.selfComment.id = Math.floor(Math.random() * 10000);
       if (this.selfComment.createDate === '') {
         this.selfComment.createDate = moment();
       }
@@ -55,6 +64,7 @@ export default {
       }
       this.selfComment.comment = '';
     },
+    saveComment() {},
   },
 };
 </script>
@@ -96,6 +106,15 @@ export default {
         background-color rgb(162 55 243)
         color white
         border 1px solid rgb(162 55 243)
+    .box-addcom__save
+        display none
+        cursor pointer
+        border-radius 0 10px 10px 0
+        height 23px
+        width 50px
+        background-color rgb(162 55 243)
+        color white
+        border 1px solid rgb(162 55 243)
     .box-addcom__send:focus
-      outline none
+        outline none
 </style>

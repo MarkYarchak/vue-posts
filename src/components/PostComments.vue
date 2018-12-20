@@ -10,6 +10,8 @@
         :comment="comment"
         @add-comment-like="LikeComment"
         @del-comment-like="DislikeComment"
+        @delete-comment="deleteComment"
+        @edit-comment="editComment"
       />
     </div>
     <div class="box-show-morecom">
@@ -42,12 +44,19 @@ export default {
   },
   data() {
     return {
-      countcom: 2,
+      openParameters: null,
+      countcom: 3,
     };
   },
   methods: {
     showMore() {
       this.countcom += 5;
+    },
+    deleteComment(allOfId) {
+      this.$emit('delete-comment', allOfId);
+    },
+    editComment(textId) {
+      this.$emit('edit-comment', textId);
     },
     LikeComment(selfLike) {
       this.$emit('add-comment-like', selfLike);

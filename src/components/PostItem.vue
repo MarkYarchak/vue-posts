@@ -15,6 +15,8 @@
       @del-post-like="deletePostLike"
       @add-comment-like="LikeComment"
       @del-comment-like="DislikeComment"
+      @delete-comment="deleteComment"
+      @edit-comment="editComment"
     />
   </div>
 </template>
@@ -45,6 +47,12 @@ export default {
   methods: {
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
+    },
+    deleteComment(comment) {
+      this.$emit('delete-comment', comment);
+    },
+    editComment(comment) {
+      this.$emit('edit-comment', comment);
     },
     createPostLike(selfLike) {
       this.$emit('add-post-like', selfLike);

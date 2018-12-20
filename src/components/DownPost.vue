@@ -3,7 +3,10 @@
     <div class="down">
       <div class="down__left">
         <div class="down__avatars-box">
-          <div class="down__avatars">
+          <div
+            v-if="post.comments.length !== 0"
+            class="down__avatars"
+          >
             <div
               v-for="(comment, index) in post.comments"
               v-if="index < 3"
@@ -16,7 +19,7 @@
         <div
           class="down__comments"
           @click="showCom()">
-          {{ post.comments.length }} {{ post.comments.length > 1 ? 'comments' : 'comment' }}
+          {{ post.comments.length }} {{ post.comments.length !== 1 ? 'comments' : 'comment' }}
         </div>
       </div>
       <div class="down__right right">
@@ -45,9 +48,12 @@
       :post="post"
       @add-comment-like="LikeComment"
       @del-comment-like="DislikeComment"
+      @delete-comment="deleteComment"
+      @edit-comment="editComment"
     />
     <AddComment
       v-if="showComments"
+      :editcomment="commentInf"
       :post="post"
       @add-comment="createComment"/>
   </div>
@@ -71,6 +77,7 @@ export default {
   },
   data() {
     return {
+      commentInf: null,
       showComments: false,
       likePos: false,
       user: {
@@ -88,7 +95,15 @@ export default {
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
     },
+    deleteComment(allOfId) {
+      this.$emit('delete-comment', allOfId);
+    },
+    editComment(textId) {
+      this.commentInf = textId;
+      this.$emit('edit-comment', textId);
+    },
     PostLike() {
+      this.post.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
         this.$emit('add-post-like', {
