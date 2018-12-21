@@ -54,7 +54,9 @@ export default {
         tempPosts[postidx].comments = tempComments.filter(c => c.id !== comment.commentId);
       }
     },
-    editComment(comment) {},
+    // editComment(comment) {
+    // @click="commentItemsFalse"
+    // },
     createPostLike(selfLike) {
       const tempPosts = this.posts.concat();
       const idx = tempPosts.findIndex(p => p.id === selfLike.postId);

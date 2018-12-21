@@ -103,6 +103,7 @@ export default {
   methods: {
     showParameters() {
       this.showCommentItems = !this.showCommentItems;
+      this.$emit('close-all-comments-items', this.showCommentItems);
     },
     deleteComment(allOfId) {
       this.$emit('delete-comment', allOfId);
