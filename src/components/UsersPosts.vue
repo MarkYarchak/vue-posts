@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import post from '../data/posts';
 import PostItem from './PostItem';
 
 export default {
@@ -28,13 +27,14 @@ export default {
   },
   data() {
     return {
-      posts: [],
       temporaryPosts: 0,
       temporaryComments: 0,
     };
   },
-  created() {
-    this.posts = post;
+  computed: {
+    posts() {
+      return this.$store.state.posts;
+    },
   },
   methods: {
     createComment(selfComment) {
@@ -54,9 +54,9 @@ export default {
         tempPosts[postidx].comments = tempComments.filter(c => c.id !== comment.commentId);
       }
     },
-    // editComment(comment) {
-    // @click="commentItemsFalse"
-    // },
+    editComment(comment) {
+      console.log('this working');
+    },
     createPostLike(selfLike) {
       const tempPosts = this.posts.concat();
       const idx = tempPosts.findIndex(p => p.id === selfLike.postId);

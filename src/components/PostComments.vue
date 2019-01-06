@@ -15,7 +15,6 @@
         @del-comment-like="DislikeComment"
         @delete-comment="deleteComment"
         @edit-comment="editComment"
-        @close-all-comments-items="closeAllCommentsItems"
       />
     </div>
     <div class="box-show-morecom">
@@ -67,10 +66,6 @@ export default {
     },
     DislikeComment(selfLike) {
       this.$emit('del-comment-like', selfLike);
-    },
-    closeAllCommentsItems(showComItem) {
-      this.openParameters = showComItem;
-      // this.$emit('close-all-comments-items', this.showCommentItems);
     },
     closeCommentsParameters() {
       this.openParameters = !this.openParameters;

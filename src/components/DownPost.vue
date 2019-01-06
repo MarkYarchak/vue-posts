@@ -53,7 +53,8 @@
     />
     <AddComment
       v-if="showComments"
-      :editcomment="commentInf"
+      :selfcomment="selfComment"
+      :commentinf="commentInf"
       :post="post"
       @add-comment="createComment"/>
   </div>
@@ -77,6 +78,17 @@ export default {
   },
   data() {
     return {
+      selfComment: {
+        id: '',
+        author: {
+          displayName: 'Mark Yarchak',
+          username: 'markyarchak',
+          avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        },
+        comment: '',
+        createDate: '',
+        likes: [],
+      },
       commentInf: null,
       showComments: false,
       likePos: false,
@@ -100,8 +112,10 @@ export default {
     },
     editComment(textId) {
       this.commentInf = textId;
-      this.$emit('edit-comment', textId);
     },
+    // replaceComment() {
+    //   this.$emit('edit-comment', textId);
+    // },
     PostLike() {
       this.post.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;

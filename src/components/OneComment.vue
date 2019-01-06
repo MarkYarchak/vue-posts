@@ -2,7 +2,7 @@
   <div class="onecom">
     <div
       class="onecom__left left"
-      @click="showParameters"
+      @click.stop="showParameters"
     >
       <div class="left__avatar">
         <div
@@ -95,15 +95,19 @@ export default {
       return moment(this.comment.createDate).fromNow(true);
     },
   },
-  // watch: {
-  //   liveComment(newVal) {
-  //     if ()
-  //   },
-  // },
+  mounted() {
+    window.addEventListener('click', this.closeCommentParameters);
+  },
+  destroed() {
+    window.removeEventListener('click', this.closeCommentParameters);
+  },
   methods: {
+    closeCommentParameters() {
+      this.showCommentItems = false;
+    },
     showParameters() {
+      // this.showCommentItems = true || false;
       this.showCommentItems = !this.showCommentItems;
-      this.$emit('close-all-comments-items', this.showCommentItems);
     },
     deleteComment(allOfId) {
       this.$emit('delete-comment', allOfId);

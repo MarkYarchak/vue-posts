@@ -6,7 +6,7 @@
     <div class="box-addcom__inpcom">
       <input
         id="inpcom"
-        v-model="selfComment.comment"
+        v-model="selfcomment.comment"
         type="text"
         placeholder="Write your comment..."
       >
@@ -28,7 +28,11 @@ import moment from 'moment';
 export default {
   name: 'AddComment',
   props: {
-    editcomment: {
+    selfcomment: {
+      type: Object,
+      default: () => ({}),
+    },
+    commentinf: {
       type: Object,
       default: () => ({}),
     },
@@ -38,31 +42,36 @@ export default {
     },
   },
   data() {
-    return {
-      selfComment: {
-        id: '',
-        author: {
-          displayName: 'Mark Yarchak',
-          username: 'markyarchak',
-          avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        },
-        comment: '',
-        createDate: '',
-        likes: [],
-      },
-    };
+    return {};
   },
+  // watch: {
+  //   commentinf() {
+  //     this.editComment();
+  //   },
+  // },
+  // mounted() {
+  //   window.addEventListener('click', this.editComment);
+  // },
+  // destroed() {
+  //   window.removeEventListener('click', this.editComment);
+  // },
+  // computed() {
+  //   console.log(store.state.maybeposts);
+  // },
   methods: {
+    editComment() {
+      console.log('watch', this.commentinf);
+    },
     createComment() {
-      this.selfComment.id = Math.floor(Math.random() * 10000);
-      if (this.selfComment.createDate === '') {
-        this.selfComment.createDate = moment();
+      this.selfcomment.id = Math.floor(Math.random() * 10000);
+      if (this.selfcomment.createDate === '') {
+        this.selfcomment.createDate = moment();
       }
-      this.selfComment.postId = this.post.id;
-      if (this.selfComment.comment !== '') {
-        this.$emit('add-comment', this.selfComment);
+      this.selfcomment.postId = this.post.id;
+      if (this.selfcomment.comment !== '') {
+        this.$emit('add-comment', this.selfcomment);
       }
-      this.selfComment.comment = '';
+      this.selfcomment.comment = '';
     },
     saveComment() {},
   },
