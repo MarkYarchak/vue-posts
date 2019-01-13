@@ -6,9 +6,10 @@
     <div class="box-addcom__inpcom">
       <input
         id="inpcom"
-        v-model="selfcomment.comment"
+        :value="selfcomment.comment"
         type="text"
         placeholder="Write your comment..."
+        @input="createMyComment"
       >
       <button
         class="box-addcom__send"
@@ -42,23 +43,40 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      postidx: this.post.id,
+    };
   },
   // watch: {
   //   commentinf() {
   //     this.editComment();
   //   },
   // },
-  // mounted() {
-  //   window.addEventListener('click', this.editComment);
-  // },
-  // destroed() {
-  //   window.removeEventListener('click', this.editComment);
-  // },
-  // computed() {
-  //   console.log(store.state.maybeposts);
+  mounted() {
+    window.addEventListener('click', this.nothing);
+  },
+  destroed() {
+    window.removeEventListener('click', this.nothing);
+  },
+  computed: {
+    myComments() {
+      return this.$store.state.posts;
+      // [idx].comments;
+    },
+  },
+  // computed: {
+  //   mapState ({
+  //      message = state => state.obj.message
+  //   }),
   // },
   methods: {
+    nothing() {
+      const idx = this.postidx;
+      console.log(this.myComments[idx].comments);
+    },
+    createMyComment() {
+      this.$store.commit('createComment', this.comments.push());
+    },
     editComment() {
       console.log('watch', this.commentinf);
     },
