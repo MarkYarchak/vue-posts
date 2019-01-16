@@ -61,8 +61,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import PostComments from './PostComments';
 import AddComment from './AddComment';
+
 
 export default {
   name: 'DownPost',
@@ -100,9 +102,21 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters({
+      userPosts: 'posts',
+    }),
+  },
+  // mounted() {
+  //   window.addEventListener('click', this.nothing);
+  // },
+  // destroed() {
+  //   window.removeEventListener('click', this.nothing);
+  // },
   methods: {
     showCom() {
       this.showComments = !this.showComments;
+      // console.log(this.post.comments);
     },
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);

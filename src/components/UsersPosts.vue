@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import PostItem from './PostItem';
 
 export default {
@@ -32,11 +33,12 @@ export default {
     };
   },
   computed: {
-    posts() {
-      return this.$store.state.posts;
-    },
+    ...mapGetters({
+      posts: 'posts',
+    }),
   },
   methods: {
+    createComment(selfComment) {},
     // createComment(selfComment) {
     //   const tempPosts = this.posts.concat();
     //   const idx = tempPosts.findIndex(p => p.id === selfComment.postId);

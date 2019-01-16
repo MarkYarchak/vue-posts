@@ -6,10 +6,9 @@
     <div class="box-addcom__inpcom">
       <input
         id="inpcom"
-        :value="selfcomment.comment"
+        v-model="selfcomment.comment"
         type="text"
         placeholder="Write your comment..."
-        @input="createMyComment"
       >
       <button
         class="box-addcom__send"
@@ -25,6 +24,7 @@
 
 <script>
 import moment from 'moment';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'AddComment',
@@ -51,18 +51,18 @@ export default {
   //   commentinf() {
   //     this.editComment();
   //   },
+  computed: {
+    ...mapGetters({
+      userPosts: 'posts',
+      userComments: 'comments',
+    }),
+  },
   // },
   mounted() {
     window.addEventListener('click', this.nothing);
   },
   destroed() {
     window.removeEventListener('click', this.nothing);
-  },
-  computed: {
-    myComments() {
-      return this.$store.state.posts;
-      // [idx].comments;
-    },
   },
   // computed: {
   //   mapState ({
@@ -71,12 +71,11 @@ export default {
   // },
   methods: {
     nothing() {
-      const idx = this.postidx;
-      console.log(this.myComments[idx].comments);
+      console.log(this.userComments);
     },
-    createMyComment() {
-      this.$store.commit('createComment', this.comments.push());
-    },
+    // createMyComment() {
+    //   this.$store.commit('createComment', this.comments.push());
+    // },
     editComment() {
       console.log('watch', this.commentinf);
     },
@@ -87,7 +86,7 @@ export default {
       }
       this.selfcomment.postId = this.post.id;
       if (this.selfcomment.comment !== '') {
-        this.$emit('add-comment', this.selfcomment);
+        this.$store.commit('add_comment', this.selfcomment);
       }
       this.selfcomment.comment = '';
     },

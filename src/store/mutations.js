@@ -7,4 +7,7 @@ export default {
       this.posts = JSON.parse(JSON.stringify(tempPosts));
     }
   },
+  givePostComments: (state, payload) => {
+    state.comments = payload;
+  },
 };
