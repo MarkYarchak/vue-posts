@@ -51,6 +51,9 @@ export default {
       countcom: 3,
     };
   },
+  computed: {
+
+  },
   methods: {
     showMore() {
       this.countcom += 5;

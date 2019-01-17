@@ -4,5 +4,7 @@ const posts = post;
 
 export default {
   posts,
+  // comments: {},
+  // onepost: {},
 };
 

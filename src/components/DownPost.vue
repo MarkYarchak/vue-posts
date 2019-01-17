@@ -18,7 +18,9 @@
         </div>
         <div
           class="down__comments"
-          @click="showCom()">
+          @click="
+            showCom()
+            nothing()">
           {{ post.comments.length }} {{ post.comments.length !== 1 ? 'comments' : 'comment' }}
         </div>
       </div>
@@ -114,9 +116,12 @@ export default {
   //   window.removeEventListener('click', this.nothing);
   // },
   methods: {
+    nothing() {
+      console.log('posts', this.userPosts);
+      // this.$store.commit('giveOnePost', this.post);
+    },
     showCom() {
       this.showComments = !this.showComments;
-      // console.log(this.post.comments);
     },
     createComment(selfComment) {
       this.$emit('add-comment', selfComment);
@@ -134,12 +139,14 @@ export default {
       this.post.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
+        // window.localStorage.setItem('this.likePos', 'true');
         this.$emit('add-post-like', {
           user: this.user,
           postId: this.post.id,
         });
       }
       if (!this.likePos) {
+        // window.localStorage.setItem('this.likePos', 'false');
         this.$emit('del-post-like', {
           user: this.user,
           postId: this.post.id,

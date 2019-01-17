@@ -54,24 +54,20 @@ export default {
   computed: {
     ...mapGetters({
       userPosts: 'posts',
-      userComments: 'comments',
+      onePost: 'onepost',
+      myComments: 'comments',
     }),
   },
   // },
-  mounted() {
-    window.addEventListener('click', this.nothing);
-  },
-  destroed() {
-    window.removeEventListener('click', this.nothing);
-  },
-  // computed: {
-  //   mapState ({
-  //      message = state => state.obj.message
-  //   }),
+  // mounted() {
+  //   window.addEventListener('click', this.nothing);
+  // },
+  // destroed() {
+  //   window.removeEventListener('click', this.nothing);
   // },
   methods: {
     nothing() {
-      console.log(this.userComments);
+      // console.log('get post?', this.myComments);
     },
     // createMyComment() {
     //   this.$store.commit('createComment', this.comments.push());

@@ -38,15 +38,15 @@ export default {
     }),
   },
   methods: {
-    createComment(selfComment) {},
-    // createComment(selfComment) {
-    //   const tempPosts = this.posts.concat();
-    //   const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
-    //   if (idx !== -1) {
-    //     tempPosts[idx].comments.unshift(selfComment);// or push() it to end
-    //     this.posts = JSON.parse(JSON.stringify(tempPosts));
-    //   }
-    // },
+    // createComment(selfComment) {},
+    createComment(selfComment) {
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
+      if (idx !== -1) {
+        tempPosts[idx].comments.unshift(selfComment);// or push() it to end
+        this.posts = JSON.parse(JSON.stringify(tempPosts));
+      }
+    },
     deleteComment(comment) {
       const tempPosts = this.posts.concat();
       const postidx = tempPosts.findIndex(p => p.id === comment.postId);
