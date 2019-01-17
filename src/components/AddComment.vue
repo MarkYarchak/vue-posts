@@ -51,20 +51,14 @@ export default {
   //   commentinf() {
   //     this.editComment();
   //   },
+  // },
   computed: {
     ...mapGetters({
       userPosts: 'posts',
-      onePost: 'onepost',
-      myComments: 'comments',
+      // onePost: 'onepost',
+      // myComments: 'comments',
     }),
   },
-  // },
-  // mounted() {
-  //   window.addEventListener('click', this.nothing);
-  // },
-  // destroed() {
-  //   window.removeEventListener('click', this.nothing);
-  // },
   methods: {
     nothing() {
       // console.log('get post?', this.myComments);

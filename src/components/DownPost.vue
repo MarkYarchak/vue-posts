@@ -109,15 +109,11 @@ export default {
       userPosts: 'posts',
     }),
   },
-  // mounted() {
-  //   window.addEventListener('click', this.nothing);
-  // },
-  // destroed() {
-  //   window.removeEventListener('click', this.nothing);
-  // },
   methods: {
     nothing() {
-      console.log('posts', this.userPosts);
+      const tempPosts = this.userPosts.concat();
+      const idx = tempPosts.findIndex(p => p.id === this.post.id);
+      console.log('posts', this.userPosts[idx].comments);
       // this.$store.commit('giveOnePost', this.post);
     },
     showCom() {
