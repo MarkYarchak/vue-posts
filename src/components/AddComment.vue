@@ -45,6 +45,8 @@ export default {
   data() {
     return {
       postidx: this.post.id,
+      inputField: document.getElementById('inpcom'),
+      // :value="inputField"
     };
   },
   // watch: {
@@ -54,20 +56,23 @@ export default {
   // },
   computed: {
     ...mapGetters({
-      userPosts: 'posts',
+      postsFromStore: 'posts',
       // onePost: 'onepost',
       // myComments: 'comments',
     }),
   },
   methods: {
-    nothing() {
-      // console.log('get post?', this.myComments);
-    },
-    // createMyComment() {
-    //   this.$store.commit('createComment', this.comments.push());
-    // },
+    nothing() {},
     editComment() {
       console.log('watch', this.commentinf);
+    },
+    pushComment(selfComment) {
+      const tempPosts = this.postsFromStore.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
+      if (idx !== -1) {
+        tempPosts[idx].comments.unshift(selfComment);// or push() it to end
+        this.postsFromStore = JSON.parse(JSON.stringify(tempPosts));
+      }
     },
     createComment() {
       this.selfcomment.id = Math.floor(Math.random() * 10000);
@@ -76,7 +81,8 @@ export default {
       }
       this.selfcomment.postId = this.post.id;
       if (this.selfcomment.comment !== '') {
-        this.$store.commit('add_comment', this.selfcomment);
+        this.pushComment(this.selfcomment);
+        // this.$emit('add-comment', this.selfcomment);
       }
       this.selfcomment.comment = '';
     },
@@ -96,7 +102,7 @@ export default {
     .box-addcom__my-avatar
         margin 5px
     .avatar
-        background url('http://wallfon.com/walls/others/nice.jpg') center center/cover no-repeat grey
+        background url('http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg') center center/cover no-repeat grey
         height 25px
         width 25px
         border-radius 50%

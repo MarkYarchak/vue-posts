@@ -11,9 +11,8 @@
       <OneComment
         :post="post"
         :comment="comment"
-        @add-comment-like="LikeComment"
-        @del-comment-like="DislikeComment"
-        @delete-comment="deleteComment"
+        @add-comment-like="likeComment"
+        @del-comment-like="dislikeComment"
         @edit-comment="editComment"
       />
     </div>
@@ -28,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import OneComment from './OneComment';
 
 export default {
@@ -47,28 +47,44 @@ export default {
   },
   data() {
     return {
+      posts: [],
       openParameters: null,
       countcom: 3,
     };
   },
   computed: {
-
+    ...mapGetters({
+      postsFromStore: 'posts',
+    }),
+  },
+  created() {
+    this.posts = this.postsFromStore;
   },
   methods: {
     showMore() {
       this.countcom += 5;
     },
-    deleteComment(allOfId) {
-      this.$emit('delete-comment', allOfId);
-    },
     editComment(textId) {
       this.$emit('edit-comment', textId);
     },
-    LikeComment(selfLike) {
-      this.$emit('add-comment-like', selfLike);
+    likeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes.push(likeData.user);
+      }
     },
-    DislikeComment(selfLike) {
-      this.$emit('del-comment-like', selfLike);
+    dislikeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes = tempComments[commentidx].likes
+          .filter(l => l.id !== likeData.user.id);
+      }
     },
     closeCommentsParameters() {
       this.openParameters = !this.openParameters;

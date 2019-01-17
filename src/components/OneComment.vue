@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import moment from 'moment';
 import CommentItems from './CommentItems';
 
@@ -85,12 +86,15 @@ export default {
       user: {
         displayName: 'Mark Yarchak',
         username: 'markyarchak',
-        avatar: 'http://wallfon.com/walls/others/nice.jpg',
+        avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
         id: 0,
       },
     };
   },
   computed: {
+    ...mapGetters({
+      userPosts: 'posts',
+    }),
     commentCreateTime() {
       return moment(this.comment.createDate).fromNow(true);
     },
@@ -110,7 +114,13 @@ export default {
       this.showCommentItems = !this.showCommentItems;
     },
     deleteComment(allOfId) {
-      this.$emit('delete-comment', allOfId);
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === allOfId.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempPosts[postidx].comments = tempComments.filter(c => c.id !== allOfId.commentId);
+      }
     },
     editComment(allOfId) {
       this.$emit('edit-comment', {

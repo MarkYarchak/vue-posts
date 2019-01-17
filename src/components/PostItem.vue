@@ -10,18 +10,15 @@
     />
     <DownPost
       :post="post"
-      @add-comment="createComment"
-      @add-post-like="createPostLike"
-      @del-post-like="deletePostLike"
-      @add-comment-like="LikeComment"
-      @del-comment-like="DislikeComment"
-      @delete-comment="deleteComment"
+      @add-post-like="likePost"
+      @del-post-like="dislikePost"
       @edit-comment="editComment"
     />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import HighPost from './HighPost';
 import ContentPost from './ContentPost';
 import DownPost from './DownPost';
@@ -41,30 +38,35 @@ export default {
   },
   data() {
     return {
-
+      posts: [],
     };
   },
+  computed: {
+    ...mapGetters({
+      postsFromStore: 'posts',
+    }),
+  },
+  created() {
+    this.posts = this.postsFromStore;
+  },
   methods: {
-    createComment(selfComment) {
-      this.$emit('add-comment', selfComment);
-    },
-    deleteComment(comment) {
-      this.$emit('delete-comment', comment);
-    },
     editComment(comment) {
       this.$emit('edit-comment', comment);
     },
-    createPostLike(selfLike) {
-      this.$emit('add-post-like', selfLike);
+    likePost(selfLike) {
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
+      if (idx !== -1) {
+        tempPosts[idx].likes.push(selfLike.user);
+      }
     },
-    deletePostLike(selfLike) {
-      this.$emit('del-post-like', selfLike);
-    },
-    LikeComment(selfLike) {
-      this.$emit('add-comment-like', selfLike);
-    },
-    DislikeComment(selfLike) {
-      this.$emit('del-comment-like', selfLike);
+    dislikePost(selfLike) {
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
+      if (idx !== -1) {
+        tempPosts[idx].likes = tempPosts[idx].likes
+          .filter(l => l.id !== selfLike.user.id);
+      }
     },
   },
 };

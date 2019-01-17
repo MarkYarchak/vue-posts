@@ -18,9 +18,7 @@
         </div>
         <div
           class="down__comments"
-          @click="
-            showCom()
-            nothing()">
+          @click="showCom()">
           {{ post.comments.length }} {{ post.comments.length !== 1 ? 'comments' : 'comment' }}
         </div>
       </div>
@@ -48,17 +46,13 @@
       v-if="showComments"
       :comments="post.comments"
       :post="post"
-      @add-comment-like="LikeComment"
-      @del-comment-like="DislikeComment"
-      @delete-comment="deleteComment"
       @edit-comment="editComment"
     />
     <AddComment
       v-if="showComments"
       :selfcomment="selfComment"
       :commentinf="commentInf"
-      :post="post"
-      @add-comment="createComment"/>
+      :post="post"/>
   </div>
 </template>
 
@@ -82,12 +76,13 @@ export default {
   },
   data() {
     return {
+      posts: [],
       selfComment: {
         id: '',
         author: {
           displayName: 'Mark Yarchak',
           username: 'markyarchak',
-          avatar: 'http://wallfon.com/walls/others/nice.jpg',
+          avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
         },
         comment: '',
         createDate: '',
@@ -109,21 +104,15 @@ export default {
       userPosts: 'posts',
     }),
   },
+  created() {
+    this.posts = this.postsFromStore;
+  },
   methods: {
-    nothing() {
-      const tempPosts = this.userPosts.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.post.id);
-      console.log('posts', this.userPosts[idx].comments);
-      // this.$store.commit('giveOnePost', this.post);
-    },
+    // nothing() {
+    //   // this.$store.commit('giveOnePost', this.post);
+    // },
     showCom() {
       this.showComments = !this.showComments;
-    },
-    createComment(selfComment) {
-      this.$emit('add-comment', selfComment);
-    },
-    deleteComment(allOfId) {
-      this.$emit('delete-comment', allOfId);
     },
     editComment(textId) {
       this.commentInf = textId;
@@ -148,12 +137,6 @@ export default {
           postId: this.post.id,
         });
       }
-    },
-    LikeComment(selfLike) {
-      this.$emit('add-comment-like', selfLike);
-    },
-    DislikeComment(selfLike) {
-      this.$emit('del-comment-like', selfLike);
     },
   },
 };

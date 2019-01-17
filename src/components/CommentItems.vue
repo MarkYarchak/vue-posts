@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'CommentItems',
@@ -43,6 +44,11 @@ export default {
       commentDelete: false,
       commentAnswer: false,
     };
+  },
+  computed: {
+    ...mapGetters({
+      userPosts: 'posts',
+    }),
   },
   methods: {
     editComment() {
