@@ -101,7 +101,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userPosts: 'posts',
+      postsFromStore: 'posts',
     }),
   },
   created() {

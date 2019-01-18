@@ -47,8 +47,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userPosts: 'posts',
+      postsFromStore: 'posts',
     }),
+  },
+  created() {
+    this.posts = this.postsFromStore;
   },
   methods: {
     editComment() {
@@ -66,10 +69,19 @@ export default {
     },
     deleteComment() {
       this.commentDelete = true;
-      this.$emit('delete-comment', {
+      this.decrementComments({
         commentId: this.comment.id,
         postId: this.post.id,
       });
+    },
+    decrementComments(allOfId) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === allOfId.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempPosts[postidx].comments = tempComments.filter(c => c.id !== allOfId.commentId);
+      }
     },
   },
 };

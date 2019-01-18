@@ -28,7 +28,6 @@
           v-if="showCommentItems"
           :comment="comment"
           :post="post"
-          @delete-comment="deleteComment"
           @edit-comment="editComment"
         />
       </div>
@@ -93,7 +92,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      userPosts: 'posts',
+      postsFromStore: 'posts',
     }),
     commentCreateTime() {
       return moment(this.comment.createDate).fromNow(true);
@@ -105,6 +104,9 @@ export default {
   destroed() {
     window.removeEventListener('click', this.closeCommentParameters);
   },
+  created() {
+    this.posts = this.postsFromStore;
+  },
   methods: {
     closeCommentParameters() {
       this.showCommentItems = false;
@@ -112,15 +114,6 @@ export default {
     showParameters() {
       // this.showCommentItems = true || false;
       this.showCommentItems = !this.showCommentItems;
-    },
-    deleteComment(allOfId) {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === allOfId.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempPosts[postidx].comments = tempComments.filter(c => c.id !== allOfId.commentId);
-      }
     },
     editComment(allOfId) {
       this.$emit('edit-comment', {
