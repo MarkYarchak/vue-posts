@@ -74,6 +74,7 @@ export default {
         postId: this.post.id,
       });
     },
+    // countinue of deleteComment()
     decrementComments(allOfId) {
       const tempPosts = this.posts.concat();
       const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);

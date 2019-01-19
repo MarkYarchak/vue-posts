@@ -21,7 +21,7 @@
         v-if="countcom < comments.length"
         class="show-morecom"
         @click="showMore"
-      >Show more</div>
+      >Show more ({{ 5 > comments.length - countcom ? comments.length - countcom : 5 }})</div>
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ export default {
   },
   data() {
     return {
+      commentsDifference: null,
       posts: [],
       openParameters: null,
       countcom: 3,
@@ -59,6 +60,7 @@ export default {
   },
   created() {
     this.posts = this.postsFromStore;
+    this.commentsDifference = this.comments.length - this.countcom;
   },
   methods: {
     showMore() {
@@ -108,7 +110,7 @@ export default {
       font-size 16px
       font-family "Arial", Arial, sans-serif
       height 16px
-      width 81px
+      width 105px
       cursor pointer
       padding 2px
       background-color #d9d9d9

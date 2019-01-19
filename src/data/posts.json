@@ -52,9 +52,33 @@
             "username": "hehariche",
             "avatar": "https://www.b17.ru/foto/uploaded/b69a564c47110acefb8c986f768210ac.jpg"
           },
-          "comment": "nice!!",
+          "comment": "i think, it`s nice! i saw best picture ever",
           "createDate": [2018, 7, 3],
-          "likes": []
+          "likes": [],
+          "answers": [
+            {
+              "id": "04",
+              "author": {
+                "displayName": "Michael Hay",
+                "username": "michelhay",
+                "avatar": "https://i.pinimg.com/originals/7c/26/e5/7c26e59ba2a60dc8ad812bb263b83bb3.jpg"
+              },
+              "comment": "oh realy?",
+              "createDate": [2018, 7, 3],
+              "likes": []
+            },
+            {
+              "id": "04",
+              "author": {
+                "displayName": "Andrew Broker",
+                "username": "andbroker",
+                "avatar": "https://chryslercapital.com/wp-content/uploads/2015/05/052615-cc-orange-is-not-the-new-black-in-car-colors-2.jpg"
+              },
+              "comment": "yeah, it`s true",
+              "createDate": [2018, 7, 5],
+              "likes": []
+            }
+          ]
         }
       ],
       "likes": []

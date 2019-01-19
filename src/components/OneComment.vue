@@ -1,58 +1,67 @@
 <template>
-  <div class="onecom">
-    <div
-      class="onecom__left left"
-      @click.stop="showParameters"
-    >
-      <div class="left__avatar">
-        <div
-          :style="{'background-image': `url(${ comment.author.avatar })`}"
-          class="avatar"
-        />
+  <div class="one-comment_plus_comment-answers">
+    <div class="onecom">
+      <div
+        class="onecom__left left"
+        @click.stop="showParameters"
+      >
+        <div class="left__avatar">
+          <div
+            :style="{'background-image': `url(${ comment.author.avatar })`}"
+            class="avatar"
+          />
+        </div>
+        <div class="left__userbox userbox">
+          <div class="userbox__comment comment">
+            <div class="comment__username">
+              {{ comment.author.username }}
+            </div>
+            <div class="comment__usercom">
+              {{ comment.comment }}
+            </div>
+          </div>
+          <div class="userbox__box-answer_date box-answer_date">
+            <div class="box-answer_date__commentdate">
+              {{ commentCreateTime }}
+            </div>
+          </div>
+          <CommentItems
+            v-if="showCommentItems"
+            :comment="comment"
+            :post="post"
+            @edit-comment="editComment"
+          />
+        </div>
       </div>
-      <div class="left__userbox userbox">
-        <div class="userbox__comment comment">
-          <div class="comment__username">
-            {{ comment.author.username }}
+      <div class="onecom__right right">
+        <div class="right__like like">
+          <div
+            v-if="comment.likes.length"
+            class="like__count"
+          >
+            {{ comment.likes.length }}
           </div>
-          <div class="comment__usercom">
-            {{ comment.comment }}
+          <div
+            class="like__position"
+            @click="LikeComment">
+            <i
+              v-if="!likePos"
+              class="far fa-heart"
+            />
+            <i
+              v-if="likePos"
+              class="fas fa-heart"
+            />
           </div>
         </div>
-        <div class="userbox__box-answer_date box-answer_date">
-          <div class="box-answer_date__commentdate">
-            {{ commentCreateTime }}
-          </div>
-        </div>
-        <CommentItems
-          v-if="showCommentItems"
-          :comment="comment"
-          :post="post"
-          @edit-comment="editComment"
-        />
       </div>
     </div>
-    <div class="onecom__right right">
-      <div class="right__like like">
-        <div
-          v-if="comment.likes.length"
-          class="like__count"
-        >
-          {{ comment.likes.length }}
-        </div>
-        <div
-          class="like__position"
-          @click="LikeComment">
-          <i
-            v-if="!likePos"
-            class="far fa-heart"
-          />
-          <i
-            v-if="likePos"
-            class="fas fa-heart"
-          />
-        </div>
-      </div>
+    <div class="comment-answers">
+      <CommentAnswers
+        v-if="commentAnswers"
+        :comment="comment"
+        :post="post"
+      />
     </div>
   </div>
 </template>
@@ -61,11 +70,13 @@
 import { mapGetters } from 'vuex';
 import moment from 'moment';
 import CommentItems from './CommentItems';
+import CommentAnswers from './CommentAnswers';
 
 export default {
   name: 'OneComment',
   components: {
     CommentItems,
+    CommentAnswers,
   },
   props: {
     post: {
@@ -79,6 +90,7 @@ export default {
   },
   data() {
     return {
+      showCommentAnswers: true,
       openParameters: null,
       showCommentItems: false,
       likePos: false,
@@ -108,6 +120,11 @@ export default {
     this.posts = this.postsFromStore;
   },
   methods: {
+    commentAnswers() {
+      if (this.comment.answers.length) {
+        this.showCommentAnswers = !this.showCommentAnswers;
+      }
+    },
     closeCommentParameters() {
       this.showCommentItems = false;
     },
@@ -146,6 +163,13 @@ export default {
 <style scoped
        lang="stylus"
 >
+    .one-comment_plus_comment-answers
+        display flex
+        flex-direction column
+    .comment-answers
+        cursor pointer
+        display flex
+        justify-content center
     .onecom
         display flex
         margin-bottom 5px
