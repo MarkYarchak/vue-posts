@@ -61,6 +61,7 @@
         v-if="commentAnswers"
         :comment="comment"
         :post="post"
+        :answers="comment.answers"
       />
     </div>
   </div>
@@ -167,12 +168,9 @@ export default {
         display flex
         flex-direction column
     .comment-answers
-        cursor pointer
-        display flex
-        justify-content center
     .onecom
         display flex
-        margin-bottom 5px
+        margin-top 5px
     .onecom__left
         display flex
     .left__avatar

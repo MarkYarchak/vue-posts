@@ -18,7 +18,7 @@
         </div>
         <div
           class="down__comments"
-          @click="showCom()">
+          @click="showCom">
           {{ post.comments.length }} {{ post.comments.length !== 1 ? 'comments' : 'comment' }}
         </div>
       </div>

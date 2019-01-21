@@ -104,7 +104,7 @@ export default {
   .box-show-morecom
       display flex
       justify-content center
-      margin 3px
+      margin 10px 3px 3px 3px
   .show-morecom
       color White
       font-size 16px

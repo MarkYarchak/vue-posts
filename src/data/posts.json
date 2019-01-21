@@ -21,7 +21,8 @@
           },
           "comment": "So good! its so beatiful, get here for me!)) please",
           "createDate": [2018, 7, 29],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "02",
@@ -32,7 +33,8 @@
           },
           "comment": "the best",
           "createDate": [2018, 7, 20],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "03",
@@ -43,10 +45,11 @@
           },
           "comment": "Wonderful picture",
           "createDate": [2018, 7, 17],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
-          "id": "04",
+          "id": "4",
           "author": {
             "displayName": "Sergio Bulfer",
             "username": "hehariche",
@@ -57,7 +60,7 @@
           "likes": [],
           "answers": [
             {
-              "id": "04",
+              "id": "50",
               "author": {
                 "displayName": "Michael Hay",
                 "username": "michelhay",
@@ -68,7 +71,7 @@
               "likes": []
             },
             {
-              "id": "04",
+              "id": "51",
               "author": {
                 "displayName": "Andrew Broker",
                 "username": "andbroker",
@@ -105,7 +108,8 @@
           },
           "comment": "Good writing",
           "createDate": [2018, 6, 11],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "06",
@@ -116,7 +120,8 @@
           },
           "comment": "how long you think it?",
           "createDate": [2018, 6, 7],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "07",
@@ -127,7 +132,8 @@
           },
           "comment": "good",
           "createDate": [2018, 6, 4],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "08",
@@ -138,7 +144,8 @@
           },
           "comment": "hey",
           "createDate": [2018, 5, 21],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "09",
@@ -149,7 +156,8 @@
           },
           "comment": "With memory...",
           "createDate": [2018, 5, 15],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "10",
@@ -160,7 +168,8 @@
           },
           "comment": "what?",
           "createDate": [2018, 5, 12],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "11",
@@ -171,7 +180,8 @@
           },
           "comment": "lol)",
           "createDate": [2018, 5, 10],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "12",
@@ -182,7 +192,8 @@
           },
           "comment": "interesting",
           "createDate": [2018, 5, 10],
-          "likes": []
+          "likes": [],
+          "answers": []
         }
       ],
       "likes": []
@@ -213,7 +224,8 @@
                 "avatar": "",
                 "id": 385
             }
-          ]
+          ],
+          "answers": []
         },
         {
           "id": "14",
@@ -224,7 +236,8 @@
           },
           "comment": "where is my comment",
           "createDate": [2018, 2, 20],
-          "likes": []
+          "likes": [],
+          "answers": []
         },
         {
           "id": "15",
@@ -235,7 +248,8 @@
           },
           "comment": "not bad",
           "createDate": [2018, 2, 15],
-          "likes": []
+          "likes": [],
+          "answers": []
         }
       ],
       "likes": [
