@@ -91,7 +91,7 @@ export default {
   },
   data() {
     return {
-      showCommentAnswers: true,
+      showCommentAnswers: false,
       openParameters: null,
       showCommentItems: false,
       likePos: false,
@@ -167,7 +167,6 @@ export default {
     .one-comment_plus_comment-answers
         display flex
         flex-direction column
-    .comment-answers
     .onecom
         display flex
         margin-top 5px

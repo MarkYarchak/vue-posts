@@ -33,39 +33,104 @@
           <!--/>-->
         </div>
       </div>
-      <!--<div class="onecom__right right">-->
-        <!--<div class="right__like like">-->
-          <!--<div-->
-            <!--v-if="answer.likes.length"-->
-            <!--class="like__count"-->
-          <!--&gt;-->
-            <!--{{ answer.likes.length }}-->
-          <!--</div>-->
-          <!--<div-->
-            <!--class="like__position"-->
-            <!--@click="LikeComment">-->
-            <!--<i-->
-              <!--v-if="!likePos"-->
-              <!--class="far fa-heart"-->
-            <!--/>-->
-            <!--<i-->
-              <!--v-if="likePos"-->
-              <!--class="fas fa-heart"-->
-            <!--/>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+      <div class="onecom__right right">
+        <div class="right__like like">
+          <div
+            v-if="answer.likes.length"
+            class="like__count"
+          >
+            {{ answer.likes.length }}
+          </div>
+          <div
+            class="like__position"
+            @click="switchLikeComment">
+            <i
+              v-if="!likePos"
+              class="far fa-heart"
+            />
+            <i
+              v-if="likePos"
+              class="fas fa-heart"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'OneCommentAnswer',
   props: {
     answer: {
       type: Object,
       default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      posts: [],
+      likePos: false,
+      user: {
+        displayName: 'Mark Yarchak',
+        username: 'markyarchak',
+        avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
+        id: 0,
+      },
+    };
+  },
+  computed: {
+    commentCreateTime() {
+      return moment(this.answer.createDate).fromNow(true);
+    },
+    ...mapGetters({
+      postsFromStore: 'posts',
+    }),
+  },
+  created() {
+    this.posts = this.postsFromStore;
+  },
+  methods: {
+    switchLikeComment() {
+      this.answer.id = Math.floor(Math.random() * 10000);
+      this.likePos = !this.likePos;
+      if (this.likePos) {
+        this.likeComment('add-comment-like', {
+          user: this.user,
+          commentId: this.comment.id,
+          postId: this.post.id,
+        });
+      }
+      if (!this.likePos) {
+        this.dislikeComment('del-comment-like', {
+          user: this.user,
+          commentId: this.comment.id,
+          postId: this.post.id,
+        });
+      }
+    },
+    likeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes.push(likeData.user);
+      }
+    },
+    dislikeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes = tempComments[commentidx].likes
+          .filter(l => l.id !== likeData.user.id);
+      }
     },
   },
 };
