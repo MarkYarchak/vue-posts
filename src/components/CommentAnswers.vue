@@ -1,15 +1,6 @@
 <template>
   <div class="comment_answers">
-    <div class="free-place"/>
-    <div
-      v-if="answers.length"
-      class="switch-commentanswers"
-      @click="showAnswers">
-      <span
-        id="span_anscomment"
-        class="anscomment-text">Show {{ 10 > answers.length ? answers.length : 10 }}
-        {{ answers.length === 1 ? "answer" : "answers" }}</span>
-    </div>
+    <!--<div class="free-place"/>-->
     <!--<div class="smth" @click="adbfkjadjfk">Show more</div>-->
     <div
       v-for="(answer, index) in answers"
@@ -22,6 +13,13 @@
         :comment="comment"
         class="comment_one-answer"
       />
+    </div>
+    <div
+      v-if="answers.length"
+      class="switch-commentanswers"
+      @click="showAnswers">
+      <span class="anscomment-text">Show {{ 10 > answers.length ? answers.length : 10 }}
+        {{ answers.length === 1 ? "answer" : "answers" }}</span>
     </div>
     <!--<div class="open-commentanswers"></div>-->
   </div>
@@ -89,7 +87,6 @@ export default {
     },
     adbfkjadjfk() {
       this.countans += 1;
-
     },
   },
 };
@@ -106,8 +103,8 @@ export default {
       /*display flex*/
       /*justify-content center*/
     .comment_one-answer
-        border-left 4px solid grey
-        margin-left 10px
+        border-left 4px solid #A3A3AC
+        margin-left 42px
     .switch-commentanswers
         -webkit-touch-callout none
         -webkit-user-select none
@@ -119,6 +116,9 @@ export default {
     .anscomment-text
         font-family "Arial", Arial, sans-serif
         font-size 14px
-        background-color #7fff6a
+        background linear-gradient(to right, #dbdbdb, white)
+        color linear-gradient(to right, white, #dbdbdb)
         padding 5px
+        margin-left 42px
+        border-radius 0 0 0 7px
 </style>

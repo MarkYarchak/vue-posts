@@ -34,30 +34,6 @@
           "comment": "the best",
           "createDate": [2018, 7, 20],
           "likes": [],
-          "answers": []
-        },
-        {
-          "id": "03",
-          "author": {
-            "displayName": "Shea Elmer",
-            "username": "hawin",
-            "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
-          },
-          "comment": "Wonderful picture",
-          "createDate": [2018, 7, 17],
-          "likes": [],
-          "answers": []
-        },
-        {
-          "id": "4",
-          "author": {
-            "displayName": "Sergio Bulfer",
-            "username": "hehariche",
-            "avatar": "https://www.b17.ru/foto/uploaded/b69a564c47110acefb8c986f768210ac.jpg"
-          },
-          "comment": "i think, it`s nice! i saw best picture ever",
-          "createDate": [2018, 7, 3],
-          "likes": [],
           "answers": [
             {
               "id": "50",
@@ -82,6 +58,30 @@
               "likes": []
             }
           ]
+        },
+        {
+          "id": "03",
+          "author": {
+            "displayName": "Shea Elmer",
+            "username": "hawin",
+            "avatar": "https://wallpaperbrowse.com/media/images/4224848-boy-pic.jpg"
+          },
+          "comment": "Wonderful picture",
+          "createDate": [2018, 7, 17],
+          "likes": [],
+          "answers": []
+        },
+        {
+          "id": "4",
+          "author": {
+            "displayName": "Sergio Bulfer",
+            "username": "hehariche",
+            "avatar": "https://www.b17.ru/foto/uploaded/b69a564c47110acefb8c986f768210ac.jpg"
+          },
+          "comment": "i think, it`s nice! i saw best picture ever",
+          "createDate": [2018, 7, 3],
+          "likes": [],
+          "answers": []
         }
       ],
       "likes": []
