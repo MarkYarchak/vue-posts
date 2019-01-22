@@ -23,8 +23,6 @@ export default {
   data() {
     return {
       posts: [],
-      temporaryPosts: 0,
-      temporaryComments: 0,
     };
   },
   computed: {

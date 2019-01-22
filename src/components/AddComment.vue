@@ -44,8 +44,22 @@ export default {
   },
   data() {
     return {
+      selfComment: {
+        id: '',
+        author: {
+          displayName: 'Mark Yarchak',
+          username: 'markyarchak',
+          avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
+        },
+        comment: '',
+        createDate: '',
+        likes: [],
+      },
+      temporaryPosts: 0,
+      temporaryComments: 0,
       postidx: this.post.id,
-      inputField: document.getElementById('inpcom'),
+      // inputField: document.getElementsByTagName('input'),
+      // placeholder: this.inputField.getAttribute('placeholder'),
       // :value="inputField"
     };
   },
@@ -75,6 +89,7 @@ export default {
       }
     },
     createComment() {
+      // this.placeholder = 'Write your answer...';
       this.selfcomment.id = Math.floor(Math.random() * 10000);
       if (this.selfcomment.createDate === '') {
         this.selfcomment.createDate = moment();

@@ -13,19 +13,21 @@
         class="comment_one-answer"
       />
     </div>
-    <div
-      v-if="answers.length"
-      class="switch-commentanswers"
-      @click="showAnswers">
-      <span class="anscomment-text">{{ openAnswersList ? 'Hide' : 'Show' }}
-        {{ 10 > answers.length ? answers.length : 10 }}
-        {{ answers.length === 1 ? "answer" : "answers" }}</span>
-    </div>
-    <div
-      v-if="openAnswersList && countans > 10 && answers.length > 10"
-      class="show-more-ans"
-      @click="showMoreAns">
-      Show more answers
+    <div class="box_switch-add">
+      <div
+        v-if="answers.length"
+        class="switch-commentanswers"
+        @click="showAnswers">
+        <span class="anscomment-text">{{ openAnswersList ? 'Hide' : 'Show' }}
+          {{ 10 > answers.length ? answers.length : 10 }}
+          {{ answers.length === 1 ? "answer" : "answers" }}</span>
+      </div>
+      <div
+        v-if="openAnswersList && countans > 9 && answers.length > 10"
+        class="show-more-ans"
+        @click="showMoreAns">
+        Show more answers
+      </div>
     </div>
     <!--<div class="open-commentanswers"></div>-->
   </div>
@@ -56,7 +58,6 @@ export default {
   },
   data() {
     return {
-      comAnsSwitch: document.body.getElementsByTagName('span'),
       openAnswersList: false,
       posts: [],
       countans: 10,
@@ -104,23 +105,31 @@ export default {
     .comment_one-answer
         border-left 4px solid #A3A3AC
         margin-left 42px
-    .switch-commentanswers
+    .box_switch-add
+        display flex
         -webkit-touch-callout none
         -webkit-user-select none
         -khtml-user-select none
         -moz-user-select none
         -ms-user-select none
         user-select none
+    .switch-commentanswers
         cursor pointer
-        margin 5px 0 5px 0
+        margin 2px 0 5px 0
+    .show-more-ans
+        font-family "Arial", Arial, sans-serif
+        cursor pointer
+        margin 2px 0 5px 0
+        font-size 11px
+        color #747474
+        background-color #f2f2f2
+        padding 5px
     .anscomment-text
         font-family "Arial", Arial, sans-serif
         font-size 11px
-        color #8f8f8f
+        color #747474
         background-color #f2f2f2
         padding 5px
         margin 0 0 10px 42px
         border-radius 0 0 0 7px
-    .show-more-ans
-        cursor pointer
 </style>
