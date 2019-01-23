@@ -50,7 +50,7 @@ export default {
         author: {
           displayName: 'Mark Yarchak',
           username: 'markyarchak',
-          avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
+          avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
         },
         comment: '',
         createDate: '',
@@ -59,16 +59,8 @@ export default {
       temporaryPosts: 0,
       temporaryComments: 0,
       postidx: this.post.id,
-      // inputField: document.getElementsByTagName('input'),
-      // placeholder: this.inputField.getAttribute('placeholder'),
-      // :value="inputField"
     };
   },
-  // watch: {
-  //   commentinf() {
-  //     this.editComment();
-  //   },
-  // },
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
@@ -87,7 +79,6 @@ export default {
       }
     },
     createComment() {
-      // this.placeholder = 'Write your answer...';
       this.selfcomment.id = Math.floor(Math.random() * 10000);
       if (this.selfcomment.createDate === '') {
         this.selfcomment.createDate = moment();
@@ -95,9 +86,8 @@ export default {
       this.selfcomment.postId = this.post.id;
       if (this.selfcomment.comment !== '') {
         this.pushComment(this.selfcomment);
-        // this.$emit('add-comment', this.selfcomment);
       }
-      // this.selfcomment.comment = '';
+      this.selfcomment.comment = '';
     },
     saveComment() {},
   },
@@ -115,7 +105,7 @@ export default {
     .box-addcom__my-avatar
         margin 5px
     .avatar
-        background url('http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg') center center/cover no-repeat grey
+        background url('https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg') center center/cover no-repeat grey
         height 25px
         width 25px
         border-radius 50%
@@ -128,18 +118,18 @@ export default {
     #inpcom
         overflow-y hidden
         outline none
-        box-shadow: 0 1px 0 0 #e8e8e8;
-        line-height: 20px;
-        height: auto;
-        border-radius 10px
-        padding 0 0 0 10px
+        line-height 15px
+        height auto
+        border-radius 10px 10px 0 10px
+        padding 2px 5px 2px 10px
         border 0.5px solid #bb69d8
         max-width 220px
         min-width 220px
-        min-height 24px
+        min-height 51px
         max-height 120px
         font-family "Arial", Arial, sans-serif
-        font-size 12px
+        font-size 13px
+        /*resize none*/
     #inpcom:focus
         outline none
     .buttons-box

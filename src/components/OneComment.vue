@@ -98,7 +98,7 @@ export default {
       user: {
         displayName: 'Mark Yarchak',
         username: 'markyarchak',
-        avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
+        avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
         id: 0,
       },
     };
