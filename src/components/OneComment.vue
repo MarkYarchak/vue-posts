@@ -201,17 +201,20 @@ export default {
         align-self flex-start
         font-weight 600
     .comment__usercom
+        max-width 259.2px
         font-family "Arial", Arial, sans-serif
         color rgb(0 0 0)
         font-size 15px
         line-height 15px
         letter-spacing -0.2px
+        word-wrap break-word
     .userbox__box-answer_date
         font-family "Arial", Arial, sans-serif
         letter-spacing -0.2px
         justify-content center
         display flex
         font-size 12px
+        padding 0 0 2px 0
     .box-answer_date__commentdate
         font-family "Arial", Arial, sans-serif
         color #636363

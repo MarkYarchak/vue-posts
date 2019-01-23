@@ -4,20 +4,21 @@
       <div class="avatar"/>
     </div>
     <div class="box-addcom__inpcom">
-      <input
+      <textarea
         id="inpcom"
         v-model="selfcomment.comment"
-        type="text"
-        placeholder="Write your comment..."
-      >
-      <button
-        class="box-addcom__send"
-        @click="createComment"
-      >Send</button>
-      <button
-        class="box-addcom__save"
-        @click="saveComment"
-      >Save</button>
+        wrap="hard"
+        placeholder="Write your comment...">Comment here</textarea>
+      <div class="buttons-box">
+        <button
+          class="box-addcom__send"
+          @click="createComment"
+        >Send</button>
+        <button
+          class="box-addcom__save"
+          @click="saveComment"
+        >Save</button>
+      </div>
     </div>
   </div>
 </template>
@@ -71,8 +72,6 @@ export default {
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
-      // onePost: 'onepost',
-      // myComments: 'comments',
     }),
   },
   methods: {
@@ -85,7 +84,6 @@ export default {
       const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
       if (idx !== -1) {
         tempPosts[idx].comments.unshift(selfComment);// or push() it to end
-        this.postsFromStore = JSON.parse(JSON.stringify(tempPosts));
       }
     },
     createComment() {
@@ -99,7 +97,7 @@ export default {
         this.pushComment(this.selfcomment);
         // this.$emit('add-comment', this.selfcomment);
       }
-      this.selfcomment.comment = '';
+      // this.selfcomment.comment = '';
     },
     saveComment() {},
   },
@@ -124,34 +122,52 @@ export default {
         padding 2px
     .box-addcom__inpcom
         display flex
-        background-color rgb(162 55 243)
+        background-color #bb69d8
         border-radius 10px
-        border 0.5px solid rgb(162 55 243)
+        border 1px 0.5px 0.7px 0.5px solid #bb69d8
     #inpcom
-        margin 0.5px
+        overflow-y hidden
+        outline none
+        box-shadow: 0 1px 0 0 #e8e8e8;
+        line-height: 20px;
+        height: auto;
         border-radius 10px
-        padding 0 5px 0 5px
-        border 0.5px solid rgb(162 55 243)
-        width 220px
+        padding 0 0 0 10px
+        border 0.5px solid #bb69d8
+        max-width 220px
+        min-width 220px
+        min-height 24px
+        max-height 120px
+        font-family "Arial", Arial, sans-serif
+        font-size 12px
     #inpcom:focus
         outline none
+    .buttons-box
+        display flex
+        align-items center
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
     .box-addcom__send
         cursor pointer
         border-radius 0 10px 10px 0
         height 23px
         width 50px
-        background-color rgb(162 55 243)
+        background-color #bb69d8
         color white
-        border 1px solid rgb(162 55 243)
+        border 1px solid #bb69d8
     .box-addcom__save
         display none
         cursor pointer
         border-radius 0 10px 10px 0
         height 23px
         width 50px
-        background-color rgb(162 55 243)
+        background-color #bb69d8
         color white
-        border 1px solid rgb(162 55 243)
+        border 1px solid #bb69d8
     .box-addcom__send:focus
         outline none
 </style>

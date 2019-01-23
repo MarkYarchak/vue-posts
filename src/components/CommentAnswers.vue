@@ -18,15 +18,19 @@
         v-if="answers.length"
         class="switch-commentanswers"
         @click="showAnswers">
-        <span class="anscomment-text">{{ openAnswersList ? 'Hide' : 'Show' }}
-          {{ 10 > answers.length ? answers.length : 10 }}
-          {{ answers.length === 1 ? "answer" : "answers" }}</span>
+        <span class="anscomment-text">
+          {{ openAnswersList ? 'Hide' : 'Show' }}
+          {{ 10 > answers.length && countans !== answers.length ? answers.length : countans }}
+          {{ answers.length === 1 ? "answer" : "answers" }}
+        </span>
       </div>
       <div
-        v-if="openAnswersList && countans > 9 && answers.length > 10"
+        v-if="openAnswersList && countans > 9 && answers.length > 10 && countans < answers.length "
         class="show-more-ans"
         @click="showMoreAns">
-        Show more answers
+        Show more
+        {{ countans + 10 > answers.length ? countans + 10 - answers.length : 10 }}
+        answers
       </div>
     </div>
     <!--<div class="open-commentanswers"></div>-->
@@ -90,7 +94,10 @@ export default {
       this.openAnswersList = !this.openAnswersList;
     },
     showMoreAns() {
-      this.countans += 10;
+      if (this.countans + 10 > this.answers.length) {
+        this.countans += (this.countans + 10) - this.answers.length;
+      } else this.countans += 10;
+      console.log(this.answers.length);
     },
   },
 };
@@ -119,7 +126,7 @@ export default {
     .show-more-ans
         font-family "Arial", Arial, sans-serif
         cursor pointer
-        margin 2px 0 5px 0
+        margin 2px 0 5px 1px
         font-size 11px
         color #747474
         background-color #f2f2f2

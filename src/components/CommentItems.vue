@@ -3,6 +3,7 @@
     <div
       id="edit"
       class="comment-item__item"
+      data-title="Edit"
       @click="editComment"
     >
       <i class="fas fa-edit"/>
@@ -10,6 +11,7 @@
     <div
       id="answer"
       class="comment-item__item"
+      data-title="Reply"
       @click="answerComment"
     >
       <i class="fas fa-comments"/>
@@ -17,6 +19,7 @@
     <div
       id="delete"
       class="comment-item__item"
+      data-title="Delete"
       @click="deleteComment"
     >
       <i class="fas fa-trash-alt"/>
@@ -92,6 +95,13 @@ export default {
     lang="stylus"
     scoped
 >
+    .comment-item__item:hover::after
+        content attr(data-title)
+        margin 1px 0 1px 4px
+        font-family "Arial", Arial, sans-serif
+        letter-spacing -0.2px
+        font-size 11px
+        font-weight bolder
     .comment-items
         margin 3px 0 3px 0
         display flex
