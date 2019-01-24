@@ -4,7 +4,7 @@
       id="edit"
       class="comment-item__item"
       data-title="Edit"
-      @click="editComment"
+      @click="editCommentAnswer"
     >
       <i class="fas fa-edit"/>
     </div>
@@ -20,7 +20,7 @@
       id="delete"
       class="comment-item__item"
       data-title="Delete"
-      @click="deleteComment"
+      @click="deleteCommentAnswer"
     >
       <i class="fas fa-trash-alt"/>
     </div>
@@ -28,53 +28,67 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'CommentAnswerItems',
+  props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
+    comment: {
+      type: Object,
+      default: () => {},
+    },
+    answer: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-      showCommentAnswerItems: false,
+      inputComment: document.getElementById('inpcom'),
+      posts: [],
       commentDelete: false,
       commentAnswer: false,
     };
   },
-  mounted() {
-    window.addEventListener('click', this.closeCommentAnswerParameters);
+  computed: {
+    ...mapGetters({
+      postsFromStore: 'posts',
+    }),
   },
-  destroed() {
-    window.removeEventListener('click', this.closeCommentAnswerParameters);
+  created() {
+    this.posts = this.postsFromStore;
   },
   methods: {
-    closeCommentAnswerParameters() {
-      this.showCommentAnswerItems = false;
-    },
-    editComment() {
+    editCommentAnswer() {
+      this.inputComment.placeholder = 'Edit your answer...';
       this.$emit('edit-comment', {
         commentId: this.comment.id,
         postId: this.post.id,
       });
     },
     answerOnAnswer() {
+      this.inputComment.placeholder = 'Write your answer...';
       this.commentAnswer = true;
       this.$emit('answer-comment', {
         commentId: this.comment.id,
         postId: this.post.id,
       });
     },
-    deleteComment() {
+    deleteCommentAnswer() {
       this.commentDelete = true;
-      this.decrementComments({
-        commentId: this.comment.id,
-        postId: this.post.id,
-      });
-    },
-    // continue of deleteComment()
-    decrementComments(allOfId) {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);
+      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === allOfId.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempPosts[postidx].comments = tempComments.filter(c => c.id !== allOfId.commentId);
+      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
+      const tempAnswers = tempPosts[postidx].comments[commentidx].answers.concat();
+      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
+      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+        tempPosts[postidx].comments[commentidx].answers = tempAnswers
+          .filter(a => a.id !== this.answer.id);
       }
     },
   },

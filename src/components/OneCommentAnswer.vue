@@ -28,9 +28,10 @@
           <CommentAnswerItems
             v-if="showCommentAnswerItems"
             :comment="comment"
+            :answer="answer"
             :post="post"
-            @edit-comment="editCommentAnswer"
           />
+          <!--@edit-comment="editCommentAnswer"-->
         </div>
       </div>
       <div class="onecom__right right">
@@ -70,6 +71,14 @@ export default {
     CommentAnswerItems,
   },
   props: {
+    post: {
+      type: Object,
+      default: () => ({}),
+    },
+    comment: {
+      type: Object,
+      default: () => {},
+    },
     answer: {
       type: Object,
       default: () => ({}),
@@ -96,45 +105,50 @@ export default {
       postsFromStore: 'posts',
     }),
   },
+  mounted() {
+    window.addEventListener('click', this.closeCommentAnswerParameters);
+  },
+  destroed() {
+    window.removeEventListener('click', this.closeCommentAnswerParameters);
+  },
   created() {
     this.posts = this.postsFromStore;
   },
   methods: {
+    closeCommentAnswerParameters() {
+      this.showCommentAnswerItems = false;
+    },
     switchLikeComment() {
       this.answer.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
-        this.likeComment('add-comment-like', {
-          user: this.user,
-          commentId: this.comment.id,
-          postId: this.post.id,
-        });
+        this.likeComment();
       }
       if (!this.likePos) {
-        this.dislikeComment('del-comment-like', {
-          user: this.user,
-          commentId: this.comment.id,
-          postId: this.post.id,
-        });
+        this.dislikeComment();
       }
     },
-    likeComment(likeData) {
+    likeComment() {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes.push(likeData.user);
+      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
+      const tempAnswers = tempComments[commentidx].answers.concat();
+      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
+      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+        tempAnswers[answeridx].likes.push(this.user);
       }
     },
-    dislikeComment(likeData) {
+    dislikeComment() {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes = tempComments[commentidx].likes
-          .filter(l => l.id !== likeData.user.id);
+      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
+      const tempAnswers = tempComments[commentidx].answers.concat();
+      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
+      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+        tempAnswers[answeridx].likes = tempAnswers[answeridx].likes
+          .filter(l => l.id !== this.user.id);
       }
     },
     showParameters() {

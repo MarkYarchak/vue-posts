@@ -384,7 +384,19 @@
           "comment": "Good writing",
           "createDate": [2018, 6, 11],
           "likes": [],
-          "answers": []
+          "answers": [
+            {
+              "id": "128",
+              "author": {
+                "displayName": "Andrew Broker",
+                "username": "andbroker",
+                "avatar": "https://chryslercapital.com/wp-content/uploads/2015/05/052615-cc-orange-is-not-the-new-black-in-car-colors-2.jpg"
+              },
+              "comment": "yeah, it`s true",
+              "createDate": [2018, 7, 23],
+              "likes": []
+            }
+          ]
         },
         {
           "id": "06",

@@ -44,6 +44,7 @@ export default {
   },
   data() {
     return {
+      inputComment: document.getElementById('inpcom'),
       commentDelete: false,
       commentAnswer: false,
     };
@@ -58,12 +59,14 @@ export default {
   },
   methods: {
     editComment() {
-      this.$emit('edit-comment', {
-        commentId: this.comment.id,
-        postId: this.post.id,
-      });
+      this.inputComment.placeholder = 'Edit your comment...';
+      // this.$emit('edit-comment', {
+      //   commentId: this.comment.id,
+      //   postId: this.post.id,
+      // });
     },
     answerComment() {
+      this.inputComment.placeholder = 'Answer to the comment...';
       this.commentAnswer = true;
       this.$emit('answer-comment', {
         commentId: this.comment.id,

@@ -8,7 +8,8 @@
         id="inpcom"
         v-model="selfcomment.comment"
         wrap="hard"
-        placeholder="Write your comment...">Comment here</textarea>
+        placeholder="Write your comment...">Comment here
+      </textarea>
       <div class="buttons-box">
         <button
           class="box-addcom__send"
@@ -56,9 +57,6 @@ export default {
         createDate: '',
         likes: [],
       },
-      temporaryPosts: 0,
-      temporaryComments: 0,
-      postidx: this.post.id,
     };
   },
   computed: {
@@ -79,6 +77,7 @@ export default {
       }
     },
     createComment() {
+      console.log('azaza', this.postsFromStore);
       this.selfcomment.id = Math.floor(Math.random() * 10000);
       if (this.selfcomment.createDate === '') {
         this.selfcomment.createDate = moment();
