@@ -60,10 +60,13 @@ export default {
   methods: {
     editComment() {
       this.inputComment.placeholder = 'Edit your comment...';
-      // this.$emit('edit-comment', {
-      //   commentId: this.comment.id,
-      //   postId: this.post.id,
-      // });
+      this.inputComment.value = this.comment.comment;
+      this.inputComment.focus();
+      this.$emit('edit-comment', {
+        commentText: this.comment.comment,
+        commentId: this.comment.id,
+        postId: this.post.id,
+      });
     },
     answerComment() {
       this.inputComment.placeholder = 'Answer to the comment...';

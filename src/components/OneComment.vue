@@ -133,11 +133,8 @@ export default {
       // this.showCommentItems = true || false;
       this.showCommentItems = !this.showCommentItems;
     },
-    editComment(allOfId) {
-      this.$emit('edit-comment', {
-        allId: allOfId,
-        text: this.comment.comment,
-      });
+    editComment(allAboutComment) {
+      this.$emit('edit-comment', allAboutComment);
     },
     LikeComment() {
       this.comment.id = Math.floor(Math.random() * 10000);

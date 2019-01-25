@@ -66,8 +66,8 @@ export default {
     showMore() {
       this.countcom += 5;
     },
-    editComment(textId) {
-      this.$emit('edit-comment', textId);
+    editComment(allAboutComment) {
+      this.$emit('edit-comment', allAboutComment);
     },
     likeComment(likeData) {
       const tempPosts = this.posts.concat();

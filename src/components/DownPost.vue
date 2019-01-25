@@ -114,8 +114,8 @@ export default {
     showCom() {
       this.showComments = !this.showComments;
     },
-    editComment(textId) {
-      this.commentInf = textId;
+    editComment(allAboutComment) {
+      this.commentInf = allAboutComment;
     },
     // replaceComment() {
     //   this.$emit('edit-comment', textId);

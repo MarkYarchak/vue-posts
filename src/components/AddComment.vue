@@ -8,6 +8,7 @@
         id="inpcom"
         v-model="selfcomment.comment"
         wrap="hard"
+        spellcheck="false"
         placeholder="Write your comment...">Comment here
       </textarea>
       <div class="buttons-box">
@@ -46,6 +47,8 @@ export default {
   },
   data() {
     return {
+      buttonCommentInput: document.getElementsByClassName('box-addcom__send'),
+      commentInput: document.getElementById('inpcoom'),
       selfComment: {
         id: '',
         author: {
@@ -70,6 +73,7 @@ export default {
       console.log('watch', this.commentinf);
     },
     pushComment(selfComment) {
+      console.log('watch', this.commentinf);
       const tempPosts = this.postsFromStore.concat();
       const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
       if (idx !== -1) {
@@ -77,7 +81,6 @@ export default {
       }
     },
     createComment() {
-      console.log('azaza', this.postsFromStore);
       this.selfcomment.id = Math.floor(Math.random() * 10000);
       if (this.selfcomment.createDate === '') {
         this.selfcomment.createDate = moment();
@@ -118,18 +121,18 @@ export default {
         overflow-y hidden
         outline none
         line-height 15px
-        height auto
         border-radius 10px 10px 0 10px
-        padding 2px 5px 2px 10px
+        padding 6px 5px 2px 10px
         border 0.5px solid #bb69d8
         max-width 220px
         min-width 220px
-        min-height 51px
-        max-height 120px
+        height auto
+        max-height 70px
         font-family "Arial", Arial, sans-serif
         font-size 13px
-        /*resize none*/
+        resize none
     #inpcom:focus
+        /*height 120px*/
         outline none
     .buttons-box
         display flex
