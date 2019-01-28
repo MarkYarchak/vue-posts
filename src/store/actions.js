@@ -1,5 +1,8 @@
+import { SET_COMMENT } from './mutations-types';
+
 export default {
-  myFunc() {
-    console.log('all is gooood');
+  updateComment(context, payload) {
+    context.commit(SET_COMMENT, payload);
+    // console.log(payload);
   },
 };

@@ -62,6 +62,11 @@ export default {
       this.inputComment.placeholder = 'Edit your comment...';
       this.inputComment.value = this.comment.comment;
       this.inputComment.focus();
+      this.$store.dispatch('updateComment', {
+        commentText: this.comment.comment,
+        commentId: this.comment.id,
+        postId: this.post.id,
+      });
       this.$emit('edit-comment', {
         commentText: this.comment.comment,
         commentId: this.comment.id,

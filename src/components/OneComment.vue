@@ -121,6 +121,7 @@ export default {
     this.posts = this.postsFromStore;
   },
   methods: {
+    createCommentAnswer() {},
     commentAnswers() {
       if (this.comment.answers.length) {
         this.showCommentAnswers = !this.showCommentAnswers;

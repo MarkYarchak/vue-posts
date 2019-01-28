@@ -2,6 +2,15 @@
   <div class="comment_answers">
     <!--<div class="free-place"/>-->
     <div
+      v-if="openAnswersList"
+      class="close_all_comment-ans"
+    >
+      <i
+        class="fas fa-angle-double-up"
+        @click="closeAllAnswers"
+      />
+    </div>
+    <div
       v-for="(answer, index) in answers"
       v-if="index < countans && openAnswersList"
       :key="index"
@@ -29,7 +38,7 @@
         class="show-more-ans"
         @click="showMoreAns">
         Show more
-        {{ countans + 10 > answers.length ? countans + 10 - answers.length : 10 }}
+        {{ countans + 10 > answers.length ? answers.length % 10 : 10 }}
         answers
       </div>
     </div>
@@ -82,22 +91,17 @@ export default {
     window.removeEventListener('click', this.nothing);
   },
   methods: {
-    nothing() {
-      // const tempPosts = this.posts.concat();
-      // const postidx = tempPosts.findIndex(p => p.id === 19);
-      // const tempComments = tempPosts[postidx].comments.concat();
-      // const commentidx = tempComments.findIndex(c => c.id === 4);
-      // const ans = tempComments[commentidx].answers;
-      // console.log('rfjgw', tempPosts[0].comments[3].answers);
+    nothing() {},
+    closeAllAnswers() {
+      this.openAnswersList = false;
     },
     showAnswers() {
       this.openAnswersList = !this.openAnswersList;
     },
     showMoreAns() {
       if (this.countans + 10 > this.answers.length) {
-        this.countans += (this.countans + 10) - this.answers.length;
+        this.countans += this.answers.length % 10;
       } else this.countans += 10;
-      console.log(this.answers.length);
     },
   },
 };
@@ -139,4 +143,18 @@ export default {
         padding 5px
         margin 0 0 10px 42px
         border-radius 0 0 0 7px
+    .close_all_comment-ans
+        display flex
+        justify-content center
+    .fa-angle-double-up
+        color grey
+        margin 1px
+        cursor pointer
+    .fa-angle-double-up:hover
+        color grey
+        margin 1px
+        cursor pointer
+        -webkit-transform scale(1.4)
+        -moz-transform scale(1.4)
+        -o-transform scale(1.4)
 </style>

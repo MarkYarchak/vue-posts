@@ -7,9 +7,11 @@
       <textarea
         id="inpcom"
         v-model="selfcomment.comment"
+        rows="2"
         wrap="hard"
         spellcheck="false"
-        placeholder="Write your comment...">Comment here
+        placeholder="Write your comment..."
+      >Comment here
       </textarea>
       <div class="buttons-box">
         <button
@@ -65,6 +67,7 @@ export default {
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
+      commentFromStore: 'comment',
     }),
   },
   methods: {
@@ -72,8 +75,19 @@ export default {
     editComment() {
       console.log('watch', this.commentinf);
     },
+    // replaceComment() {
+    //   const tempPosts = this.postsFromStore.concat();
+    //   const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+    //   const tempComments = tempPosts[idx].comments.concat();
+    //   const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+    //   const currentComment = tempPosts[idx].tempComments[commentidx].concat();
+    //   if (currentComment !== this.commentFromStore.commentText
+    //     && idx !== -1 && commentidx !== -1) {
+    //     tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
+    //   }
+    // },
     pushComment(selfComment) {
-      console.log('watch', this.commentinf);
+      console.log('watch', this.commentFromStore);
       const tempPosts = this.postsFromStore.concat();
       const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
       if (idx !== -1) {
@@ -126,8 +140,8 @@ export default {
         border 0.5px solid #bb69d8
         max-width 220px
         min-width 220px
-        height auto
-        max-height 70px
+        /*height auto*/
+        /*max-height 70px*/
         font-family "Arial", Arial, sans-serif
         font-size 13px
         resize none
