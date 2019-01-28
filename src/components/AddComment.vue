@@ -51,17 +51,6 @@ export default {
     return {
       buttonCommentInput: document.getElementsByClassName('box-addcom__send'),
       commentInput: document.getElementById('inpcoom'),
-      selfComment: {
-        id: '',
-        author: {
-          displayName: 'Mark Yarchak',
-          username: 'markyarchak',
-          avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
-        },
-        comment: '',
-        createDate: '',
-        likes: [],
-      },
     };
   },
   computed: {
@@ -140,7 +129,7 @@ export default {
         border 0.5px solid #bb69d8
         max-width 220px
         min-width 220px
-        /*height auto*/
+        height 60px
         /*max-height 70px*/
         font-family "Arial", Arial, sans-serif
         font-size 13px

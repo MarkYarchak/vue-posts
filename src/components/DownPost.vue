@@ -80,6 +80,7 @@ export default {
       selfComment: {
         id: '',
         author: {
+          id: 777,
           displayName: 'Mark Yarchak',
           username: 'markyarchak',
           avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
@@ -95,7 +96,7 @@ export default {
         displayName: 'Mark Yarchak',
         username: 'markyarchak',
         avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        id: 1,
+        id: 777,
       },
     };
   },

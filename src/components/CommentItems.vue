@@ -1,6 +1,7 @@
 <template>
   <div class="comment-items">
     <div
+      v-if="comment.author.id === userFromStore.id"
       id="edit"
       class="comment-item__item"
       data-title="Edit"
@@ -17,6 +18,7 @@
       <i class="fas fa-comments"/>
     </div>
     <div
+      v-if="comment.author.id === userFromStore.id"
       id="delete"
       class="comment-item__item"
       data-title="Delete"
@@ -52,6 +54,7 @@ export default {
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
+      userFromStore: 'user',
     }),
   },
   created() {
@@ -75,6 +78,7 @@ export default {
     },
     answerComment() {
       this.inputComment.placeholder = 'Answer to the comment...';
+      this.inputComment.focus();
       this.commentAnswer = true;
       this.$emit('answer-comment', {
         commentId: this.comment.id,
@@ -83,19 +87,12 @@ export default {
     },
     deleteComment() {
       this.commentDelete = true;
-      this.decrementComments({
-        commentId: this.comment.id,
-        postId: this.post.id,
-      });
-    },
-    // countinue of deleteComment()
-    decrementComments(allOfId) {
       const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === allOfId.postId);
+      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === allOfId.commentId);
+      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
       if (postidx !== -1 && commentidx !== -1) {
-        tempPosts[postidx].comments = tempComments.filter(c => c.id !== allOfId.commentId);
+        tempPosts[postidx].comments = tempComments.filter(c => c.id !== this.comment.id);
       }
     },
   },
