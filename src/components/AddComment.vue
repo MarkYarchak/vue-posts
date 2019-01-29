@@ -6,8 +6,8 @@
     <div class="box-addcom__inpcom">
       <textarea
         id="inpcom"
+        ref="inputComment"
         v-model="selfcomment.comment"
-        rows="2"
         wrap="hard"
         spellcheck="false"
         placeholder="Write your comment..."
@@ -15,13 +15,10 @@
       </textarea>
       <div class="buttons-box">
         <button
+          id="main_comment-button"
           class="box-addcom__send"
-          @click="createComment"
+          @click="commentOperations"
         >Send</button>
-        <button
-          class="box-addcom__save"
-          @click="saveComment"
-        >Save</button>
       </div>
     </div>
   </div>
@@ -48,40 +45,34 @@ export default {
     },
   },
   data() {
-    return {
-      buttonCommentInput: document.getElementsByClassName('box-addcom__send'),
-      commentInput: document.getElementById('inpcoom'),
-    };
+    return {};
   },
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
       commentFromStore: 'comment',
+      answerFromStore: 'answer',
+      userFromStore: 'user',
     }),
   },
   methods: {
-    nothing() {},
-    editComment() {
-      console.log('watch', this.commentinf);
-    },
-    // replaceComment() {
-    //   const tempPosts = this.postsFromStore.concat();
-    //   const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
-    //   const tempComments = tempPosts[idx].comments.concat();
-    //   const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
-    //   const currentComment = tempPosts[idx].tempComments[commentidx].concat();
-    //   if (currentComment !== this.commentFromStore.commentText
-    //     && idx !== -1 && commentidx !== -1) {
-    //     tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
-    //   }
-    // },
-    pushComment(selfComment) {
-      console.log('watch', this.commentFromStore);
-      const tempPosts = this.postsFromStore.concat();
-      const idx = tempPosts.findIndex(p => p.id === selfComment.postId);
-      if (idx !== -1) {
-        tempPosts[idx].comments.unshift(selfComment);// or push() it to end
+    commentOperations() {
+      if (this.$refs.inputComment.placeholder === 'Write your comment...') {
+        this.createComment();
       }
+      if (this.$refs.inputComment.placeholder === 'Edit your comment...') {
+        this.editComment();
+      }
+      if (this.$refs.inputComment.placeholder === 'Answer to the comment...') {
+        this.createCommentAnswer();
+      }
+      if (this.$refs.inputComment.placeholder === 'Edit your answer...') {
+        this.editCommentAnswer();
+      }
+      if (this.$refs.inputComment.placeholder === 'Write your reply to answer...') {
+        this.answerOnAnswer();
+      }
+      this.selfcomment.comment = '';
     },
     createComment() {
       this.selfcomment.id = Math.floor(Math.random() * 10000);
@@ -90,11 +81,51 @@ export default {
       }
       this.selfcomment.postId = this.post.id;
       if (this.selfcomment.comment !== '') {
-        this.pushComment(this.selfcomment);
+        const tempPosts = this.postsFromStore.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.selfcomment.postId);
+        if (idx !== -1) {
+          tempPosts[idx].comments.unshift(this.selfcomment);// or push() it to end
+        }
       }
-      this.selfcomment.comment = '';
     },
-    saveComment() {},
+    editComment() {
+      const tempPosts = this.postsFromStore.concat();
+      const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+      const tempComments = tempPosts[idx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+      const currentComment = tempPosts[idx].tempComments[commentidx].concat();
+      if (currentComment.comment !== this.commentFromStore.commentText
+        && idx !== -1 && commentidx !== -1) {
+        tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
+      }
+    },
+    createCommentAnswer() {
+      this.selfcomment.id = Math.floor(Math.random() * 10000);
+      if (this.selfcomment.createDate === '') {
+        this.selfcomment.createDate = moment();
+      }
+      if (this.selfcomment.comment !== '') {
+        const tempPosts = this.postsFromStore.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+        const tempComments = tempPosts[idx].comments.concat();
+        const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+        if (idx !== -1 && commentidx !== -1) {
+          tempComments[commentidx].answers.unshift(this.selfcomment);
+        }
+      }
+    },
+    editCommentAnswer() {
+      const tempPosts = this.postsFromStore.concat();
+      const idx = tempPosts.findIndex(p => p.id === this.answerFromStore.postId);
+      const tempComments = tempPosts[idx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+      const currentComment = tempPosts[idx].tempComments[commentidx].concat();
+      if (currentComment.comment !== this.commentFromStore.commentText
+              && idx !== -1 && commentidx !== -1) {
+        tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
+      }
+    },
+    answerOnAnswer() {},
   },
 };
 </script>

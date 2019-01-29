@@ -11,9 +11,6 @@
       <OneComment
         :post="post"
         :comment="comment"
-        @add-comment-like="likeComment"
-        @del-comment-like="dislikeComment"
-        @edit-comment="editComment"
       />
     </div>
     <div class="box-show-morecom">
@@ -65,28 +62,6 @@ export default {
   methods: {
     showMore() {
       this.countcom += 5;
-    },
-    editComment(allAboutComment) {
-      this.$emit('edit-comment', allAboutComment);
-    },
-    likeComment(likeData) {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes.push(likeData.user);
-      }
-    },
-    dislikeComment(likeData) {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes = tempComments[commentidx].likes
-          .filter(l => l.id !== likeData.user.id);
-      }
     },
     closeCommentsParameters() {
       this.openParameters = !this.openParameters;

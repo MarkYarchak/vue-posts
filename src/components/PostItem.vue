@@ -10,9 +10,6 @@
     />
     <DownPost
       :post="post"
-      @add-post-like="likePost"
-      @del-post-like="dislikePost"
-      @edit-comment="editComment"
     />
   </div>
 </template>
@@ -49,26 +46,7 @@ export default {
   created() {
     this.posts = this.postsFromStore;
   },
-  methods: {
-    editComment(comment) {
-      this.$emit('edit-comment', comment);
-    },
-    likePost(selfLike) {
-      const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
-      if (idx !== -1) {
-        tempPosts[idx].likes.push(selfLike.user);
-      }
-    },
-    dislikePost(selfLike) {
-      const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === selfLike.postId);
-      if (idx !== -1) {
-        tempPosts[idx].likes = tempPosts[idx].likes
-          .filter(l => l.id !== selfLike.user.id);
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 

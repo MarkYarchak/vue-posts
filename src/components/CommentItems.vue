@@ -1,7 +1,7 @@
 <template>
   <div class="comment-items">
+    <!--v-if="comment.author.id === userFromStore.id"-->
     <div
-      v-if="comment.author.id === userFromStore.id"
       id="edit"
       class="comment-item__item"
       data-title="Edit"
@@ -17,8 +17,8 @@
     >
       <i class="fas fa-comments"/>
     </div>
+    <!--v-if="comment.author.id === userFromStore.id"-->
     <div
-      v-if="comment.author.id === userFromStore.id"
       id="delete"
       class="comment-item__item"
       data-title="Delete"
@@ -70,17 +70,13 @@ export default {
         commentId: this.comment.id,
         postId: this.post.id,
       });
-      this.$emit('edit-comment', {
-        commentText: this.comment.comment,
-        commentId: this.comment.id,
-        postId: this.post.id,
-      });
     },
     answerComment() {
       this.inputComment.placeholder = 'Answer to the comment...';
       this.inputComment.focus();
       this.commentAnswer = true;
-      this.$emit('answer-comment', {
+      this.$store.dispatch('updateComment', {
+        commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
       });

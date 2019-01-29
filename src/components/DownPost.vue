@@ -46,12 +46,10 @@
       v-if="showComments"
       :comments="post.comments"
       :post="post"
-      @edit-comment="editComment"
     />
     <AddComment
       v-if="showComments"
       :selfcomment="selfComment"
-      :commentinf="commentInf"
       :post="post"/>
   </div>
 </template>
@@ -79,64 +77,50 @@ export default {
       posts: [],
       selfComment: {
         id: '',
-        author: {
-          id: 777,
-          displayName: 'Mark Yarchak',
-          username: 'markyarchak',
-          avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
-        },
+        author: {},
         comment: '',
         createDate: '',
         likes: [],
       },
-      commentInf: null,
       showComments: false,
       likePos: false,
-      user: {
-        displayName: 'Mark Yarchak',
-        username: 'markyarchak',
-        avatar: 'http://wallfon.com/walls/others/nice.jpg',
-        id: 777,
-      },
+      user: {},
     };
   },
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
+      userFromStore: 'user',
     }),
   },
   created() {
     this.posts = this.postsFromStore;
+    this.user = this.userFromStore;
+    this.selfComment.author = this.userFromStore;
   },
   methods: {
-    // nothing() {
-    //   // this.$store.commit('giveOnePost', this.post);
-    // },
     showCom() {
       this.showComments = !this.showComments;
     },
-    editComment(allAboutComment) {
-      this.commentInf = allAboutComment;
-    },
-    // replaceComment() {
-    //   this.$emit('edit-comment', textId);
-    // },
     PostLike() {
       this.post.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
         // window.localStorage.setItem('this.likePos', 'true');
-        this.$emit('add-post-like', {
-          user: this.user,
-          postId: this.post.id,
-        });
+        const tempPosts = this.posts.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.post.id);
+        if (idx !== -1) {
+          tempPosts[idx].likes.push(this.user);
+        }
       }
       if (!this.likePos) {
         // window.localStorage.setItem('this.likePos', 'false');
-        this.$emit('del-post-like', {
-          user: this.user,
-          postId: this.post.id,
-        });
+        const tempPosts = this.posts.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.post.id);
+        if (idx !== -1) {
+          tempPosts[idx].likes = tempPosts[idx].likes
+            .filter(l => l.id !== this.user.id);
+        }
       }
     },
   },

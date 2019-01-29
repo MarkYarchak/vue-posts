@@ -1,5 +1,6 @@
 <template>
   <div class="comment-answer_items">
+    <!--v-if="answer.author.id === userFromStore.id"-->
     <div
       id="edit"
       class="comment-item__item"
@@ -16,6 +17,7 @@
     >
       <i class="fas fa-comments"/>
     </div>
+    <!--v-if="answer.author.id === userFromStore.id"-->
     <div
       id="delete"
       class="comment-item__item"
@@ -57,6 +59,7 @@ export default {
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
+      userFromStore: 'user',
     }),
   },
   created() {
@@ -65,17 +68,23 @@ export default {
   methods: {
     editCommentAnswer() {
       this.inputComment.placeholder = 'Edit your answer...';
-      this.$emit('edit-comment', {
+      this.inputComment.focus();
+      this.$store.dispatch('updateAnswer', {
+        commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
+        answerId: this.answer.id,
       });
     },
     answerOnAnswer() {
-      this.inputComment.placeholder = 'Write your answer...';
+      this.inputComment.placeholder = 'Write your reply to answer...';
       this.commentAnswer = true;
-      this.$emit('answer-comment', {
+      this.inputComment.focus();
+      this.$store.dispatch('updateAnswer', {
+        commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
+        answerId: this.answer.id,
       });
     },
     deleteCommentAnswer() {

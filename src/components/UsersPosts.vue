@@ -5,7 +5,6 @@
         v-for="(item, key) in posts"
         :key="key"
         :post="item"
-        @edit-comment="editComment"
       />
     </ul>
   </div>
@@ -33,11 +32,7 @@ export default {
   created() {
     this.posts = this.postsFromStore;
   },
-  methods: {
-    editComment(comment) {
-      console.log('this working');
-    },
-  },
+  methods: {},
 };
 </script>
 

@@ -114,6 +114,7 @@ export default {
   created() {
     this.posts = this.postsFromStore;
   },
+  // ор про чай, поняв, що ти муся, я кака і бєка і хто тільки) любиш котів 7 липня 9:43 вечора
   methods: {
     closeCommentAnswerParameters() {
       this.showCommentAnswerItems = false;

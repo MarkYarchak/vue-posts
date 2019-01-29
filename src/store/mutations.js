@@ -1,13 +1,10 @@
-import { SET_COMMENT } from './mutations-types';
+import { SET_COMMENT, SET_ANSWER } from './mutations-types';
 
 export default {
   [SET_COMMENT](state, comment) {
     this.state.comment = comment;
   },
-  // givePostComments: (state, payload) => {
-  //   state.comments = payload;
-  // },
-  // giveOnePost(state, payload) {
-  //   state.onepost = payload;
-  // },
+  [SET_ANSWER](state, answer) {
+    this.state.answer = answer;
+  },
 };

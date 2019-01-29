@@ -29,7 +29,6 @@
             v-if="showCommentItems"
             :comment="comment"
             :post="post"
-            @edit-comment="editComment"
           />
         </div>
       </div>
@@ -43,7 +42,7 @@
           </div>
           <div
             class="like__position"
-            @click="LikeComment">
+            @click="SwitchCommentLike">
             <i
               v-if="!likePos"
               class="far fa-heart"
@@ -95,17 +94,13 @@ export default {
       openParameters: null,
       showCommentItems: false,
       likePos: false,
-      user: {
-        displayName: 'Mark Yarchak',
-        username: 'markyarchak',
-        avatar: 'https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg',
-        id: 777,
-      },
+      user: {},
     };
   },
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
+      userFromStore: 'user',
     }),
     commentCreateTime() {
       return moment(this.comment.createDate).fromNow(true);
@@ -119,6 +114,7 @@ export default {
   },
   created() {
     this.posts = this.postsFromStore;
+    this.user = this.userFromStore;
   },
   methods: {
     createCommentAnswer() {},
@@ -134,25 +130,41 @@ export default {
       // this.showCommentItems = true || false;
       this.showCommentItems = !this.showCommentItems;
     },
-    editComment(allAboutComment) {
-      this.$emit('edit-comment', allAboutComment);
-    },
-    LikeComment() {
+    SwitchCommentLike() {
       this.comment.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
-        this.$emit('add-comment-like', {
+        this.likeComment({
           user: this.user,
           commentId: this.comment.id,
           postId: this.post.id,
         });
       }
       if (!this.likePos) {
-        this.$emit('del-comment-like', {
+        this.dislikeComment({
           user: this.user,
           commentId: this.comment.id,
           postId: this.post.id,
         });
+      }
+    },
+    likeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes.push(likeData.user);
+      }
+    },
+    dislikeComment(likeData) {
+      const tempPosts = this.posts.concat();
+      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+      const tempComments = tempPosts[postidx].comments.concat();
+      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+      if (postidx !== -1 && commentidx !== -1) {
+        tempComments[commentidx].likes = tempComments[commentidx].likes
+          .filter(l => l.id !== likeData.user.id);
       }
     },
   },
