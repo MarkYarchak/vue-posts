@@ -114,7 +114,7 @@ export default {
         display flex
         flex-direction column
     .comment_one-answer
-        border-left 4px solid #A3A3AC
+        border-left 4px solid #c8c8d1
         margin-left 42px
     .box_switch-add
         display flex
@@ -141,13 +141,13 @@ export default {
         color #747474
         background-color #f2f2f2
         padding 5px
-        margin 0 0 10px 42px
+        margin 0 0 10px 40px
         border-radius 0 0 0 7px
     .close_all_comment-ans
         display flex
         justify-content center
     .fa-angle-double-up
-        color grey
+        color #b3b3b3
         margin 1px
         cursor pointer
     .fa-angle-double-up:hover

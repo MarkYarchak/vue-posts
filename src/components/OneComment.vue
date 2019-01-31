@@ -9,7 +9,10 @@
           <div
             :style="{'background-image': `url(${ comment.author.avatar })`}"
             class="avatar"
-          />
+          >
+            {{ comment.author.avatar === '' ? comment.author.avatar =
+            'https://kiittnp.in/ea19b38134d463acc8c7b66744a481847ab4b/assets/img/user.png' : '' }}
+          </div>
         </div>
         <div class="left__userbox userbox">
           <div class="userbox__comment comment">
@@ -187,16 +190,19 @@ export default {
         padding 5px
     .avatar
         background center center/cover no-repeat grey
-        height 25px
-        width 25px
+        height 27px
+        width 27px
         border-radius 50%
         padding 2px
-        border 1px solid rgb(162 55 243)
     .left__userbox
         display flex
         flex-direction column
         border-radius 5px
-        background-color WhiteSmoke
+        background-color white
+        box-shadow 0 1px 2px 0 rgba(0 0 0 0.18),
+        0 1px 2px 0 rgba(0 0 0 0.04), 0 1px 3px 2px rgba(0 0 0 0.04)
+    .left__userbox:hover
+        background-color #ebebeb
     .userbox__comment
         font-family "Arial", Arial, sans-serif
         align-self stretch
@@ -211,7 +217,7 @@ export default {
         align-self flex-start
         font-weight 600
     .comment__usercom
-        max-width 259.2px
+        max-width 255.2px
         font-family "Arial", Arial, sans-serif
         color rgb(0 0 0)
         font-size 15px

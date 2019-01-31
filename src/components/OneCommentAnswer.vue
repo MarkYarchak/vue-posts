@@ -8,13 +8,19 @@
         <div class="left__avatar">
           <div
             :style="{'background-image': `url(${ answer.author.avatar })`}"
-            class="avatar"
-          />
+            class="avatar">
+            {{ answer.author.avatar === '' ? answer.author.avatar =
+            'https://kiittnp.in/ea19b38134d463acc8c7b66744a481847ab4b/assets/img/user.png' : '' }}
+          </div>
         </div>
         <div class="left__userbox userbox">
           <div class="userbox__comment comment">
             <div class="comment__username">
               {{ answer.author.username }}
+              <span class="conjunction">
+                {{ selfcomment.usernameOfCompanion !== '' ? 'to' : '' }}
+              </span>
+              {{ selfcomment.usernameOfCompanion !== '' ? selfcomment.usernameOfCompanion : '' }}
             </div>
             <div class="comment__usercom">
               {{ answer.comment }}
@@ -31,7 +37,6 @@
             :answer="answer"
             :post="post"
           />
-          <!--@edit-comment="editCommentAnswer"-->
         </div>
       </div>
       <div class="onecom__right right">
@@ -86,15 +91,14 @@ export default {
   },
   data() {
     return {
+      selfcomment: {
+        usernameOfCompanion: '',
+      },
       showCommentAnswerItems: false,
       posts: [],
       likePos: false,
-      user: {
-        displayName: 'Mark Yarchak',
-        username: 'markyarchak',
-        avatar: 'http://www.austinhealthydentist.com/wp-content/uploads/2016/01/istock-649754038-guy-smiling-web.jpg',
-        id: 777,
-      },
+      user: {},
+      usernameOfCompanion: '',
     };
   },
   computed: {
@@ -103,6 +107,7 @@ export default {
     },
     ...mapGetters({
       postsFromStore: 'posts',
+      userFromStore: 'user',
     }),
   },
   mounted() {
@@ -112,9 +117,9 @@ export default {
     window.removeEventListener('click', this.closeCommentAnswerParameters);
   },
   created() {
+    this.user = this.userFromStore;
     this.posts = this.postsFromStore;
   },
-  // ор про чай, поняв, що ти муся, я кака і бєка і хто тільки) любиш котів 7 липня 9:43 вечора
   methods: {
     closeCommentAnswerParameters() {
       this.showCommentAnswerItems = false;
@@ -175,16 +180,19 @@ export default {
       padding 5px
   .avatar
       background center center/cover no-repeat grey
-      height 25px
-      width 25px
+      height 27px
+      width 27px
       border-radius 50%
       padding 2px
-      border 1px solid rgb(162 55 243)
   .left__userbox
       display flex
       flex-direction column
       border-radius 5px
-      background-color WhiteSmoke
+      background-color white
+      box-shadow 0 1px 2px 0 rgba(0 0 0 0.18),
+      0 1px 2px 0 rgba(0 0 0 0.04), 0 1px 3px 2px rgba(0 0 0 0.04)
+  .left__userbox:hover
+      background-color #ebebeb
   .userbox__comment
       font-family "Arial", Arial, sans-serif
       align-self stretch
@@ -193,13 +201,16 @@ export default {
       flex-direction column
       border-radius 5px
       padding 5px 8px 5px 8px
+      max-width 218px
   .comment__username
       letter-spacing -0.2px
       font-size 15px
       align-self flex-start
       font-weight 600
+  .conjunction
+      font-weight normal
+      font-style italic
   .comment__usercom
-      max-width 275.2px
       font-family "Arial", Arial, sans-serif
       color rgb(0 0 0)
       font-size 15px

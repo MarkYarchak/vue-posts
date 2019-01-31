@@ -1,13 +1,15 @@
 <template>
   <div class="box-addcom">
     <div class="box-addcom__my-avatar">
-      <div class="avatar"/>
+      <div
+        :style="{'background-image': `url(${ userFromStore.avatar })`}"
+        class="avatar"/>
     </div>
     <div class="box-addcom__inpcom">
       <textarea
-        id="inpcom"
-        ref="inputComment"
+        id="post.id"
         v-model="selfcomment.comment"
+        class="inpcom"
         wrap="hard"
         spellcheck="false"
         placeholder="Write your comment..."
@@ -45,7 +47,10 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      inputSomething: document.getElementById('commentFromStore.postId'),
+      selectedPost: null,
+    };
   },
   computed: {
     ...mapGetters({
@@ -55,21 +60,26 @@ export default {
       userFromStore: 'user',
     }),
   },
+  created() {
+    const tempPosts = this.postsFromStore;
+    const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+    this.selectedPost = tempPosts[idx];
+  },
   methods: {
     commentOperations() {
-      if (this.$refs.inputComment.placeholder === 'Write your comment...') {
+      if (this.inputComment.placeholder === 'Write your comment...') {
         this.createComment();
       }
-      if (this.$refs.inputComment.placeholder === 'Edit your comment...') {
+      if (this.inputSomething.placeholder === 'Edit your comment...') {
         this.editComment();
       }
-      if (this.$refs.inputComment.placeholder === 'Answer to the comment...') {
+      if (this.inputComment.placeholder === 'Answer to the comment...') {
         this.createCommentAnswer();
       }
-      if (this.$refs.inputComment.placeholder === 'Edit your answer...') {
+      if (this.inputComment.placeholder === 'Edit your answer...') {
         this.editCommentAnswer();
       }
-      if (this.$refs.inputComment.placeholder === 'Write your reply to answer...') {
+      if (this.inputComment.placeholder === 'Write your reply to answer...') {
         this.answerOnAnswer();
       }
       this.selfcomment.comment = '';
@@ -141,9 +151,9 @@ export default {
     .box-addcom__my-avatar
         margin 5px
     .avatar
-        background url('https://dogzone-tcwebsites.netdna-ssl.com/wp-content/uploads/2018/06/funny-dog-quotes-2.jpg') center center/cover no-repeat grey
-        height 25px
-        width 25px
+        background center center/cover no-repeat grey
+        height 27px
+        width 27px
         border-radius 50%
         padding 2px
     .box-addcom__inpcom
@@ -151,7 +161,7 @@ export default {
         background-color #bb69d8
         border-radius 10px
         border 1px 0.5px 0.7px 0.5px solid #bb69d8
-    #inpcom
+    .inpcom
         overflow-y hidden
         outline none
         line-height 15px

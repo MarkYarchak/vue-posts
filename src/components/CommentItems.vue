@@ -46,7 +46,7 @@ export default {
   },
   data() {
     return {
-      inputComment: document.getElementById('inpcom'),
+      inputComment: document.getElementById('post.id'),
       commentDelete: false,
       commentAnswer: false,
     };

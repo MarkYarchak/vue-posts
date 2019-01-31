@@ -85,6 +85,7 @@ export default {
         commentId: this.comment.id,
         postId: this.post.id,
         answerId: this.answer.id,
+        usernameOfCompanion: this.answer.author.username,
       });
     },
     deleteCommentAnswer() {
