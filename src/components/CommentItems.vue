@@ -46,7 +46,7 @@ export default {
   },
   data() {
     return {
-      inputComment: document.getElementById('post.id'),
+      inputMessage: document.getElementById('post.id'),
       commentDelete: false,
       commentAnswer: false,
     };
@@ -62,10 +62,11 @@ export default {
   },
   methods: {
     editComment() {
-      this.inputComment.placeholder = 'Edit your comment...';
-      this.inputComment.value = this.comment.comment;
-      this.inputComment.focus();
-      this.$store.dispatch('updateComment', {
+      this.inputMessage.placeholder = 'Edit your comment...';
+      this.inputMessage.value = this.comment.comment;
+      this.inputMessage.focus();
+      this.$store.dispatch('updateCommentOrAnswer', {
+        getInputPlace: this.inputMessage,
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
@@ -75,7 +76,8 @@ export default {
       this.inputComment.placeholder = 'Answer to the comment...';
       this.inputComment.focus();
       this.commentAnswer = true;
-      this.$store.dispatch('updateComment', {
+      this.$store.dispatch('updateCommentOrAnswer', {
+        getInputPlace: this.inputMessage,
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
@@ -100,7 +102,7 @@ export default {
     scoped
 >
     .comment-item__item:hover::after
-        content attr(data-title)
+        // content attr(data-title)
         margin 1px 0 1px 4px
         font-family "Arial", Arial, sans-serif
         letter-spacing -0.2px

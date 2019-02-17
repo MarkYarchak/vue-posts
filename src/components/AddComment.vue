@@ -48,38 +48,36 @@ export default {
   },
   data() {
     return {
-      inputSomething: document.getElementById('commentFromStore.postId'),
+      selectedPostId: document.getElementById('selectedPost'),
       selectedPost: null,
     };
   },
   computed: {
     ...mapGetters({
       postsFromStore: 'posts',
-      commentFromStore: 'comment',
-      answerFromStore: 'answer',
+      commentOrAnswerFromStore: 'commentOrAnswer',
       userFromStore: 'user',
     }),
   },
   created() {
-    const tempPosts = this.postsFromStore;
-    const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
-    this.selectedPost = tempPosts[idx];
+    this.selectedPost = this.commentOrAnswerFromStore.getInputPlace;
   },
   methods: {
     commentOperations() {
-      if (this.inputComment.placeholder === 'Write your comment...') {
+      console.log('f', this.selectedPost);
+      if (this.selectedPostId.placeholder === 'Write your comment...') {
         this.createComment();
       }
-      if (this.inputSomething.placeholder === 'Edit your comment...') {
+      if (this.selectedPostId.placeholder === 'Edit your comment...') {
         this.editComment();
       }
-      if (this.inputComment.placeholder === 'Answer to the comment...') {
+      if (this.selectedPostId.placeholder === 'Answer to the comment...') {
         this.createCommentAnswer();
       }
-      if (this.inputComment.placeholder === 'Edit your answer...') {
+      if (this.selectedPostId.placeholder === 'Edit your answer...') {
         this.editCommentAnswer();
       }
-      if (this.inputComment.placeholder === 'Write your reply to answer...') {
+      if (this.selectedPostId.placeholder === 'Write your reply to answer...') {
         this.answerOnAnswer();
       }
       this.selfcomment.comment = '';
@@ -158,16 +156,16 @@ export default {
         padding 2px
     .box-addcom__inpcom
         display flex
-        background-color #bb69d8
+        background-color #8c8d9f
         border-radius 10px
-        border 1px 0.5px 0.7px 0.5px solid #bb69d8
+        border 1px 0.5px 0.7px 0.5px solid #8c8d9f
     .inpcom
         overflow-y hidden
         outline none
         line-height 15px
         border-radius 10px 10px 0 10px
         padding 6px 5px 2px 10px
-        border 0.5px solid #bb69d8
+        border 0.5px solid #8c8d9f
         max-width 220px
         min-width 220px
         height 60px
@@ -176,7 +174,7 @@ export default {
         font-size 13px
         resize none
     #inpcom:focus
-        /*height 120px*/
+        height 120px
         outline none
     .buttons-box
         display flex
@@ -192,9 +190,9 @@ export default {
         border-radius 0 10px 10px 0
         height 23px
         width 50px
-        background-color #bb69d8
+        background-color #8c8d9f
         color white
-        border 1px solid #bb69d8
+        border 1px solid #8c8d9f
     .box-addcom__save
         display none
         cursor pointer

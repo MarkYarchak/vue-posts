@@ -69,7 +69,7 @@ export default {
     editCommentAnswer() {
       this.inputComment.placeholder = 'Edit your answer...';
       this.inputComment.focus();
-      this.$store.dispatch('updateAnswer', {
+      this.$store.dispatch('updateCommentOrAnswer', {
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
@@ -80,7 +80,7 @@ export default {
       this.inputComment.placeholder = 'Write your reply to answer...';
       this.commentAnswer = true;
       this.inputComment.focus();
-      this.$store.dispatch('updateAnswer', {
+      this.$store.dispatch('updateCommentOrAnswer', {
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
@@ -111,7 +111,7 @@ export default {
         display flex
         justify-content space-around
     .comment-item__item:hover::after
-        content attr(data-title)
+        // content attr(data-title)
         margin 1px 0 1px 4px
         font-family "Arial", Arial, sans-serif
         letter-spacing -0.2px

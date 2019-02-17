@@ -4,8 +4,7 @@ const posts = post;
 
 export default {
   posts,
-  comment: {},
-  answer: {},
+  answerOrComment: {},
   user: {
     displayName: 'Mark Yarchak',
     username: 'markyarchak',

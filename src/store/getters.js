@@ -1,6 +1,5 @@
 export default {
   posts: state => state.posts,
-  comment: state => state.comment,
+  commentOrAnswer: state => state.answerOrComment,
   user: state => state.user,
-  answer: state => state.answer,
 };

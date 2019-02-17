@@ -4,7 +4,6 @@ import state from './state';
 import actions from './actions';
 import getters from './getters';
 import mutations from './mutations';
-import mutationstypes from './mutations-types';
 
 Vue.use(Vuex);
 
@@ -13,5 +12,4 @@ export default new Vuex.Store({
   actions,
   getters,
   mutations,
-  mutationstypes,
 });
