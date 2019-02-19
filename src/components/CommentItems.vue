@@ -46,9 +46,10 @@ export default {
   },
   data() {
     return {
-      inputMessage: document.getElementById('post.id'),
+      inputMessage: document.getElementById('post.id', '_textarea'),
       commentDelete: false,
       commentAnswer: false,
+
     };
   },
   computed: {
@@ -66,7 +67,7 @@ export default {
       this.inputMessage.value = this.comment.comment;
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
-        getInputPlace: this.inputMessage,
+        editPlaceholder: this.inputMessage,
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,

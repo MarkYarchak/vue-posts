@@ -7,12 +7,13 @@
     </div>
     <div class="box-addcom__inpcom">
       <textarea
-        id="post.id"
+        :id="post.id + '_textarea'"
+        :placeholder="variablePlaceholder"
         v-model="selfcomment.comment"
         class="inpcom"
         wrap="hard"
         spellcheck="false"
-        placeholder="Write your comment..."
+        @keyup.ctrl.enter="commentOperations"
       >Comment here
       </textarea>
       <div class="buttons-box">
@@ -37,10 +38,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    commentinf: {
-      type: Object,
-      default: () => ({}),
-    },
     post: {
       type: Object,
       default: () => ({}),
@@ -48,8 +45,10 @@ export default {
   },
   data() {
     return {
-      selectedPostId: document.getElementById('selectedPost'),
+      placeForInput: this.selfcomment.comment,
+      selectedPostId: document.getElementById('commentOrAnswerFromStore.postId'),
       selectedPost: null,
+      variablePlaceholder: 'Write your comment...',
     };
   },
   computed: {
@@ -59,25 +58,26 @@ export default {
       userFromStore: 'user',
     }),
   },
+  watch: {},
   created() {
-    this.selectedPost = this.commentOrAnswerFromStore.getInputPlace;
+    // this.variablePlaceholder = this.commentOrAnswerFromStore.editPlaceholder;
   },
   methods: {
     commentOperations() {
-      console.log('f', this.selectedPost);
-      if (this.selectedPostId.placeholder === 'Write your comment...') {
+      console.log('f', this.commentOrAnswerFromStore);
+      if (this.variablePlaceholder === 'Write your comment...') {
         this.createComment();
       }
-      if (this.selectedPostId.placeholder === 'Edit your comment...') {
+      if (this.variablePlaceholder === 'Edit your comment...') {
         this.editComment();
       }
-      if (this.selectedPostId.placeholder === 'Answer to the comment...') {
+      if (this.variablePlaceholder === 'Answer to the comment...') {
         this.createCommentAnswer();
       }
-      if (this.selectedPostId.placeholder === 'Edit your answer...') {
+      if (this.variablePlaceholder === 'Edit your answer...') {
         this.editCommentAnswer();
       }
-      if (this.selectedPostId.placeholder === 'Write your reply to answer...') {
+      if (this.variablePlaceholder === 'Write your reply to answer...') {
         this.answerOnAnswer();
       }
       this.selfcomment.comment = '';
@@ -95,17 +95,20 @@ export default {
           tempPosts[idx].comments.unshift(this.selfcomment);// or push() it to end
         }
       }
+      this.variablePlaceholder = 'Write your comment...';
     },
     editComment() {
       const tempPosts = this.postsFromStore.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
       const tempComments = tempPosts[idx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+      const commentidx = tempComments
+        .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
       const currentComment = tempPosts[idx].tempComments[commentidx].concat();
-      if (currentComment.comment !== this.commentFromStore.commentText
+      if (currentComment.comment !== this.commentOrAnswerFromStore.commentText
         && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
       }
+      this.variablePlaceholder = 'Write your comment...';
     },
     createCommentAnswer() {
       this.selfcomment.id = Math.floor(Math.random() * 10000);
@@ -114,24 +117,28 @@ export default {
       }
       if (this.selfcomment.comment !== '') {
         const tempPosts = this.postsFromStore.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.commentFromStore.postId);
+        const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
         const tempComments = tempPosts[idx].comments.concat();
-        const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+        const commentidx = tempComments
+          .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
         if (idx !== -1 && commentidx !== -1) {
           tempComments[commentidx].answers.unshift(this.selfcomment);
         }
       }
+      this.variablePlaceholder = 'Write your comment...';
     },
     editCommentAnswer() {
       const tempPosts = this.postsFromStore.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.answerFromStore.postId);
+      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
       const tempComments = tempPosts[idx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.commentFromStore.commentId);
+      const commentidx = tempComments
+        .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
       const currentComment = tempPosts[idx].tempComments[commentidx].concat();
-      if (currentComment.comment !== this.commentFromStore.commentText
+      if (currentComment.comment !== this.commentOrAnswerFromStore.commentText
               && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
       }
+      this.variablePlaceholder = 'Write your comment...';
     },
     answerOnAnswer() {},
   },
