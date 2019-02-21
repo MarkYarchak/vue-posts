@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import './plugins/vuetify';
 import App from './App';
 import store from './store/store';
 

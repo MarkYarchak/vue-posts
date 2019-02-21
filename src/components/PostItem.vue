@@ -33,24 +33,14 @@ export default {
       default: () => ({}),
     },
   },
-  data() {
-    return {
-      posts: [],
-    };
-  },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-    }),
+    ...mapGetters([
+      'posts',
+    ]),
   },
-  created() {
-    this.posts = this.postsFromStore;
-  },
-  methods: {},
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style
     lang="stylus"
     scoped

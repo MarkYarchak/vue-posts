@@ -80,12 +80,13 @@ export default {
       display flex
       justify-content center
       margin 10px 3px 3px 3px
+      padding 2px
   .show-morecom
       color White
       font-size 16px
       font-family "Arial", Arial, sans-serif
-      height 16px
-      width 105px
+      height 20px
+      width 110px
       cursor pointer
       padding 2px
       background-color #d9d9d9

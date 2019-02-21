@@ -2,24 +2,31 @@
   <div class="box-addcom">
     <div class="box-addcom__my-avatar">
       <div
-        :style="{'background-image': `url(${ userFromStore.avatar })`}"
+        :style="{'background-image': `url(${ user.avatar })`}"
         class="avatar"/>
     </div>
     <div class="box-addcom__inpcom">
       <textarea
-        :id="post.id + '_textarea'"
+        id="post.id"
+        ref="changingTextarea"
         :placeholder="variablePlaceholder"
         v-model="selfcomment.comment"
         class="inpcom"
         wrap="hard"
         spellcheck="false"
-        @keyup.ctrl.enter="commentOperations"
+        @keypress.ctrl.enter="commentOperations"
       >Comment here
       </textarea>
+      <!--<button-->
+      <!--v-if="awesomeOperations || selfcomment.comment !== ''"-->
+      <!--class="cancelCommentOperation"-->
+      <!--@click="antiCommentOperations">-->
+      <!--Cancel-->
+      <!--</button>-->
       <div class="buttons-box">
         <button
           id="main_comment-button"
-          class="box-addcom__send"
+          class="btn-addcom"
           @click="commentOperations"
         >Send</button>
       </div>
@@ -45,51 +52,60 @@ export default {
   },
   data() {
     return {
-      placeForInput: this.selfcomment.comment,
-      selectedPostId: document.getElementById('commentOrAnswerFromStore.postId'),
+      awesomeOperations: false,
       selectedPost: null,
       variablePlaceholder: 'Write your comment...',
     };
   },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-      commentOrAnswerFromStore: 'commentOrAnswer',
-      userFromStore: 'user',
-    }),
+    ...mapGetters([
+      'posts',
+      'commentOrAnswer',
+      'user',
+    ]),
   },
   watch: {},
   created() {
-    // this.variablePlaceholder = this.commentOrAnswerFromStore.editPlaceholder;
+    this.selfcomment.author = this.user;
   },
   methods: {
     commentOperations() {
-      console.log('f', this.commentOrAnswerFromStore);
       if (this.variablePlaceholder === 'Write your comment...') {
         this.createComment();
       }
       if (this.variablePlaceholder === 'Edit your comment...') {
+        this.awesomeOperations = true;
         this.editComment();
       }
       if (this.variablePlaceholder === 'Answer to the comment...') {
+        this.awesomeOperations = true;
         this.createCommentAnswer();
       }
       if (this.variablePlaceholder === 'Edit your answer...') {
+        this.awesomeOperations = true;
         this.editCommentAnswer();
       }
       if (this.variablePlaceholder === 'Write your reply to answer...') {
+        this.awesomeOperations = true;
         this.answerOnAnswer();
       }
       this.selfcomment.comment = '';
     },
+    antiCommentOperations() {
+      this.variablePlaceholder = 'Write your comment...';
+      this.selfcomment.comment = '';
+    },
     createComment() {
+      if (this.selfcomment.comment !== '') {
+        this.awesomeOperations = true;
+      }
       this.selfcomment.id = Math.floor(Math.random() * 10000);
       if (this.selfcomment.createDate === '') {
         this.selfcomment.createDate = moment();
       }
       this.selfcomment.postId = this.post.id;
       if (this.selfcomment.comment !== '') {
-        const tempPosts = this.postsFromStore.concat();
+        const tempPosts = this.posts.concat();
         const idx = tempPosts.findIndex(p => p.id === this.selfcomment.postId);
         if (idx !== -1) {
           tempPosts[idx].comments.unshift(this.selfcomment);// or push() it to end
@@ -98,15 +114,15 @@ export default {
       this.variablePlaceholder = 'Write your comment...';
     },
     editComment() {
-      const tempPosts = this.postsFromStore.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
       const tempComments = tempPosts[idx].comments.concat();
       const commentidx = tempComments
-        .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
-      const currentComment = tempPosts[idx].tempComments[commentidx].concat();
-      if (currentComment.comment !== this.commentOrAnswerFromStore.commentText
+        .findIndex(c => c.id === this.commentOrAnswer.commentId);
+      const currentComment = tempComments[commentidx].concat();
+      if (currentComment.comment !== this.commentOrAnswer.commentText
         && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
+        tempPosts[idx].comments.replace(currentComment.comment, this.selfcomment.comment);
       }
       this.variablePlaceholder = 'Write your comment...';
     },
@@ -116,11 +132,11 @@ export default {
         this.selfcomment.createDate = moment();
       }
       if (this.selfcomment.comment !== '') {
-        const tempPosts = this.postsFromStore.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
+        const tempPosts = this.posts.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
         const tempComments = tempPosts[idx].comments.concat();
         const commentidx = tempComments
-          .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
+          .findIndex(c => c.id === this.commentOrAnswer.commentId);
         if (idx !== -1 && commentidx !== -1) {
           tempComments[commentidx].answers.unshift(this.selfcomment);
         }
@@ -128,15 +144,17 @@ export default {
       this.variablePlaceholder = 'Write your comment...';
     },
     editCommentAnswer() {
-      const tempPosts = this.postsFromStore.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswerFromStore.postId);
+      const tempPosts = this.posts.concat();
+      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
       const tempComments = tempPosts[idx].comments.concat();
       const commentidx = tempComments
-        .findIndex(c => c.id === this.commentOrAnswerFromStore.commentId);
-      const currentComment = tempPosts[idx].tempComments[commentidx].concat();
-      if (currentComment.comment !== this.commentOrAnswerFromStore.commentText
+        .findIndex(c => c.id === this.commentOrAnswer.commentId);
+      const tempAnswers = tempComments[commentidx].answers.concat();
+      const answeridx = tempAnswers.findIndex(a => a.id === this.commentOrAnswer.answerId);
+      const currentAnswer = tempAnswers[answeridx];
+      if (currentAnswer.comment !== this.commentOrAnswer.commentText
               && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentComment, this.selfcomment.comment);
+        tempPosts[idx].comments.replace(currentAnswer.comment, this.selfcomment.comment);
       }
       this.variablePlaceholder = 'Write your comment...';
     },
@@ -173,18 +191,20 @@ export default {
         border-radius 10px 10px 0 10px
         padding 6px 5px 2px 10px
         border 0.5px solid #8c8d9f
-        max-width 220px
-        min-width 220px
+        width 230px
         height 60px
         /*max-height 70px*/
         font-family "Arial", Arial, sans-serif
         font-size 13px
         resize none
+        background-color #fff
     #inpcom:focus
         height 120px
         outline none
     .buttons-box
+        width 60px
         display flex
+        justify-content space-around
         align-items center
         -webkit-touch-callout none
         -webkit-user-select none
@@ -192,7 +212,7 @@ export default {
         -moz-user-select none
         -ms-user-select none
         user-select none
-    .box-addcom__send
+    .btn-addcom
         cursor pointer
         border-radius 0 10px 10px 0
         height 23px
@@ -200,15 +220,6 @@ export default {
         background-color #8c8d9f
         color white
         border 1px solid #8c8d9f
-    .box-addcom__save
-        display none
-        cursor pointer
-        border-radius 0 10px 10px 0
-        height 23px
-        width 50px
-        background-color #bb69d8
-        color white
-        border 1px solid #bb69d8
-    .box-addcom__send:focus
+    .btn-addcom:focus
         outline none
 </style>

@@ -46,10 +46,9 @@ export default {
   },
   data() {
     return {
-      inputMessage: document.getElementById('post.id', '_textarea'),
+      inputMessage: document.getElementById('post.id'),
       commentDelete: false,
       commentAnswer: false,
-
     };
   },
   computed: {
@@ -63,19 +62,20 @@ export default {
   },
   methods: {
     editComment() {
+      console.log(this.$parent.$parent.$parent.$refs.changingTextarea);
       this.inputMessage.placeholder = 'Edit your comment...';
       this.inputMessage.value = this.comment.comment;
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
-        editPlaceholder: this.inputMessage,
+        getInputPlace: this.inputMessage,
         commentText: this.comment.comment,
         commentId: this.comment.id,
         postId: this.post.id,
       });
     },
     answerComment() {
-      this.inputComment.placeholder = 'Answer to the comment...';
-      this.inputComment.focus();
+      this.inputMessage.placeholder = 'Answer to the comment...';
+      this.inputMessage.focus();
       this.commentAnswer = true;
       this.$store.dispatch('updateCommentOrAnswer', {
         getInputPlace: this.inputMessage,

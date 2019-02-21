@@ -50,10 +50,8 @@ export default {
   },
   data() {
     return {
-      inputComment: document.getElementById('inpcom'),
+      inputMessage: document.getElementById('post.id'),
       posts: [],
-      commentDelete: false,
-      commentAnswer: false,
     };
   },
   computed: {
@@ -67,8 +65,9 @@ export default {
   },
   methods: {
     editCommentAnswer() {
-      this.inputComment.placeholder = 'Edit your answer...';
-      this.inputComment.focus();
+      this.inputMessage.placeholder = 'Edit your answer...';
+      this.inputMessage.focus();
+      this.inputMessage.value = this.answer.comment;
       this.$store.dispatch('updateCommentOrAnswer', {
         commentText: this.comment.comment,
         commentId: this.comment.id,
@@ -77,9 +76,8 @@ export default {
       });
     },
     answerOnAnswer() {
-      this.inputComment.placeholder = 'Write your reply to answer...';
-      this.commentAnswer = true;
-      this.inputComment.focus();
+      this.inputMessage.placeholder = 'Write your reply to answer...';
+      this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
         commentText: this.comment.comment,
         commentId: this.comment.id,
@@ -89,7 +87,6 @@ export default {
       });
     },
     deleteCommentAnswer() {
-      this.commentDelete = true;
       const tempPosts = this.posts.concat();
       const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();

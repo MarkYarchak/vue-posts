@@ -74,7 +74,6 @@ export default {
   },
   data() {
     return {
-      posts: [],
       selfComment: {
         id: '',
         author: {},
@@ -84,19 +83,13 @@ export default {
       },
       showComments: false,
       likePos: false,
-      user: {},
     };
   },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-      userFromStore: 'user',
-    }),
-  },
-  created() {
-    this.posts = this.postsFromStore;
-    this.user = this.userFromStore;
-    this.selfComment.author = this.userFromStore;
+    ...mapGetters([
+      'posts',
+      'user',
+    ]),
   },
   methods: {
     showCom() {
@@ -157,8 +150,8 @@ export default {
         flex-shrink 0
         align-items center
         background center center/cover no-repeat grey
-        height 20px
-        width 20px
+        height 23px
+        width 23px
         border-radius 50%
         border 2px solid white
     .avatar:not(:first-child)
