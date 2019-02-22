@@ -7,10 +7,9 @@
     </div>
     <div class="box-addcom__inpcom">
       <textarea
-        id="post.id"
-        ref="changingTextarea"
-        :placeholder="variablePlaceholder"
-        v-model="selfcomment.comment"
+        :id="post.id"
+        :placeholder="inputmenu.variablePlaceholder"
+        v-model="selfComment.comment"
         class="inpcom"
         wrap="hard"
         spellcheck="false"
@@ -18,7 +17,7 @@
       >Comment here
       </textarea>
       <!--<button-->
-      <!--v-if="awesomeOperations || selfcomment.comment !== ''"-->
+      <!--v-if="awesomeOperations || selfComment.comment !== ''"-->
       <!--class="cancelCommentOperation"-->
       <!--@click="antiCommentOperations">-->
       <!--Cancel-->
@@ -41,20 +40,32 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'AddComment',
   props: {
-    selfcomment: {
+    post: {
       type: Object,
       default: () => ({}),
     },
-    post: {
+    inputmenu: {
       type: Object,
       default: () => ({}),
     },
   },
   data() {
     return {
-      awesomeOperations: false,
-      selectedPost: null,
-      variablePlaceholder: 'Write your comment...',
+      selfComment: {
+        id: '',
+        author: {},
+        comment: '',
+        createDate: '',
+        likes: [],
+      },
+      awesomeOperations: {
+        createCom: false,
+        editCom: false,
+        answerCom: false,
+        createAns: false,
+        editAns: false,
+        answerAns: false,
+      },
     };
   },
   computed: {
@@ -64,54 +75,64 @@ export default {
       'user',
     ]),
   },
-  watch: {},
+  watch: {
+    variablePlaceholder() {
+      switch (this.inputmenu.variablePlaceholder) {
+        case 'Edit your comment...': { this.awesomeOperations.createCom = true; break; }
+        case 'Answer to the comment...': { this.awesomeOperations.createCom = true; break; }
+        case 'Edit your answer...': { this.awesomeOperations.createCom = true; break; }
+        case 'Write your reply to answer...': { this.awesomeOperations.createCom = true; break; }
+        default: { this.awesomeOperations.createCom = true; break; }
+      }
+    },
+  },
   created() {
-    this.selfcomment.author = this.user;
+    this.selfComment.author = this.user;
   },
   methods: {
     commentOperations() {
-      if (this.variablePlaceholder === 'Write your comment...') {
+      if (this.inputmenu.variablePlaceholder === 'Write your comment...') {
         this.createComment();
       }
-      if (this.variablePlaceholder === 'Edit your comment...') {
+      if (this.inputmenu.variablePlaceholder === 'Edit your comment...') {
         this.awesomeOperations = true;
         this.editComment();
       }
-      if (this.variablePlaceholder === 'Answer to the comment...') {
+      if (this.inputmenu.variablePlaceholder === 'Answer to the comment...') {
         this.awesomeOperations = true;
         this.createCommentAnswer();
       }
-      if (this.variablePlaceholder === 'Edit your answer...') {
+      if (this.inputmenu.variablePlaceholder === 'Edit your answer...') {
         this.awesomeOperations = true;
         this.editCommentAnswer();
       }
-      if (this.variablePlaceholder === 'Write your reply to answer...') {
+      if (this.inputmenu.variablePlaceholder === 'Write your reply to answer...') {
         this.awesomeOperations = true;
         this.answerOnAnswer();
       }
-      this.selfcomment.comment = '';
+      this.selfComment.comment = '';
     },
     antiCommentOperations() {
-      this.variablePlaceholder = 'Write your comment...';
-      this.selfcomment.comment = '';
+      this.inputmenu.variablePlaceholder = 'Write your comment...';
+      this.selfComment.comment = '';
     },
     createComment() {
-      if (this.selfcomment.comment !== '') {
+      if (this.selfComment.comment !== '') {
         this.awesomeOperations = true;
       }
-      this.selfcomment.id = Math.floor(Math.random() * 10000);
-      if (this.selfcomment.createDate === '') {
-        this.selfcomment.createDate = moment();
+      this.selfComment.id = Math.floor(Math.random() * 10000);
+      if (this.selfComment.createDate === '') {
+        this.selfComment.createDate = moment();
       }
-      this.selfcomment.postId = this.post.id;
-      if (this.selfcomment.comment !== '') {
+      this.selfComment.postId = this.post.id;
+      if (this.selfComment.comment !== '') {
         const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.selfcomment.postId);
+        const idx = tempPosts.findIndex(p => p.id === this.selfComment.postId);
         if (idx !== -1) {
-          tempPosts[idx].comments.unshift(this.selfcomment);// or push() it to end
+          tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
         }
       }
-      this.variablePlaceholder = 'Write your comment...';
+      this.inputmenu.variablePlaceholder = 'Write your comment...';
     },
     editComment() {
       const tempPosts = this.posts.concat();
@@ -122,26 +143,26 @@ export default {
       const currentComment = tempComments[commentidx].concat();
       if (currentComment.comment !== this.commentOrAnswer.commentText
         && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentComment.comment, this.selfcomment.comment);
+        tempPosts[idx].comments.replace(currentComment.comment, this.selfComment.comment);
+        this.inputmenu.variablePlaceholder = 'Write your comment...';
       }
-      this.variablePlaceholder = 'Write your comment...';
     },
     createCommentAnswer() {
-      this.selfcomment.id = Math.floor(Math.random() * 10000);
-      if (this.selfcomment.createDate === '') {
-        this.selfcomment.createDate = moment();
+      this.selfComment.id = Math.floor(Math.random() * 10000);
+      if (this.selfComment.createDate === '') {
+        this.selfComment.createDate = moment();
       }
-      if (this.selfcomment.comment !== '') {
+      if (this.selfComment.comment !== '') {
         const tempPosts = this.posts.concat();
         const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
         const tempComments = tempPosts[idx].comments.concat();
         const commentidx = tempComments
           .findIndex(c => c.id === this.commentOrAnswer.commentId);
         if (idx !== -1 && commentidx !== -1) {
-          tempComments[commentidx].answers.unshift(this.selfcomment);
+          tempComments[commentidx].answers.unshift(this.selfComment);
+          this.inputmenu.variablePlaceholder = 'Write your comment...';
         }
       }
-      this.variablePlaceholder = 'Write your comment...';
     },
     editCommentAnswer() {
       const tempPosts = this.posts.concat();
@@ -154,9 +175,9 @@ export default {
       const currentAnswer = tempAnswers[answeridx];
       if (currentAnswer.comment !== this.commentOrAnswer.commentText
               && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentAnswer.comment, this.selfcomment.comment);
+        tempPosts[idx].comments.replace(currentAnswer.comment, this.selfComment.comment);
+        this.inputmenu.variablePlaceholder = 'Write your comment...';
       }
-      this.variablePlaceholder = 'Write your comment...';
     },
     answerOnAnswer() {},
   },

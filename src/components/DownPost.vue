@@ -49,7 +49,7 @@
     />
     <AddComment
       v-if="showComments"
-      :selfcomment="selfComment"
+      :inputmenu="inputMenu"
       :post="post"/>
   </div>
 </template>
@@ -74,15 +74,11 @@ export default {
   },
   data() {
     return {
-      selfComment: {
-        id: '',
-        author: {},
-        comment: '',
-        createDate: '',
-        likes: [],
-      },
       showComments: false,
       likePos: false,
+      inputMenu: {
+        variablePlaceholder: '',
+      },
     };
   },
   computed: {
@@ -94,6 +90,7 @@ export default {
   methods: {
     showCom() {
       this.showComments = !this.showComments;
+      this.inputMenu.variablePlaceholder = 'Write your comment...';
     },
     PostLike() {
       this.post.id = Math.floor(Math.random() * 10000);
@@ -165,7 +162,7 @@ export default {
         cursor pointer
     .down__right
         display: flex
-        padding-top 13px
+        padding-top 2px
         padding-right 11px
     .right__like
         display flex

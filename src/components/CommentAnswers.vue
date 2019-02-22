@@ -117,6 +117,7 @@ export default {
         border-left 4px solid #c8c8d1
         margin-left 42px
     .box_switch-add
+        margin 0 0 5px 0
         display flex
         -webkit-touch-callout none
         -webkit-user-select none
@@ -126,11 +127,11 @@ export default {
         user-select none
     .switch-commentanswers
         cursor pointer
-        margin 2px 0 5px 0
+        margin 2px 0 0 0
     .show-more-ans
         font-family "Arial", Arial, sans-serif
         cursor pointer
-        margin 2px 0 5px 1px
+        margin 0 0 5px 1px
         font-size 11px
         color #747474
         background-color #f2f2f2

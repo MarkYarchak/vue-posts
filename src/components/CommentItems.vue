@@ -1,6 +1,6 @@
 <template>
   <div class="comment-items">
-    <!--v-if="comment.author.id === userFromStore.id"-->
+    <!--v-if="comment.author.id === user.id"-->
     <div
       id="edit"
       class="comment-item__item"
@@ -17,7 +17,7 @@
     >
       <i class="fas fa-comments"/>
     </div>
-    <!--v-if="comment.author.id === userFromStore.id"-->
+    <!--v-if="comment.author.id === user.id"-->
     <div
       id="delete"
       class="comment-item__item"
@@ -46,23 +46,17 @@ export default {
   },
   data() {
     return {
-      inputMessage: document.getElementById('post.id'),
-      commentDelete: false,
-      commentAnswer: false,
+      inputMessage: document.getElementById(this.post.id),
     };
   },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-      userFromStore: 'user',
-    }),
-  },
-  created() {
-    this.posts = this.postsFromStore;
+    ...mapGetters([
+      'posts',
+      'user',
+    ]),
   },
   methods: {
     editComment() {
-      console.log(this.$parent.$parent.$parent.$refs.changingTextarea);
       this.inputMessage.placeholder = 'Edit your comment...';
       this.inputMessage.value = this.comment.comment;
       this.inputMessage.focus();
@@ -76,7 +70,6 @@ export default {
     answerComment() {
       this.inputMessage.placeholder = 'Answer to the comment...';
       this.inputMessage.focus();
-      this.commentAnswer = true;
       this.$store.dispatch('updateCommentOrAnswer', {
         getInputPlace: this.inputMessage,
         commentText: this.comment.comment,
@@ -85,7 +78,6 @@ export default {
       });
     },
     deleteComment() {
-      this.commentDelete = true;
       const tempPosts = this.posts.concat();
       const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();
