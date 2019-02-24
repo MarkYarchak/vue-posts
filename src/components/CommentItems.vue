@@ -59,11 +59,11 @@ export default {
   methods: {
     editComment() {
       console.log();
+      this.inputMessage.placeholder = 'Edit your comment...';
+      this.inputMessage.value = this.comment.comment;
+      this.inputMessage.focus();
       this.inputAction = 'Edit your comment';
       this.$store.dispatch('setInputAction', this.inputAction);
-      this.inputMessage.placeholder = 'Edit your comment...';
-      this.inputMessage.focus();
-      this.inputMessage.value = this.comment.comment;
       this.$store.dispatch('updateCommentOrAnswer', {
         getInputPlace: this.inputMessage,
         commentText: this.comment.comment,

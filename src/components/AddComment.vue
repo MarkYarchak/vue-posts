@@ -8,7 +8,8 @@
         selfComment.comment !== ''"
         color="rgba(212,212,212,0.65)"
         class="btn-cancel_comment_operation"
-        @click="antiCommentOperations">
+        @click="antiCommentOperations"
+      >
         Cancel
       </v-btn>
     </div>
@@ -88,6 +89,16 @@ export default {
     inputAction(newValue) {
       const AO = this.awesomeOperations;
       switch (newValue) {
+        case 'Write your comment': {
+          AO.createCom = true;
+          AO.editCom = false;
+          AO.createAns = false;
+          AO.editAns = false;
+          AO.answerAns = false;
+          this.$refs.changingTextarea.placeholder = 'Write your comment...';
+          this.inputMenu.variablePlaceholder = 'Write your comment...';
+          break;
+        }
         case 'Edit your comment': {
           AO.createCom = false;
           AO.editCom = true;
@@ -126,6 +137,8 @@ export default {
           AO.createAns = false;
           AO.editAns = false;
           AO.answerAns = false;
+          this.$refs.changingTextarea.placeholder = 'Write your comment...';
+          this.inputMenu.variablePlaceholder = 'Write your comment...';
           break;
         }
       }
@@ -145,11 +158,8 @@ export default {
           default: { this.createComment(); break; }
         }
       }
-      this.selfComment.comment = '';
     },
     antiCommentOperations() {
-      this.inputMenu.variablePlaceholder = 'Write your comment...';
-      this.$refs.changingTextarea.placeholder = 'Write your comment...';
       this.selfComment.comment = '';
       this.$store.dispatch('setInputAction', this.defaultInputAction);
       const AO = this.awesomeOperations;
@@ -158,6 +168,7 @@ export default {
       AO.createAns = false;
       AO.editAns = false;
       AO.answerAns = false;
+      this.$refs.changingTextarea.focus();
     },
     createComment() {
       this.selfComment.id = Math.floor(Math.random() * 10000);
@@ -172,7 +183,7 @@ export default {
           tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
         }
       }
-      this.inputMenu.variablePlaceholder = 'Write your comment...';
+      this.antiCommentOperations();
     },
     editComment() {
       const tempPosts = this.posts.concat();
@@ -184,7 +195,7 @@ export default {
       if (currentComment.comment !== this.commentOrAnswer.commentText
         && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentComment.comment, this.selfComment.comment);
-        this.inputMenu.variablePlaceholder = 'Write your comment...';
+        this.antiCommentOperations();
       }
     },
     createCommentAnswer() {
@@ -257,25 +268,21 @@ export default {
     .box-addcom__inpcom
         display flex
         background-color #8c8d9f
-        border-radius 10px
+        border-radius 7px 10px 10px 7px
         border 1px solid #8c8d9f
     .inpcom
         overflow-y hidden
         outline none
         line-height 15px
-        border-radius 10px 10px 0 10px
-        padding 6px 5px 2px 10px
+        border-radius 7px 4px 4px 7px
+        padding 5px 5px 2px 5px
         border 0.5px solid #8c8d9f
         width 230px
-        height 60px
-        /*max-height 70px*/
+        height 70px
         font-family "Arial", Arial, sans-serif
         font-size 13px
         resize none
         background-color #fff
-    #inpcom:focus
-        height 120px
-        outline none
     .buttons-box
         width 60px
         display flex
@@ -289,6 +296,7 @@ export default {
         user-select none
     .btn-addcom
         cursor pointer
+        font-weight bolder
         border-radius 0 10px 10px 0
         height 23px
         width 50px
@@ -297,4 +305,13 @@ export default {
         border 1px solid #8c8d9f
     .btn-addcom:focus
         outline none
+    .btn-addcom:active
+        height 50px
+        width 50px
+        color #ebebeb
+        border-radius 50%
+        -webkit-transform scale(1.3)
+        -ms-transform scale(1.3)
+        -moz-transform scale(1.3)
+        transform scale(1.3)
 </style>

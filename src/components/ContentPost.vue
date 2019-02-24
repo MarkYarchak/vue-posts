@@ -1,13 +1,13 @@
 <template>
   <div class="content">
-    <p v-if="post.content.text">
-      {{ post.content.text }}
-    </p>
     <div
       v-if="post.content.imageUrl"
       :style="{'background-image': `url(${ post.content.imageUrl })`}"
       class="image"
     />
+    <p v-if="post.content.text">
+      {{ post.content.text }}
+    </p>
   </div>
 </template>
 
