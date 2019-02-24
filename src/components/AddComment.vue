@@ -308,7 +308,6 @@ export default {
     .btn-addcom:active
         height 50px
         width 50px
-        color #ebebeb
         border-radius 50%
         -webkit-transform scale(1.3)
         -ms-transform scale(1.3)
