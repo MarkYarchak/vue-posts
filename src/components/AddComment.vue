@@ -1,17 +1,18 @@
 <template>
   <div class="box_input-cencel">
     <div class="active_parameters-box">
-      <v-spacer/>
-      <v-btn
+      <div class="used_comment-or-answer">
+        {{ changingComment }}
+      </div>
+      <div
         v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
           awesomeOperations.editAns || awesomeOperations.answerAns || awesomeOperations.createCom &&
         selfComment.comment !== ''"
-        color="rgba(212,212,212,0.65)"
         class="btn-cancel_comment_operation"
         @click="antiCommentOperations"
       >
         Cancel
-      </v-btn>
+      </div>
     </div>
     <div class="box-addcom">
       <div class="box-addcom__my-avatar">
@@ -74,6 +75,7 @@ export default {
         editAns: false,
         answerAns: false,
       },
+      changingComment: 'Hey, what are you thinking about? Please say something bro',
       defaultInputAction: 'Write your comment',
     };
   },
@@ -244,16 +246,36 @@ export default {
         font-family "Arial", Arial, sans-serif
     .active_parameters-box
         display flex
-        margin 0 5px 0 37px
-        align-items end
-    .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat)
+        height 26px
+        margin 0 10px 0 39px
+        justify-content space-between
+        align-items center
+        background-color whitesmoke
+        aling-items center
+    .used_comment-or-answer
+        border-left 4px solid blue
+        padding 5px
+        display flex
+        width 226px
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+    .btn-cancel_comment_operation
+        background-color inherit
+        transition all 200ms linear 0ms
         font-family "Arial", Arial, sans-serif
-        margin 0 30px 0 0
         text-transform none
-        /*margin-right 50px*/
-        color darkred
-        height 20px
-        width 35px
+        color #482fdd
+        margin-right 5px
+        -webkit-transition all 0.3s ease
+        -moz-transition all 0.3s ease
+        -o-transition all 0.3s ease
+    .btn-cancel_comment_operation:active
+        background-color #482fdd
+        -webkit-transform scale(1.2)
+        -ms-transform scale(1.2)
+        -moz-transform scale(1.2)
+        transform scale(1.2)
     .box-addcom
         display flex
         align-items center
@@ -268,13 +290,13 @@ export default {
     .box-addcom__inpcom
         display flex
         background-color #8c8d9f
-        border-radius 7px 10px 10px 7px
+        border-radius 4px 10px 10px 4px
         border 1px solid #8c8d9f
     .inpcom
         overflow-y hidden
         outline none
         line-height 15px
-        border-radius 7px 4px 4px 7px
+        border-radius 4px 4px 4px 4px
         padding 5px 5px 2px 5px
         border 0.5px solid #8c8d9f
         width 230px
@@ -309,8 +331,8 @@ export default {
         height 50px
         width 50px
         border-radius 50%
-        -webkit-transform scale(1.3)
-        -ms-transform scale(1.3)
-        -moz-transform scale(1.3)
-        transform scale(1.3)
+        -webkit-transform scale(1.25)
+        -ms-transform scale(1.25)
+        -moz-transform scale(1.25)
+        transform scale(1.25)
 </style>
