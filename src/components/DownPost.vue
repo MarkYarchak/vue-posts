@@ -49,8 +49,8 @@
     />
     <AddComment
       v-if="showComments"
-      :inputmenu="inputMenu"
-      :post="post"/>
+      :post="post"
+    />
   </div>
 </template>
 
@@ -76,9 +76,6 @@ export default {
     return {
       showComments: false,
       likePos: false,
-      inputMenu: {
-        variablePlaceholder: '',
-      },
     };
   },
   computed: {
@@ -90,7 +87,6 @@ export default {
   methods: {
     showCom() {
       this.showComments = !this.showComments;
-      this.inputMenu.variablePlaceholder = 'Write your comment...';
     },
     PostLike() {
       this.post.id = Math.floor(Math.random() * 10000);

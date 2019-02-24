@@ -50,7 +50,8 @@ export default {
   },
   data() {
     return {
-      inputMessage: document.getElementById('post.id'),
+      inputAction: '',
+      inputMessage: document.getElementById(this.post.id),
       posts: [],
     };
   },
@@ -65,6 +66,8 @@ export default {
   },
   methods: {
     editCommentAnswer() {
+      this.inputAction = 'Edit your answer';
+      this.$store.dispatch('setInputAction', this.inputAction);
       this.inputMessage.placeholder = 'Edit your answer...';
       this.inputMessage.focus();
       this.inputMessage.value = this.answer.comment;
@@ -76,6 +79,8 @@ export default {
       });
     },
     answerOnAnswer() {
+      this.inputAction = 'Reply to answer';
+      this.$store.dispatch('setInputAction', this.inputAction);
       this.inputMessage.placeholder = 'Write your reply to answer...';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {

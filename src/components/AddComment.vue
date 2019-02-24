@@ -1,33 +1,42 @@
 <template>
-  <div class="box-addcom">
-    <div class="box-addcom__my-avatar">
-      <div
-        :style="{'background-image': `url(${ user.avatar })`}"
-        class="avatar"/>
+  <div class="box_input-cencel">
+    <div class="active_parameters-box">
+      <v-spacer/>
+      <v-btn
+        v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
+          awesomeOperations.editAns || awesomeOperations.answerAns || awesomeOperations.createCom &&
+        selfComment.comment !== ''"
+        color="rgba(212,212,212,0.65)"
+        class="btn-cancel_comment_operation"
+        @click="antiCommentOperations">
+        Cancel
+      </v-btn>
     </div>
-    <div class="box-addcom__inpcom">
-      <textarea
-        :id="post.id"
-        :placeholder="inputmenu.variablePlaceholder"
-        v-model="selfComment.comment"
-        class="inpcom"
-        wrap="hard"
-        spellcheck="false"
-        @keypress.ctrl.enter="commentOperations"
-      >Comment here
-      </textarea>
-      <!--<button-->
-      <!--v-if="awesomeOperations || selfComment.comment !== ''"-->
-      <!--class="cancelCommentOperation"-->
-      <!--@click="antiCommentOperations">-->
-      <!--Cancel-->
-      <!--</button>-->
-      <div class="buttons-box">
-        <button
-          id="main_comment-button"
-          class="btn-addcom"
-          @click="commentOperations"
-        >Send</button>
+    <div class="box-addcom">
+      <div class="box-addcom__my-avatar">
+        <div
+          :style="{'background-image': `url(${ user.avatar })`}"
+          class="avatar"/>
+      </div>
+      <div class="box-addcom__inpcom">
+        <textarea
+          ref="changingTextarea"
+          :id="post.id"
+          :placeholder="inputMenu.variablePlaceholder"
+          v-model="selfComment.comment"
+          class="inpcom"
+          wrap="hard"
+          spellcheck="false"
+          @keypress.ctrl.enter="commentOperations"
+        >Comment here
+        </textarea>
+        <div class="buttons-box">
+          <button
+            id="main_comment-button"
+            class="btn-addcom"
+            @click="commentOperations"
+          >Send</button>
+        </div>
       </div>
     </div>
   </div>
@@ -44,13 +53,12 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    inputmenu: {
-      type: Object,
-      default: () => ({}),
-    },
   },
   data() {
     return {
+      inputMenu: {
+        variablePlaceholder: 'Write your comment...',
+      },
       selfComment: {
         id: '',
         author: {},
@@ -59,13 +67,13 @@ export default {
         likes: [],
       },
       awesomeOperations: {
-        createCom: false,
+        createCom: true,
         editCom: false,
-        answerCom: false,
         createAns: false,
         editAns: false,
         answerAns: false,
       },
+      defaultInputAction: '',
     };
   },
   computed: {
@@ -73,16 +81,53 @@ export default {
       'posts',
       'commentOrAnswer',
       'user',
+      'inputAction',
     ]),
   },
   watch: {
-    variablePlaceholder() {
-      switch (this.inputmenu.variablePlaceholder) {
-        case 'Edit your comment...': { this.awesomeOperations.createCom = true; break; }
-        case 'Answer to the comment...': { this.awesomeOperations.createCom = true; break; }
-        case 'Edit your answer...': { this.awesomeOperations.createCom = true; break; }
-        case 'Write your reply to answer...': { this.awesomeOperations.createCom = true; break; }
-        default: { this.awesomeOperations.createCom = true; break; }
+    inputAction(newValue) {
+      const AO = this.awesomeOperations;
+      switch (newValue) {
+        case 'Edit your comment': {
+          AO.createCom = false;
+          AO.editCom = true;
+          AO.createAns = false;
+          AO.editAns = false;
+          AO.answerAns = false;
+          break;
+        }
+        case 'Answer to the comment': {
+          AO.createCom = false;
+          AO.editCom = false;
+          AO.createAns = true;
+          AO.editAns = false;
+          AO.answerAns = false;
+          break;
+        }
+        case 'Edit your answer': {
+          AO.createCom = false;
+          AO.editCom = false;
+          AO.createAns = false;
+          AO.editAns = true;
+          AO.answerAns = false;
+          break;
+        }
+        case 'Reply to answer': {
+          AO.createCom = false;
+          AO.editCom = false;
+          AO.createAns = false;
+          AO.editAns = false;
+          AO.answerAns = true;
+          break;
+        }
+        default: {
+          AO.createCom = true;
+          AO.editCom = false;
+          AO.createAns = false;
+          AO.editAns = false;
+          AO.answerAns = false;
+          break;
+        }
       }
     },
   },
@@ -91,35 +136,31 @@ export default {
   },
   methods: {
     commentOperations() {
-      if (this.inputmenu.variablePlaceholder === 'Write your comment...') {
-        this.createComment();
-      }
-      if (this.inputmenu.variablePlaceholder === 'Edit your comment...') {
-        this.awesomeOperations = true;
-        this.editComment();
-      }
-      if (this.inputmenu.variablePlaceholder === 'Answer to the comment...') {
-        this.awesomeOperations = true;
-        this.createCommentAnswer();
-      }
-      if (this.inputmenu.variablePlaceholder === 'Edit your answer...') {
-        this.awesomeOperations = true;
-        this.editCommentAnswer();
-      }
-      if (this.inputmenu.variablePlaceholder === 'Write your reply to answer...') {
-        this.awesomeOperations = true;
-        this.answerOnAnswer();
+      if (this.selfComment.comment !== '') {
+        switch (this.inputAction) {
+          case 'Edit your comment': { this.editComment(); break; }
+          case 'Answer to the comment': { this.createCommentAnswer(); break; }
+          case 'Edit your answer': { this.editCommentAnswer(); break; }
+          case 'Reply to answer': { this.answerOnAnswer(); break; }
+          default: { this.createComment(); break; }
+        }
       }
       this.selfComment.comment = '';
     },
     antiCommentOperations() {
-      this.inputmenu.variablePlaceholder = 'Write your comment...';
+      // console.log('before', this.inputMenu.variablePlaceholder);
+      this.inputMenu.variablePlaceholder = 'Write your comment...';
+      // console.log('after', this.inputMenu.variablePlaceholder);
+      this.$refs.changingTextarea.placeholder = 'Write your comment...';
       this.selfComment.comment = '';
+      this.$store.dispatch('setInputAction', this.defaultInputAction);
+      this.awesomeOperations.createCom = false;
+      this.awesomeOperations.editCom = false;
+      this.awesomeOperations.createAns = false;
+      this.awesomeOperations.editAns = false;
+      this.awesomeOperations.answerAns = false;
     },
     createComment() {
-      if (this.selfComment.comment !== '') {
-        this.awesomeOperations = true;
-      }
       this.selfComment.id = Math.floor(Math.random() * 10000);
       if (this.selfComment.createDate === '') {
         this.selfComment.createDate = moment();
@@ -132,7 +173,7 @@ export default {
           tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
         }
       }
-      this.inputmenu.variablePlaceholder = 'Write your comment...';
+      this.inputMenu.variablePlaceholder = 'Write your comment...';
     },
     editComment() {
       const tempPosts = this.posts.concat();
@@ -144,7 +185,7 @@ export default {
       if (currentComment.comment !== this.commentOrAnswer.commentText
         && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentComment.comment, this.selfComment.comment);
-        this.inputmenu.variablePlaceholder = 'Write your comment...';
+        this.inputMenu.variablePlaceholder = 'Write your comment...';
       }
     },
     createCommentAnswer() {
@@ -160,7 +201,7 @@ export default {
           .findIndex(c => c.id === this.commentOrAnswer.commentId);
         if (idx !== -1 && commentidx !== -1) {
           tempComments[commentidx].answers.unshift(this.selfComment);
-          this.inputmenu.variablePlaceholder = 'Write your comment...';
+          this.inputMenu.variablePlaceholder = 'Write your comment...';
         }
       }
     },
@@ -176,7 +217,7 @@ export default {
       if (currentAnswer.comment !== this.commentOrAnswer.commentText
               && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentAnswer.comment, this.selfComment.comment);
-        this.inputmenu.variablePlaceholder = 'Write your comment...';
+        this.inputMenu.variablePlaceholder = 'Write your comment...';
       }
     },
     answerOnAnswer() {},
@@ -186,12 +227,26 @@ export default {
 
 <style scoped
        lang="stylus"
->
+>   .box_input-cencel
+        display flex
+        flex-direction column
+        padding 5px
+        font-family "Arial", Arial, sans-serif
+    .active_parameters-box
+        display flex
+        margin 0 5px 0 37px
+        align-items end
+    .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat)
+        font-family "Arial", Arial, sans-serif
+        margin 0 30px -20px 0
+        text-transform none
+        /*margin-right 50px*/
+        color darkred
+        height 20px
+        width 35px
     .box-addcom
         display flex
         align-items center
-        font-family "Arial", Arial, sans-serif
-        padding 5px
     .box-addcom__my-avatar
         margin 5px
     .avatar
@@ -204,7 +259,7 @@ export default {
         display flex
         background-color #8c8d9f
         border-radius 10px
-        border 1px 0.5px 0.7px 0.5px solid #8c8d9f
+        border 1px solid #8c8d9f
     .inpcom
         overflow-y hidden
         outline none
