@@ -73,7 +73,7 @@ export default {
         editAns: false,
         answerAns: false,
       },
-      defaultInputAction: '',
+      defaultInputAction: 'Write your comment',
     };
   },
   computed: {
@@ -148,17 +148,16 @@ export default {
       this.selfComment.comment = '';
     },
     antiCommentOperations() {
-      // console.log('before', this.inputMenu.variablePlaceholder);
       this.inputMenu.variablePlaceholder = 'Write your comment...';
-      // console.log('after', this.inputMenu.variablePlaceholder);
       this.$refs.changingTextarea.placeholder = 'Write your comment...';
       this.selfComment.comment = '';
       this.$store.dispatch('setInputAction', this.defaultInputAction);
-      this.awesomeOperations.createCom = false;
-      this.awesomeOperations.editCom = false;
-      this.awesomeOperations.createAns = false;
-      this.awesomeOperations.editAns = false;
-      this.awesomeOperations.answerAns = false;
+      const AO = this.awesomeOperations;
+      AO.createCom = true;
+      AO.editCom = false;
+      AO.createAns = false;
+      AO.editAns = false;
+      AO.answerAns = false;
     },
     createComment() {
       this.selfComment.id = Math.floor(Math.random() * 10000);
@@ -238,7 +237,7 @@ export default {
         align-items end
     .theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat)
         font-family "Arial", Arial, sans-serif
-        margin 0 30px -20px 0
+        margin 0 30px 0 0
         text-transform none
         /*margin-right 50px*/
         color darkred

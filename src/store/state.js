@@ -5,7 +5,7 @@ const posts = post;
 export default {
   posts,
   answerOrComment: {},
-  inputAction: '',
+  inputAction: 'Write your comment',
   user: {
     displayName: 'Mark Yarchak',
     username: 'markyarchak',
