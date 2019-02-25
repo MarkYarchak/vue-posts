@@ -60,27 +60,26 @@ export default {
     editComment() {
       console.log();
       this.inputMessage.placeholder = 'Edit your comment...';
-      this.inputMessage.value = this.comment.comment;
       this.inputMessage.focus();
       this.inputAction = 'Edit your comment';
-      this.$store.dispatch('setInputAction', this.inputAction);
       this.$store.dispatch('updateCommentOrAnswer', {
-        getInputPlace: this.inputMessage,
+        inpAction: this.inputAction,
         commentText: this.comment.comment,
-        commentId: this.comment.id,
+        username: this.comment.author.username,
         postId: this.post.id,
+        commentId: this.comment.id,
       });
     },
     answerComment() {
       this.inputAction = 'Answer to the comment';
-      this.$store.dispatch('setInputAction', this.inputAction);
       this.inputMessage.placeholder = 'Answer to the comment...';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
-        getInputPlace: this.inputMessage,
+        inpAction: this.inputAction,
         commentText: this.comment.comment,
-        commentId: this.comment.id,
+        username: this.comment.author.username,
         postId: this.post.id,
+        commentId: this.comment.id,
       });
     },
     deleteComment() {

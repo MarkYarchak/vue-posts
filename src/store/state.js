@@ -4,8 +4,18 @@ const posts = post;
 
 export default {
   posts,
-  answerOrComment: {},
-  inputAction: 'Write your comment',
+  answerOrComment: {
+    inpAction: 'Write your comment',
+    commentText: '',
+    username: '',
+    postId: null,
+    commentId: null,
+    answerId: null,
+  },
+  // inputAction: {
+  //   name: 'Write your comment',
+  //   commentOperationText: '',
+  // },
   user: {
     displayName: 'Mark Yarchak',
     username: 'markyarchak',

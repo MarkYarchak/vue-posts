@@ -1,17 +1,31 @@
 <template>
   <div class="box_input-cencel">
     <div class="active_parameters-box">
-      <div class="used_comment-or-answer">
-        {{ changingComment }}
+      <div
+        v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
+          awesomeOperations.editAns || awesomeOperations.answerAns ||
+        awesomeOperations.createCom && selfComment.comment !== ''"
+        class="used_comment-or-answer"
+      >
+        <div class="used_comment-or-answer__receiver">
+          <b>{{ answerOrComment.username }}</b>
+        </div>
+        <div class="used_comment-or-answer__text">
+          {{ answerOrComment.commentText }}
+        </div>
       </div>
       <div
         v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
           awesomeOperations.editAns || awesomeOperations.answerAns || awesomeOperations.createCom &&
         selfComment.comment !== ''"
-        class="btn-cancel_comment_operation"
-        @click="antiCommentOperations"
+        class="btn-cencel-box"
       >
-        Cancel
+        <div
+          class="btn-cancel_comment_operation"
+          @click="antiCommentOperations"
+        >
+          Cancel
+        </div>
       </div>
     </div>
     <div class="box-addcom">
@@ -75,16 +89,16 @@ export default {
         editAns: false,
         answerAns: false,
       },
-      changingComment: 'Hey, what are you thinking about? Please say something bro',
       defaultInputAction: 'Write your comment',
     };
   },
   computed: {
     ...mapGetters([
       'posts',
-      'commentOrAnswer',
+      'answerOrComment',
       'user',
       'inputAction',
+      'commentOperationText',
     ]),
   },
   watch: {
@@ -107,6 +121,7 @@ export default {
           AO.createAns = false;
           AO.editAns = false;
           AO.answerAns = false;
+          this.selfComment.comment = this.answerOrComment.commentText;
           break;
         }
         case 'Answer to the comment': {
@@ -123,6 +138,7 @@ export default {
           AO.createAns = false;
           AO.editAns = true;
           AO.answerAns = false;
+          this.selfComment.comment = this.answerOrComment.commentText;
           break;
         }
         case 'Reply to answer': {
@@ -183,18 +199,19 @@ export default {
         const idx = tempPosts.findIndex(p => p.id === this.selfComment.postId);
         if (idx !== -1) {
           tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
+          // this.posts = Object.assign({}, this.selfComment);
+          this.antiCommentOperations();
         }
       }
-      this.antiCommentOperations();
     },
     editComment() {
       const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
+      const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
       const tempComments = tempPosts[idx].comments.concat();
       const commentidx = tempComments
-        .findIndex(c => c.id === this.commentOrAnswer.commentId);
+        .findIndex(c => c.id === this.answerOrComment.commentId);
       const currentComment = tempComments[commentidx].concat();
-      if (currentComment.comment !== this.commentOrAnswer.commentText
+      if (currentComment.comment !== this.answerOrComment.commentText
         && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentComment.comment, this.selfComment.comment);
         this.antiCommentOperations();
@@ -207,29 +224,29 @@ export default {
       }
       if (this.selfComment.comment !== '') {
         const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
+        const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
         const tempComments = tempPosts[idx].comments.concat();
         const commentidx = tempComments
-          .findIndex(c => c.id === this.commentOrAnswer.commentId);
+          .findIndex(c => c.id === this.answerOrComment.commentId);
         if (idx !== -1 && commentidx !== -1) {
           tempComments[commentidx].answers.unshift(this.selfComment);
-          this.inputMenu.variablePlaceholder = 'Write your comment...';
+          this.antiCommentOperations();
         }
       }
     },
     editCommentAnswer() {
       const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.commentOrAnswer.postId);
+      const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
       const tempComments = tempPosts[idx].comments.concat();
       const commentidx = tempComments
-        .findIndex(c => c.id === this.commentOrAnswer.commentId);
+        .findIndex(c => c.id === this.answerOrComment.commentId);
       const tempAnswers = tempComments[commentidx].answers.concat();
-      const answeridx = tempAnswers.findIndex(a => a.id === this.commentOrAnswer.answerId);
+      const answeridx = tempAnswers.findIndex(a => a.id === this.answerOrComment.answerId);
       const currentAnswer = tempAnswers[answeridx];
-      if (currentAnswer.comment !== this.commentOrAnswer.commentText
+      if (currentAnswer.comment !== this.answerOrComment.commentText
               && idx !== -1 && commentidx !== -1) {
         tempPosts[idx].comments.replace(currentAnswer.comment, this.selfComment.comment);
-        this.inputMenu.variablePlaceholder = 'Write your comment...';
+        this.antiCommentOperations();
       }
     },
     answerOnAnswer() {},
@@ -246,36 +263,41 @@ export default {
         font-family "Arial", Arial, sans-serif
     .active_parameters-box
         display flex
-        height 26px
-        margin 0 10px 0 39px
+        margin 0 10px 0 38px
         justify-content space-between
         align-items center
-        background-color whitesmoke
         aling-items center
+        height 42px
     .used_comment-or-answer
-        border-left 4px solid blue
-        padding 5px
+        background-color whitesmoke
         display flex
-        width 226px
+        flex-direction column
+        border-left 4px solid blue
+        padding 5px 1px 5px 5px
+        width 232px
+    .used_comment-or-answer__text
         white-space nowrap
         overflow hidden
         text-overflow ellipsis
+    .btn-cencel-box
+        width 52px
+        display flex
+        align-items center
+        flex-grow 1
+        height 42px
+        background-color whitesmoke
+        margin-right 6px
+        padding-right 6px
+        padding-left 2px
     .btn-cancel_comment_operation
         background-color inherit
-        transition all 200ms linear 0ms
         font-family "Arial", Arial, sans-serif
-        text-transform none
-        color #482fdd
-        margin-right 5px
-        -webkit-transition all 0.3s ease
-        -moz-transition all 0.3s ease
-        -o-transition all 0.3s ease
+        color blue
+        -webkit-transition all 0.2s ease
+        -moz-transition all 0.2s ease
+        -o-transition all 0.2s ease
     .btn-cancel_comment_operation:active
-        background-color #482fdd
-        -webkit-transform scale(1.2)
-        -ms-transform scale(1.2)
-        -moz-transform scale(1.2)
-        transform scale(1.2)
+        background-color lavender
     .box-addcom
         display flex
         align-items center

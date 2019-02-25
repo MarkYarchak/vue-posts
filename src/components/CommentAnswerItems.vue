@@ -67,28 +67,28 @@ export default {
   methods: {
     editCommentAnswer() {
       this.inputAction = 'Edit your answer';
-      this.$store.dispatch('setInputAction', this.inputAction);
       this.inputMessage.placeholder = 'Edit your answer...';
       this.inputMessage.focus();
-      this.inputMessage.value = this.answer.comment;
       this.$store.dispatch('updateCommentOrAnswer', {
-        commentText: this.comment.comment,
-        commentId: this.comment.id,
+        inpAction: this.inputAction,
+        commentText: this.answer.comment,
+        username: this.answer.author.username,
         postId: this.post.id,
+        commentId: this.comment.id,
         answerId: this.answer.id,
       });
     },
     answerOnAnswer() {
       this.inputAction = 'Reply to answer';
-      this.$store.dispatch('setInputAction', this.inputAction);
       this.inputMessage.placeholder = 'Write your reply to answer...';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
-        commentText: this.comment.comment,
-        commentId: this.comment.id,
+        inpAction: this.inputAction,
+        commentText: this.answer.comment,
+        username: this.answer.author.username,
         postId: this.post.id,
+        commentId: this.comment.id,
         answerId: this.answer.id,
-        usernameOfCompanion: this.answer.author.username,
       });
     },
     deleteCommentAnswer() {
