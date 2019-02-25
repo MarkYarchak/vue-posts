@@ -2,7 +2,7 @@
   <div class="comment_answers">
     <!--<div class="free-place"/>-->
     <div
-      v-if="openAnswersList"
+      v-if="openAnswersList && answers.length"
       class="close_all_comment-ans"
     >
       <i
@@ -42,7 +42,6 @@
         answers
       </div>
     </div>
-    <!--<div class="open-commentanswers"></div>-->
   </div>
 </template>
 

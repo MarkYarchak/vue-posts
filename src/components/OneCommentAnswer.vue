@@ -18,9 +18,10 @@
             <div class="comment__username">
               {{ answer.author.username }}
               <span class="conjunction">
-                {{ selfcomment.usernameOfCompanion !== '' ? 'to' : '' }}
+                <i class="fas fa-long-arrow-alt-right"/>
               </span>
-              {{ selfcomment.usernameOfCompanion !== '' ? selfcomment.usernameOfCompanion : '' }}
+              {{ answer.usernameOfCompanion ?
+              answer.usernameOfCompanion : comment.author.username }}
             </div>
             <div class="comment__usercom">
               {{ answer.comment }}
@@ -92,13 +93,12 @@ export default {
   data() {
     return {
       selfcomment: {
-        usernameOfCompanion: '',
+        usernameOfCompanion: 'mark',
       },
       showCommentAnswerItems: false,
       posts: [],
       likePos: false,
       user: {},
-      usernameOfCompanion: '',
     };
   },
   computed: {

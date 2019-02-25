@@ -12,10 +12,13 @@ export default {
     commentId: null,
     answerId: null,
   },
-  // inputAction: {
-  //   name: 'Write your comment',
-  //   commentOperationText: '',
-  // },
+  inputAction: {
+    createCom: true,
+    editCom: false,
+    createAns: false,
+    editAns: false,
+    answerAns: false,
+  },
   user: {
     displayName: 'Mark Yarchak',
     username: 'markyarchak',

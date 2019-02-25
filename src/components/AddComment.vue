@@ -3,12 +3,12 @@
     <div class="active_parameters-box">
       <div
         v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
-          awesomeOperations.editAns || awesomeOperations.answerAns ||
-        awesomeOperations.createCom && selfComment.comment !== ''"
+        awesomeOperations.editAns || awesomeOperations.answerAns"
         class="used_comment-or-answer"
       >
         <div class="used_comment-or-answer__receiver">
-          <b>{{ answerOrComment.username }}</b>
+          <b>{{ awesomeOperations.editCom || awesomeOperations.editAns ?
+          'Edit comment' : answerOrComment.username }}</b>
         </div>
         <div class="used_comment-or-answer__text">
           {{ answerOrComment.commentText }}
@@ -16,8 +16,7 @@
       </div>
       <div
         v-if="awesomeOperations.editCom || awesomeOperations.createAns ||
-          awesomeOperations.editAns || awesomeOperations.answerAns || awesomeOperations.createCom &&
-        selfComment.comment !== ''"
+        awesomeOperations.editAns || awesomeOperations.answerAns"
         class="btn-cencel-box"
       >
         <div
@@ -51,7 +50,18 @@
             id="main_comment-button"
             class="btn-addcom"
             @click="commentOperations"
-          >Send</button>
+          >
+            <i
+              v-if="awesomeOperations.createCom"
+              class="fas fa-paper-plane"/>
+            <i
+              v-if="awesomeOperations.editCom || awesomeOperations.editAns"
+              class="fas fa-edit"/>
+            <i
+              v-if="awesomeOperations.createAns || awesomeOperations.answerAns"
+              class="fas fa-comments"
+            />
+          </button>
         </div>
       </div>
     </div>
@@ -82,13 +92,6 @@ export default {
         createDate: '',
         likes: [],
       },
-      awesomeOperations: {
-        createCom: true,
-        editCom: false,
-        createAns: false,
-        editAns: false,
-        answerAns: false,
-      },
       defaultInputAction: 'Write your comment',
     };
   },
@@ -98,63 +101,81 @@ export default {
       'answerOrComment',
       'user',
       'inputAction',
-      'commentOperationText',
+      'awesomeOperations',
     ]),
   },
   watch: {
     inputAction(newValue) {
-      const AO = this.awesomeOperations;
       switch (newValue) {
         case 'Write your comment': {
-          AO.createCom = true;
-          AO.editCom = false;
-          AO.createAns = false;
-          AO.editAns = false;
-          AO.answerAns = false;
+          this.$store.dispatch('setInputAction', {
+            createCom: true,
+            editCom: false,
+            createAns: false,
+            editAns: false,
+            answerAns: false,
+          });
           this.$refs.changingTextarea.placeholder = 'Write your comment...';
-          this.inputMenu.variablePlaceholder = 'Write your comment...';
           break;
         }
         case 'Edit your comment': {
-          AO.createCom = false;
-          AO.editCom = true;
-          AO.createAns = false;
-          AO.editAns = false;
-          AO.answerAns = false;
+          this.$store.dispatch('setInputAction', {
+            createCom: false,
+            editCom: true,
+            createAns: false,
+            editAns: false,
+            answerAns: false,
+          });
+          this.$refs.changingTextarea.value = this.answerOrComment.commentText;
+          this.$refs.changingTextarea.placeholder = 'Edit your comment...';
           this.selfComment.comment = this.answerOrComment.commentText;
           break;
         }
         case 'Answer to the comment': {
-          AO.createCom = false;
-          AO.editCom = false;
-          AO.createAns = true;
-          AO.editAns = false;
-          AO.answerAns = false;
+          this.$store.dispatch('setInputAction', {
+            createCom: false,
+            editCom: false,
+            createAns: true,
+            editAns: false,
+            answerAns: false,
+          });
+          this.$refs.changingTextarea.value = this.answerOrComment.commentText;
+          this.$refs.changingTextarea.placeholder = 'Answer to the comment...';
           break;
         }
         case 'Edit your answer': {
-          AO.createCom = false;
-          AO.editCom = false;
-          AO.createAns = false;
-          AO.editAns = true;
-          AO.answerAns = false;
+          this.$store.dispatch('setInputAction', {
+            createCom: false,
+            editCom: false,
+            createAns: false,
+            editAns: true,
+            answerAns: false,
+          });
+          this.$refs.changingTextarea.value = this.answerOrComment.commentText;
+          this.$refs.changingTextarea.placeholder = 'Edit your answer...';
           this.selfComment.comment = this.answerOrComment.commentText;
           break;
         }
         case 'Reply to answer': {
-          AO.createCom = false;
-          AO.editCom = false;
-          AO.createAns = false;
-          AO.editAns = false;
-          AO.answerAns = true;
+          this.$store.dispatch('setInputAction', {
+            createCom: false,
+            editCom: false,
+            createAns: false,
+            editAns: false,
+            answerAns: true,
+          });
+          this.$refs.changingTextarea.value = this.answerOrComment.commentText;
+          this.$refs.changingTextarea.placeholder = 'Write your reply to answer...';
           break;
         }
         default: {
-          AO.createCom = true;
-          AO.editCom = false;
-          AO.createAns = false;
-          AO.editAns = false;
-          AO.answerAns = false;
+          this.$store.dispatch('setInputAction', {
+            createCom: true,
+            editCom: false,
+            createAns: false,
+            editAns: false,
+            answerAns: false,
+          });
           this.$refs.changingTextarea.placeholder = 'Write your comment...';
           this.inputMenu.variablePlaceholder = 'Write your comment...';
           break;
@@ -177,15 +198,26 @@ export default {
         }
       }
     },
+    clearFunction() {
+      this.$store.dispatch('updateCommentOrAnswer', {
+        inpAction: 'Write your comment',
+        commentText: '',
+        username: '',
+        postId: null,
+        commentId: null,
+        answerId: null,
+      });
+    },
     antiCommentOperations() {
+      this.clearFunction();
       this.selfComment.comment = '';
-      this.$store.dispatch('setInputAction', this.defaultInputAction);
-      const AO = this.awesomeOperations;
-      AO.createCom = true;
-      AO.editCom = false;
-      AO.createAns = false;
-      AO.editAns = false;
-      AO.answerAns = false;
+      this.$store.dispatch('setInputAction', {
+        createCom: true,
+        editCom: false,
+        createAns: false,
+        editAns: false,
+        answerAns: false,
+      });
       this.$refs.changingTextarea.focus();
     },
     createComment() {
@@ -199,7 +231,8 @@ export default {
         const idx = tempPosts.findIndex(p => p.id === this.selfComment.postId);
         if (idx !== -1) {
           tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
-          // this.posts = Object.assign({}, this.selfComment);
+          this.posts = Object.assign(tempPosts);
+          // this.posts = JSON.parse(JSON.stringify(tempPosts));
           this.antiCommentOperations();
         }
       }
@@ -210,10 +243,10 @@ export default {
       const tempComments = tempPosts[idx].comments.concat();
       const commentidx = tempComments
         .findIndex(c => c.id === this.answerOrComment.commentId);
-      const currentComment = tempComments[commentidx].concat();
-      if (currentComment.comment !== this.answerOrComment.commentText
+      if (tempComments[commentidx].comment !== this.selfComment.comment
         && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentComment.comment, this.selfComment.comment);
+        tempComments[commentidx].replace(tempComments[commentidx].comment,
+          this.selfComment.comment);
         this.antiCommentOperations();
       }
     },
@@ -249,7 +282,23 @@ export default {
         this.antiCommentOperations();
       }
     },
-    answerOnAnswer() {},
+    answerOnAnswer() {
+      this.selfComment.id = Math.floor(Math.random() * 10000);
+      if (this.selfComment.createDate === '') {
+        this.selfComment.createDate = moment();
+      }
+      if (this.selfComment.comment !== '') {
+        const tempPosts = this.posts.concat();
+        const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
+        const tempComments = tempPosts[idx].comments.concat();
+        const commentidx = tempComments
+          .findIndex(c => c.id === this.answerOrComment.commentId);
+        if (idx !== -1 && commentidx !== -1) {
+          tempComments[commentidx].answers.unshift(this.selfComment);
+          this.antiCommentOperations();
+        }
+      }
+    },
   },
 };
 </script>

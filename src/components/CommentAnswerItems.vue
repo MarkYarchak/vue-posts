@@ -65,9 +65,25 @@ export default {
     this.posts = this.postsFromStore;
   },
   methods: {
+    clearFunction() {
+      this.$store.dispatch('setInputAction', {
+        createCom: true,
+        editCom: false,
+        createAns: false,
+        editAns: false,
+        answerAns: false,
+      });
+      this.$store.dispatch('updateCommentOrAnswer', {
+        inpAction: 'Write your comment',
+        commentText: '',
+        username: '',
+        postId: null,
+        commentId: null,
+        answerId: null,
+      });
+    },
     editCommentAnswer() {
       this.inputAction = 'Edit your answer';
-      this.inputMessage.placeholder = 'Edit your answer...';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
         inpAction: this.inputAction,
@@ -80,7 +96,6 @@ export default {
     },
     answerOnAnswer() {
       this.inputAction = 'Reply to answer';
-      this.inputMessage.placeholder = 'Write your reply to answer...';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
         inpAction: this.inputAction,
