@@ -229,15 +229,12 @@ export default {
     createComment() {
       if (this.selfComment.comment !== '') {
         this.selfComment.id = Math.floor(Math.random() * 10000);
-        if (this.selfComment.createDate === '') {
-          this.selfComment.createDate = moment();
-        }
         this.$store.dispatch('createMyComment', {
           myComment: {
             id: this.selfComment.id,
             author: this.user,
             comment: this.selfComment.comment,
-            createDate: this.selfComment.createDate,
+            createDate: moment(),
             likes: [],
             answers: [],
           },
@@ -260,16 +257,13 @@ export default {
     },
     createCommentAnswer() {
       this.selfComment.id = Math.floor(Math.random() * 10000);
-      if (this.selfComment.createDate === '') {
-        this.selfComment.createDate = moment();
-      }
       this.$store.dispatch('createMyAnswer', {
         myAnswer: {
           id: this.selfComment.id,
           author: this.user,
           usernameOfCompanion: '',
           comment: this.selfComment.comment,
-          createDate: this.selfComment.createDate,
+          createDate: moment(),
           likes: [],
         },
         postId: this.answerOrComment.postId,
@@ -292,16 +286,13 @@ export default {
     },
     answerOnAnswer() {
       this.selfComment.id = Math.floor(Math.random() * 10000);
-      if (this.selfComment.createDate === '') {
-        this.selfComment.createDate = moment();
-      }
       this.$store.dispatch('myReplyAnswer', {
         myAnswer: {
           id: this.selfComment.id,
           author: this.user,
           usernameOfCompanion: this.answerOrComment.username,
           comment: this.selfComment.comment,
-          createDate: this.selfComment.createDate,
+          createDate: moment(),
           likes: [],
         },
         postId: this.answerOrComment.postId,

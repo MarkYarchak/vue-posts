@@ -121,7 +121,6 @@ export default {
     window.removeEventListener('click', this.closeCommentParameters);
   },
   methods: {
-    createCommentAnswer() {},
     commentAnswers() {
       if (this.comment.answers.length) {
         this.showCommentAnswers = !this.showCommentAnswers;
@@ -131,7 +130,6 @@ export default {
       this.showCommentItems = false;
     },
     showParameters() {
-      // this.showCommentItems = true || false;
       this.showCommentItems = !this.showCommentItems;
     },
     SwitchCommentLike() {
