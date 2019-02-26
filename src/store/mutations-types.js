@@ -1,2 +1,7 @@
 export const SET_COMMENT = 'SET_COMMENT';
 export const INPUT_ACTION = 'INPUT_ACTION';
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const CREATE_ANSWER = 'CREATE_ANSWER';
+export const EDIT_ANSWER = 'EDIT_ANSWER';
+export const REPLY_ANSWER = 'REPLY_ANSWER';

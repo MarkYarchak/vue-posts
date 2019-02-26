@@ -227,32 +227,35 @@ export default {
       this.$refs.changingTextarea.focus();
     },
     createComment() {
-      this.selfComment.id = Math.floor(Math.random() * 10000);
-      if (this.selfComment.createDate === '') {
-        this.selfComment.createDate = moment();
-      }
-      this.selfComment.postId = this.post.id;
       if (this.selfComment.comment !== '') {
-        const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.selfComment.postId);
-        if (idx !== -1) {
-          tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
-          // this.posts = Object.assign(tempPosts);
-          // this.posts = JSON.parse(JSON.stringify(tempPosts));
-          this.antiCommentOperations();
+        this.selfComment.id = Math.floor(Math.random() * 10000);
+        if (this.selfComment.createDate === '') {
+          this.selfComment.createDate = moment();
         }
+        this.$store.dispatch('createMyComment', {
+          myComment: {
+            id: this.selfComment.id,
+            author: this.user,
+            comment: this.selfComment.comment,
+            createDate: this.selfComment.createDate,
+            likes: [],
+            answers: [],
+          },
+          postId: this.post.id,
+        });
+        this.antiCommentOperations();
       }
     },
     editComment() {
-      const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
-      const tempComments = tempPosts[idx].comments.concat();
-      const commentidx = tempComments
-        .findIndex(c => c.id === this.answerOrComment.commentId);
-      if (tempComments[commentidx].comment !== this.selfComment.comment
-        && idx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].replace(tempComments[commentidx].comment,
-          this.selfComment.comment);
+      if (this.selfComment.comment !== '') {
+        this.$store.dispatch('editMyComment', {
+          myComment: {
+            comment: this.selfComment.comment,
+            editing: true,
+          },
+          postId: this.answerOrComment.postId,
+          commentId: this.answerOrComment.commentId,
+        });
         this.antiCommentOperations();
       }
     },
@@ -261,30 +264,31 @@ export default {
       if (this.selfComment.createDate === '') {
         this.selfComment.createDate = moment();
       }
-      if (this.selfComment.comment !== '') {
-        const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
-        const tempComments = tempPosts[idx].comments.concat();
-        const commentidx = tempComments
-          .findIndex(c => c.id === this.answerOrComment.commentId);
-        if (idx !== -1 && commentidx !== -1) {
-          tempComments[commentidx].answers.unshift(this.selfComment);
-          this.antiCommentOperations();
-        }
-      }
+      this.$store.dispatch('createMyAnswer', {
+        myAnswer: {
+          id: this.selfComment.id,
+          author: this.user,
+          usernameOfCompanion: '',
+          comment: this.selfComment.comment,
+          createDate: this.selfComment.createDate,
+          likes: [],
+        },
+        postId: this.answerOrComment.postId,
+        commentId: this.answerOrComment.commentId,
+      });
+      this.antiCommentOperations();
     },
     editCommentAnswer() {
-      const tempPosts = this.posts.concat();
-      const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
-      const tempComments = tempPosts[idx].comments.concat();
-      const commentidx = tempComments
-        .findIndex(c => c.id === this.answerOrComment.commentId);
-      const tempAnswers = tempComments[commentidx].answers.concat();
-      const answeridx = tempAnswers.findIndex(a => a.id === this.answerOrComment.answerId);
-      const currentAnswer = tempAnswers[answeridx];
-      if (currentAnswer.comment !== this.answerOrComment.commentText
-              && idx !== -1 && commentidx !== -1) {
-        tempPosts[idx].comments.replace(currentAnswer.comment, this.selfComment.comment);
+      if (this.selfComment.comment !== '') {
+        this.$store.dispatch('editMyAnswer', {
+          myComment: {
+            comment: this.selfComment.comment,
+            editing: true,
+          },
+          postId: this.answerOrComment.postId,
+          commentId: this.answerOrComment.commentId,
+          answerId: this.answerOrComment.answerId,
+        });
         this.antiCommentOperations();
       }
     },
@@ -293,17 +297,19 @@ export default {
       if (this.selfComment.createDate === '') {
         this.selfComment.createDate = moment();
       }
-      if (this.selfComment.comment !== '') {
-        const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.answerOrComment.postId);
-        const tempComments = tempPosts[idx].comments.concat();
-        const commentidx = tempComments
-          .findIndex(c => c.id === this.answerOrComment.commentId);
-        if (idx !== -1 && commentidx !== -1) {
-          tempComments[commentidx].answers.unshift(this.selfComment);
-          this.antiCommentOperations();
-        }
-      }
+      this.$store.dispatch('myReplyAnswer', {
+        myAnswer: {
+          id: this.selfComment.id,
+          author: this.user,
+          usernameOfCompanion: this.answerOrComment.username,
+          comment: this.selfComment.comment,
+          createDate: this.selfComment.createDate,
+          likes: [],
+        },
+        postId: this.answerOrComment.postId,
+        commentId: this.answerOrComment.commentId,
+      });
+      this.antiCommentOperations();
     },
   },
 };

@@ -1,4 +1,12 @@
-import { SET_COMMENT, INPUT_ACTION } from './mutations-types';
+import {
+  SET_COMMENT,
+  INPUT_ACTION,
+  CREATE_COMMENT,
+  EDIT_COMMENT,
+  CREATE_ANSWER,
+  EDIT_ANSWER,
+  REPLY_ANSWER,
+} from './mutations-types';
 
 export default {
   updateCommentOrAnswer(context, payload) {
@@ -6,5 +14,20 @@ export default {
   },
   setInputAction(context, payload) {
     context.commit(INPUT_ACTION, payload);
+  },
+  createMyComment(context, payload) {
+    context.commit(CREATE_COMMENT, payload);
+  },
+  editMyComment(context, payload) {
+    context.commit(EDIT_COMMENT, payload);
+  },
+  createMyAnswer(context, payload) {
+    context.commit(CREATE_ANSWER, payload);
+  },
+  editMyAnswer(context, payload) {
+    context.commit(EDIT_ANSWER, payload);
+  },
+  myReplyAnswer(context, payload) {
+    context.commit(REPLY_ANSWER, payload);
   },
 };
