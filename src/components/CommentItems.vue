@@ -1,7 +1,7 @@
 <template>
   <div class="comment-items">
-    <!--v-if="comment.author.id === user.id"-->
     <div
+      v-if="comment.author.id === user.id"
       id="edit"
       class="comment-item__item"
       data-title="Edit"
@@ -17,8 +17,8 @@
     >
       <i class="fas fa-comments"/>
     </div>
-    <!--v-if="comment.author.id === user.id"-->
     <div
+      v-if="comment.author.id === user.id"
       id="delete"
       class="comment-item__item"
       data-title="Delete"
