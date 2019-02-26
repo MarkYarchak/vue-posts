@@ -66,13 +66,6 @@ export default {
   },
   methods: {
     clearFunction() {
-      this.$store.dispatch('setInputAction', {
-        createCom: true,
-        editCom: false,
-        createAns: false,
-        editAns: false,
-        answerAns: false,
-      });
       this.$store.dispatch('updateCommentOrAnswer', {
         inpAction: 'Write your comment',
         commentText: '',
@@ -83,6 +76,7 @@ export default {
       });
     },
     editCommentAnswer() {
+      this.clearFunction();
       this.inputAction = 'Edit your answer';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
@@ -95,6 +89,7 @@ export default {
       });
     },
     answerOnAnswer() {
+      this.clearFunction();
       this.inputAction = 'Reply to answer';
       this.inputMessage.focus();
       this.$store.dispatch('updateCommentOrAnswer', {
