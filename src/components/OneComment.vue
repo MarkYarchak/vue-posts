@@ -23,9 +23,14 @@
               {{ comment.comment }}
             </div>
           </div>
-          <div class="userbox__box-answer_date box-answer_date">
-            <div class="box-answer_date__commentdate">
+          <div class="userbox__box-comment_date box-comment_date">
+            <div class="box-comment_date__commentdate">
               {{ commentCreateTime }}
+            </div>
+            <div
+              v-if="comment.editing"
+              class="box-comment_date__true-edit">
+              ● edited
             </div>
           </div>
           <CommentItems
@@ -220,15 +225,14 @@ export default {
         line-height 15px
         letter-spacing -0.2px
         word-wrap break-word
-    .userbox__box-answer_date
+    .userbox__box-comment_date
         font-family "Arial", Arial, sans-serif
         letter-spacing -0.2px
         justify-content center
         display flex
         font-size 12px
-        padding 0 0 2px 0
-    .box-answer_date__commentdate
-        font-family "Arial", Arial, sans-serif
+        padding 0 3px 2px 3px
+    .box-comment_date__commentdate
         color #636363
         padding-bottom 1px
         -webkit-touch-callout none
@@ -237,7 +241,8 @@ export default {
         -moz-user-select none
         -ms-user-select none
         user-select none
-    .box-answer_date__answer
+    .box-comment_date__true-edit
+        margin 0 0 0 5px
     .onecom__right
         margin 0 5px 0 3px
         display flex

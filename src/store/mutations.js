@@ -31,6 +31,7 @@ export default {
     if (tempComments[commentidx].comment !== comment.myComment.comment
         && idx !== -1 && commentidx !== -1) {
       tempComments[commentidx].comment = comment.myComment.comment;
+      tempComments[commentidx].editing = true;
     }
   },
   [CREATE_ANSWER](state, answer) {
@@ -55,6 +56,7 @@ export default {
     if (currentAnswer.comment !== answer.myComment.comment
         && idx !== -1 && commentidx !== -1) {
       currentAnswer.comment = answer.myComment.comment;
+      currentAnswer.editing = true;
     }
   },
   [REPLY_ANSWER](state, answer) {

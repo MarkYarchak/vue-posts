@@ -251,7 +251,6 @@ export default {
         this.$store.dispatch('editMyComment', {
           myComment: {
             comment: this.selfComment.comment,
-            editing: true,
           },
           postId: this.answerOrComment.postId,
           commentId: this.answerOrComment.commentId,
@@ -283,7 +282,6 @@ export default {
         this.$store.dispatch('editMyAnswer', {
           myComment: {
             comment: this.selfComment.comment,
-            editing: true,
           },
           postId: this.answerOrComment.postId,
           commentId: this.answerOrComment.commentId,

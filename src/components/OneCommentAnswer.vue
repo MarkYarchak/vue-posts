@@ -31,6 +31,11 @@
             <div class="box-answer_date__commentdate">
               {{ commentCreateTime }}
             </div>
+            <div
+              v-if="answer.editing"
+              class="box-answer_date__true-edit">
+              ● edited
+            </div>
           </div>
           <CommentAnswerItems
             v-if="showCommentAnswerItems &&
@@ -218,8 +223,8 @@ export default {
       justify-content center
       display flex
       font-size 12px
+      padding 0 3px 2px 3px
   .box-answer_date__commentdate
-      font-family "Arial", Arial, sans-serif
       color #636363
       padding-bottom 1px
       -webkit-touch-callout none
@@ -228,7 +233,8 @@ export default {
       -moz-user-select none
       -ms-user-select none
       user-select none
-  .box-answer_date__answer
+  .box-answer_date__true-edit
+      margin 0 0 0 5px
   .onecom__right
       margin 0 5px 0 3px
       display flex

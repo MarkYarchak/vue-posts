@@ -23,6 +23,7 @@
           },
           "comment": "So good! its so beatiful, get here for me!)) please",
           "createDate": [2018, 7, 29],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -36,6 +37,7 @@
           },
           "comment": "the best",
           "createDate": [2018, 7, 20],
+          "editing": false,
           "likes": [],
           "answers": [
             {
@@ -49,6 +51,7 @@
               "usernameOfCompanion": "",
               "comment": "oh realy? i think, that is false mind, and bad place (not for rest), isn't it?",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -62,6 +65,7 @@
               "usernameOfCompanion": "bro",
               "comment": "yeah, it`s true",
               "createDate": [2018, 7, 23],
+              "editing": false,
               "likes": []
             },
             {
@@ -75,6 +79,7 @@
               "usernameOfCompanion": "",
               "comment": "stop ur mind",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -88,6 +93,7 @@
               "usernameOfCompanion": "nobody",
               "comment": "thanks ha",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -101,6 +107,7 @@
               "usernameOfCompanion": "",
               "comment": "narmalno)",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -114,6 +121,7 @@
               "usernameOfCompanion": "",
               "comment": "run away",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -127,6 +135,7 @@
               "usernameOfCompanion": "",
               "comment": "maybe true",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -140,6 +149,7 @@
               "usernameOfCompanion": "",
               "comment": "independent mind bro",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -153,6 +163,7 @@
               "usernameOfCompanion": "",
               "comment": "give arguments pls",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -166,6 +177,7 @@
               "usernameOfCompanion": "",
               "comment": "why?",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -179,6 +191,7 @@
               "usernameOfCompanion": "",
               "comment": "saying beauty",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -192,6 +205,7 @@
               "usernameOfCompanion": "",
               "comment": "need smth more?",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -205,6 +219,7 @@
               "usernameOfCompanion": "",
               "comment": "guy don't cry)",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -218,6 +233,7 @@
               "usernameOfCompanion": "",
               "comment": "leave back pls",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -231,6 +247,7 @@
               "usernameOfCompanion": "",
               "comment": "go away",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             },
             {
@@ -244,6 +261,7 @@
               "usernameOfCompanion": "",
               "comment": "oh no",
               "createDate": [2018, 7, 21],
+              "editing": false,
               "likes": []
             }
           ]
@@ -258,6 +276,7 @@
           },
           "comment": "Wonderful picture",
           "createDate": [2018, 7, 17],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -271,6 +290,7 @@
           },
           "comment": "i think, it`s nice! i saw best picture ever",
           "createDate": [2018, 7, 3],
+          "editing": false,
           "likes": [],
           "answers": []
         }
@@ -301,6 +321,7 @@
           },
           "comment": "Good writing",
           "createDate": [2018, 6, 11],
+          "editing": false,
           "likes": [],
           "answers": [
             {
@@ -314,6 +335,7 @@
               "usernameOfCompanion": "",
               "comment": "yeah, it`s true",
               "createDate": [2018, 7, 23],
+              "editing": false,
               "likes": []
             }
           ]
@@ -328,6 +350,7 @@
           },
           "comment": "how long you think it?",
           "createDate": [2018, 6, 7],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -341,6 +364,7 @@
           },
           "comment": "good",
           "createDate": [2018, 6, 4],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -354,6 +378,7 @@
           },
           "comment": "hey",
           "createDate": [2018, 5, 21],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -367,6 +392,7 @@
           },
           "comment": "With memory...",
           "createDate": [2018, 5, 15],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -380,6 +406,7 @@
           },
           "comment": "what?",
           "createDate": [2018, 5, 12],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -393,6 +420,7 @@
           },
           "comment": "lol)",
           "createDate": [2018, 5, 10],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -406,6 +434,7 @@
           },
           "comment": "interesting",
           "createDate": [2018, 5, 10],
+          "editing": false,
           "likes": [],
           "answers": []
         }
@@ -433,6 +462,7 @@
           },
           "comment": "haha",
           "createDate": [2018, 3, 2],
+          "editing": false,
           "likes": [
             {
               "displayName": "Tatum Vine",
@@ -453,6 +483,7 @@
           },
           "comment": "where is my comment",
           "createDate": [2018, 2, 20],
+          "editing": false,
           "likes": [],
           "answers": []
         },
@@ -466,6 +497,7 @@
           },
           "comment": "not bad",
           "createDate": [2018, 2, 15],
+          "editing": false,
           "likes": [],
           "answers": []
         }

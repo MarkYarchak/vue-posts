@@ -71,17 +71,13 @@ export default {
   data() {
     return {
       openAnswersList: false,
-      posts: [],
       countans: 10,
     };
   },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-    }),
-  },
-  created() {
-    this.posts = this.postsFromStore;
+    ...mapGetters([
+      'posts',
+    ]),
   },
   mounted() {
     window.addEventListener('click', this.nothing);
