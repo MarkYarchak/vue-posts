@@ -33,7 +33,8 @@
             </div>
           </div>
           <CommentAnswerItems
-            v-if="showCommentAnswerItems"
+            v-if="showCommentAnswerItems &&
+            !awesomeOperations.editCom && !awesomeOperations.editAns"
             :comment="comment"
             :answer="answer"
             :post="post"
@@ -96,29 +97,24 @@ export default {
         usernameOfCompanion: 'mark',
       },
       showCommentAnswerItems: false,
-      posts: [],
       likePos: false,
-      user: {},
     };
   },
   computed: {
     commentCreateTime() {
       return moment(this.answer.createDate).fromNow(true);
     },
-    ...mapGetters({
-      postsFromStore: 'posts',
-      userFromStore: 'user',
-    }),
+    ...mapGetters([
+      'posts',
+      'user',
+      'awesomeOperations',
+    ]),
   },
   mounted() {
     window.addEventListener('click', this.closeCommentAnswerParameters);
   },
   destroed() {
     window.removeEventListener('click', this.closeCommentAnswerParameters);
-  },
-  created() {
-    this.user = this.userFromStore;
-    this.posts = this.postsFromStore;
   },
   methods: {
     closeCommentAnswerParameters() {

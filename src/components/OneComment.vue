@@ -29,7 +29,7 @@
             </div>
           </div>
           <CommentItems
-            v-if="showCommentItems"
+            v-if="showCommentItems && !awesomeOperations.editCom && !awesomeOperations.editAns"
             :comment="comment"
             :post="post"
           />
@@ -97,14 +97,14 @@ export default {
       openParameters: null,
       showCommentItems: false,
       likePos: false,
-      user: {},
     };
   },
   computed: {
-    ...mapGetters({
-      postsFromStore: 'posts',
-      userFromStore: 'user',
-    }),
+    ...mapGetters([
+      'posts',
+      'user',
+      'awesomeOperations',
+    ]),
     commentCreateTime() {
       return moment(this.comment.createDate).fromNow(true);
     },
@@ -114,10 +114,6 @@ export default {
   },
   destroed() {
     window.removeEventListener('click', this.closeCommentParameters);
-  },
-  created() {
-    this.posts = this.postsFromStore;
-    this.user = this.userFromStore;
   },
   methods: {
     createCommentAnswer() {},

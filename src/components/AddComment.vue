@@ -102,9 +102,15 @@ export default {
       'user',
       'inputAction',
       'awesomeOperations',
+      'changingUsername',
     ]),
   },
   watch: {
+    changingUsername() {
+      if (this.inputAction.editCom || this.inputAction.editAns) {
+        this.selfComment.comment = this.answerOrComment.commentText;
+      }
+    },
     inputAction(newValue) {
       switch (newValue) {
         case 'Write your comment': {
@@ -231,7 +237,7 @@ export default {
         const idx = tempPosts.findIndex(p => p.id === this.selfComment.postId);
         if (idx !== -1) {
           tempPosts[idx].comments.unshift(this.selfComment);// or push() it to end
-          this.posts = Object.assign(tempPosts);
+          // this.posts = Object.assign(tempPosts);
           // this.posts = JSON.parse(JSON.stringify(tempPosts));
           this.antiCommentOperations();
         }

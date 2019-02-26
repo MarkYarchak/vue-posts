@@ -4,4 +4,5 @@ export default {
   inputAction: state => state.answerOrComment.inpAction,
   answerOrComment: state => state.answerOrComment,
   awesomeOperations: state => state.inputAction,
+  changingUsername: state => state.answerOrComment.username,
 };
