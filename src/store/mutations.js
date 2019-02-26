@@ -30,8 +30,7 @@ export default {
       .findIndex(c => c.id === comment.commentId);
     if (tempComments[commentidx].comment !== comment.myComment.comment
         && idx !== -1 && commentidx !== -1) {
-      tempComments[commentidx].replace(tempComments[commentidx].comment,
-        comment.myComment.comment);
+      tempComments[commentidx].comment = comment.myComment.comment;
     }
   },
   [CREATE_ANSWER](state, answer) {
@@ -55,7 +54,7 @@ export default {
     const currentAnswer = tempAnswers[answeridx];
     if (currentAnswer.comment !== answer.myComment.comment
         && idx !== -1 && commentidx !== -1) {
-      tempPosts[idx].comments.replace(currentAnswer.comment, answer.myComment.comment);
+      currentAnswer.comment = answer.myComment.comment;
     }
   },
   [REPLY_ANSWER](state, answer) {
