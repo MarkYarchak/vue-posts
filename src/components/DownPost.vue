@@ -79,6 +79,17 @@ export default {
     };
   },
   computed: {
+    // filteredComments() {
+    //   for (let a = 0; this.post.comments; a) {
+    //     const firstAvatar = a.author.avatar;
+    //     const tempComments = this.post.comments.concat();
+    //     const commentidx = tempComments.findIndex(c => c.author.avatar === firstAvatar);
+    //     if (commentidx !== -1) {
+    //       var filteredComments = tempComments.filter(c => c.author.avatar !== commentidx);
+    //     }
+    //   }
+    //   return filteredComments;
+    // },
     ...mapGetters([
       'posts',
       'user',
@@ -92,7 +103,6 @@ export default {
       this.post.id = Math.floor(Math.random() * 10000);
       this.likePos = !this.likePos;
       if (this.likePos) {
-        // window.localStorage.setItem('this.likePos', 'true');
         const tempPosts = this.posts.concat();
         const idx = tempPosts.findIndex(p => p.id === this.post.id);
         if (idx !== -1) {
@@ -100,7 +110,6 @@ export default {
         }
       }
       if (!this.likePos) {
-        // window.localStorage.setItem('this.likePos', 'false');
         const tempPosts = this.posts.concat();
         const idx = tempPosts.findIndex(p => p.id === this.post.id);
         if (idx !== -1) {

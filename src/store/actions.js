@@ -6,6 +6,8 @@ import {
   CREATE_ANSWER,
   EDIT_ANSWER,
   REPLY_ANSWER,
+  DELETE_COMMENT,
+  DELETE_ANSWER,
 } from './mutations-types';
 
 export default {
@@ -29,5 +31,11 @@ export default {
   },
   myReplyAnswer(context, payload) {
     context.commit(REPLY_ANSWER, payload);
+  },
+  deleteUserComment(context, payload) {
+    context.commit(DELETE_COMMENT, payload);
+  },
+  deleteUserAnswer(context, payload) {
+    context.commit(DELETE_ANSWER, payload);
   },
 };

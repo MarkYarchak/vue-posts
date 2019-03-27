@@ -5,3 +5,5 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const CREATE_ANSWER = 'CREATE_ANSWER';
 export const EDIT_ANSWER = 'EDIT_ANSWER';
 export const REPLY_ANSWER = 'REPLY_ANSWER';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const DELETE_ANSWER = 'DELETE_ANSWER';

@@ -6,6 +6,8 @@ import {
   CREATE_ANSWER,
   EDIT_ANSWER,
   REPLY_ANSWER,
+  DELETE_COMMENT,
+  DELETE_ANSWER,
 } from './mutations-types';
 
 export default {
@@ -67,6 +69,27 @@ export default {
       .findIndex(c => c.id === answer.commentId);
     if (idx !== -1 && commentidx !== -1) {
       tempComments[commentidx].answers.unshift(answer.myAnswer);
+    }
+  },
+  [DELETE_COMMENT](state, comment) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === comment.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === comment.commentId);
+    if (postidx !== -1 && commentidx !== -1) {
+      tempPosts[postidx].comments = tempComments.filter(c => c.id !== comment.commentId);
+    }
+  },
+  [DELETE_ANSWER](state, answer) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === answer.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === answer.commentId);
+    const tempAnswers = tempPosts[postidx].comments[commentidx].answers.concat();
+    const answeridx = tempAnswers.findIndex(a => a.id === answer.answerId);
+    if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+      tempPosts[postidx].comments[commentidx].answers = tempAnswers
+        .filter(a => a.id !== answer.answerId);
     }
   },
 };

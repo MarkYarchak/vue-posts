@@ -102,6 +102,11 @@ export default {
       });
     },
     deleteCommentAnswer() {
+      this.$store.dispatch('deleteUserAnswer', {
+        postId: this.post.id,
+        commentId: this.comment.id,
+        answerId: this.answer.id,
+      });
       const tempPosts = this.posts.concat();
       const postidx = tempPosts.findIndex(p => p.id === this.post.id);
       const tempComments = tempPosts[postidx].comments.concat();

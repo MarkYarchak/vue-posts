@@ -99,13 +99,10 @@ export default {
       });
     },
     deleteComment() {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempPosts[postidx].comments = tempComments.filter(c => c.id !== this.comment.id);
-      }
+      this.$store.dispatch('deleteUserComment', {
+        postId: this.post.id,
+        commentId: this.comment.id,
+      });
     },
   },
 };
