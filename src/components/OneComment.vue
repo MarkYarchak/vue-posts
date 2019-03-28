@@ -52,11 +52,11 @@
             class="like__position"
             @click="SwitchCommentLike">
             <i
-              v-if="!likePos"
+              v-if="!comment.likes.some(u => u.id === user.id)"
               class="far fa-heart"
             />
             <i
-              v-if="likePos"
+              v-if="comment.likes.some(u => u.id === user.id)"
               class="fas fa-heart"
             />
           </div>
@@ -133,40 +133,18 @@ export default {
       this.showCommentItems = !this.showCommentItems;
     },
     SwitchCommentLike() {
-      this.comment.id = Math.floor(Math.random() * 10000);
-      this.likePos = !this.likePos;
-      if (this.likePos) {
-        this.likeComment({
+      if (this.comment.likes.findIndex(u => u.id === this.user.id) !== -1) {
+        this.$store.dispatch('dislikeComment', {
           user: this.user,
           commentId: this.comment.id,
           postId: this.post.id,
         });
-      }
-      if (!this.likePos) {
-        this.dislikeComment({
+      } else {
+        this.$store.dispatch('likeComment', {
           user: this.user,
           commentId: this.comment.id,
           postId: this.post.id,
         });
-      }
-    },
-    likeComment(likeData) {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes.push(likeData.user);
-      }
-    },
-    dislikeComment(likeData) {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
-      if (postidx !== -1 && commentidx !== -1) {
-        tempComments[commentidx].likes = tempComments[commentidx].likes
-          .filter(l => l.id !== likeData.user.id);
       }
     },
   },

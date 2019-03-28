@@ -31,11 +31,11 @@
             class="like__position"
             @click="PostLike">
             <i
-              v-if="!likePos"
+              v-if="!post.likes.some(u => u.id === user.id)"
               class="far fa-heart"
             />
             <i
-              v-if="likePos"
+              v-if="post.likes.some(u => u.id === user.id)"
               class="fas fa-heart"
             />
           </div>
@@ -95,27 +95,27 @@ export default {
       'user',
     ]),
   },
+  created() {
+    if (this.post.likes.some(u => u.id === this.user.id)) {
+      this.likePos = true;
+    }
+  },
   methods: {
     showCom() {
       this.showComments = !this.showComments;
     },
     PostLike() {
-      this.post.id = Math.floor(Math.random() * 10000);
-      this.likePos = !this.likePos;
-      if (this.likePos) {
-        const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.post.id);
-        if (idx !== -1) {
-          tempPosts[idx].likes.push(this.user);
-        }
-      }
-      if (!this.likePos) {
-        const tempPosts = this.posts.concat();
-        const idx = tempPosts.findIndex(p => p.id === this.post.id);
-        if (idx !== -1) {
-          tempPosts[idx].likes = tempPosts[idx].likes
-            .filter(l => l.id !== this.user.id);
-        }
+      // this.post.id = Math.floor(Math.random() * 10000);
+      if (this.post.likes.findIndex(u => u.id === this.user.id) !== -1) {
+        this.$store.dispatch('dislikePost', {
+          postId: this.post.id,
+          user: this.user,
+        });
+      } else {
+        this.$store.dispatch('likePost', {
+          postId: this.post.id,
+          user: this.user,
+        });
       }
     },
   },

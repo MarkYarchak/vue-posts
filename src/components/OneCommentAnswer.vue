@@ -58,11 +58,11 @@
             class="like__position"
             @click="switchLikeComment">
             <i
-              v-if="!likePos"
+              v-if="!answer.likes.some(u => u.id === user.id)"
               class="far fa-heart"
             />
             <i
-              v-if="likePos"
+              v-if="answer.likes.some(u => u.id === user.id)"
               class="fas fa-heart"
             />
           </div>
@@ -126,40 +126,28 @@ export default {
       this.showCommentAnswerItems = false;
     },
     switchLikeComment() {
-      this.answer.id = Math.floor(Math.random() * 10000);
-      this.likePos = !this.likePos;
-      if (this.likePos) {
-        this.likeComment();
-      }
-      if (!this.likePos) {
-        this.dislikeComment();
+      // this.answer.id = Math.floor(Math.random() * 10000);
+      // this.likePos = !this.likePos;
+      if (this.answer.likes.findIndex(u => u.id === this.user.id) !== -1) {
+        this.$store.dispatch('dislikeAnswer', {
+          postId: this.post.id,
+          commentId: this.comment.id,
+          answerId: this.answer.id,
+          user: this.user,
+        });
+      } else {
+        this.$store.dispatch('likeAnswer', {
+          postId: this.post.id,
+          commentId: this.comment.id,
+          answerId: this.answer.id,
+          user: this.user,
+        });
       }
     },
     likeComment() {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
-      const tempAnswers = tempComments[commentidx].answers.concat();
-      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
-      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
-        tempAnswers[answeridx].likes.push(this.user);
-      }
-    },
-    dislikeComment() {
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
-      const tempAnswers = tempComments[commentidx].answers.concat();
-      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
-      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
-        tempAnswers[answeridx].likes = tempAnswers[answeridx].likes
-          .filter(l => l.id !== this.user.id);
-      }
+
     },
     showParameters() {
-      // this.showCommentItems = true || false;
       this.showCommentAnswerItems = !this.showCommentAnswerItems;
     },
   },

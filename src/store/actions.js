@@ -1,4 +1,10 @@
 import {
+  LIKE_POST,
+  DISLIKE_POST,
+  LIKE_COMMENT,
+  DISLIKE_COMMENT,
+  LIKE_ANSWER,
+  DISLIKE_ANSWER,
   SET_COMMENT,
   INPUT_ACTION,
   CREATE_COMMENT,
@@ -11,6 +17,24 @@ import {
 } from './mutations-types';
 
 export default {
+  likePost(context, payload) {
+    context.commit(LIKE_POST, payload);
+  },
+  dislikePost(context, payload) {
+    context.commit(DISLIKE_POST, payload);
+  },
+  likeComment(context, payload) {
+    context.commit(LIKE_COMMENT, payload);
+  },
+  dislikeComment(context, payload) {
+    context.commit(DISLIKE_COMMENT, payload);
+  },
+  likeAnswer(context, payload) {
+    context.commit(LIKE_ANSWER, payload);
+  },
+  dislikeAnswer(context, payload) {
+    context.commit(DISLIKE_ANSWER, payload);
+  },
   updateCommentOrAnswer(context, payload) {
     context.commit(SET_COMMENT, payload);
   },

@@ -8,9 +8,72 @@ import {
   REPLY_ANSWER,
   DELETE_COMMENT,
   DELETE_ANSWER,
+  LIKE_POST,
+  DISLIKE_POST,
+  LIKE_COMMENT,
+  DISLIKE_COMMENT,
+  LIKE_ANSWER,
+  DISLIKE_ANSWER,
 } from './mutations-types';
 
 export default {
+  [LIKE_POST](state, post) {
+    const tempPosts = this.state.posts.concat();
+    const idx = tempPosts.findIndex(p => p.id === post.postId);
+    if (idx !== -1) {
+      tempPosts[idx].likes.push(post.user);
+    }
+  },
+  [DISLIKE_POST](state, post) {
+    const tempPosts = this.state.posts.concat();
+    const idx = tempPosts.findIndex(p => p.id === post.postId);
+    if (idx !== -1) {
+      tempPosts[idx].likes = tempPosts[idx].likes
+        .filter(l => l.id !== post.user.id);
+    }
+  },
+  [LIKE_COMMENT](state, likeData) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+    if (postidx !== -1 && commentidx !== -1) {
+      tempComments[commentidx].likes.push(likeData.user);
+    }
+  },
+  [DISLIKE_COMMENT](state, likeData) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+    if (postidx !== -1 && commentidx !== -1) {
+      tempComments[commentidx].likes = tempComments[commentidx].likes
+        .filter(l => l.id !== likeData.user.id);
+    }
+  },
+  [LIKE_ANSWER](state, likeData) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+    const tempAnswers = tempComments[commentidx].answers.concat();
+    const answeridx = tempAnswers.findIndex(a => a.id === likeData.answerId);
+    if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+      tempAnswers[answeridx].likes.push(likeData.user);
+    }
+  },
+  [DISLIKE_ANSWER](state, likeData) {
+    const tempPosts = this.state.posts.concat();
+    const postidx = tempPosts.findIndex(p => p.id === likeData.postId);
+    const tempComments = tempPosts[postidx].comments.concat();
+    const commentidx = tempComments.findIndex(c => c.id === likeData.commentId);
+    const tempAnswers = tempComments[commentidx].answers.concat();
+    const answeridx = tempAnswers.findIndex(a => a.id === likeData.answerId);
+    if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
+      tempAnswers[answeridx].likes = tempAnswers[answeridx].likes
+        .filter(l => l.id !== likeData.user.id);
+    }
+  },
   [SET_COMMENT](state, comment) {
     this.state.answerOrComment = comment;
   },

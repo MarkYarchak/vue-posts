@@ -346,6 +346,7 @@ export default {
         -webkit-transition all 0.2s ease
         -moz-transition all 0.2s ease
         -o-transition all 0.2s ease
+        cursor pointer
     .btn-cancel_comment_operation:active
         background-color lavender
     .box-addcom

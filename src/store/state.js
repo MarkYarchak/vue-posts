@@ -1,6 +1,4 @@
-import post from '../data/posts';
-
-const posts = post;
+import posts from '../data/posts';
 
 export default {
   posts,
