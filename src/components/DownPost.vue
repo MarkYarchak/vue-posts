@@ -32,11 +32,11 @@
             @click="PostLike">
             <i
               v-if="!post.likes.some(u => u.id === user.id)"
-              class="far fa-heart"
+              class="far fa-heart animated bounceIn"
             />
             <i
               v-if="post.likes.some(u => u.id === user.id)"
-              class="fas fa-heart"
+              class="fas fa-heart animated bounceIn"
             />
           </div>
         </div>

@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import HighPost from './HighPost';
 import ContentPost from './ContentPost';
 import DownPost from './DownPost';
@@ -32,11 +31,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  },
-  computed: {
-    ...mapGetters([
-      'posts',
-    ]),
   },
 };
 </script>
