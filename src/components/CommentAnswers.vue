@@ -24,11 +24,21 @@
     </div>
     <div class="box_switch-add">
       <div
-        v-if="answers.length"
+        v-if="answers.length && openAnswersList"
+        class="switch-commentanswers"
+        @click="closeAllAnswers">
+        <span class="anscomment-text">
+          Hide
+          {{ countans }}
+          {{ answers.length === 1 ? "answer" : "answers" }}
+        </span>
+      </div>
+      <div
+        v-if="answers.length && !openAnswersList"
         class="switch-commentanswers"
         @click="showAnswers">
         <span class="anscomment-text">
-          {{ openAnswersList ? 'Hide' : 'Show' }}
+          Show
           {{ 10 > answers.length && countans !== answers.length ? answers.length : countans }}
           {{ answers.length === 1 ? "answer" : "answers" }}
         </span>
@@ -89,14 +99,15 @@ export default {
     nothing() {},
     closeAllAnswers() {
       this.openAnswersList = false;
+      this.countans = 10;
     },
     showAnswers() {
       this.openAnswersList = !this.openAnswersList;
     },
     showMoreAns() {
-      if (this.countans + 10 > this.answers.length) {
-        this.countans += this.answers.length % 10;
-      } else this.countans += 10;
+      if (this.countans + 10 < this.answers.length) {
+        this.countans += 10;
+      } else this.countans += this.answers.length % 10;
     },
   },
 };

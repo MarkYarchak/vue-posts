@@ -107,16 +107,6 @@ export default {
         commentId: this.comment.id,
         answerId: this.answer.id,
       });
-      const tempPosts = this.posts.concat();
-      const postidx = tempPosts.findIndex(p => p.id === this.post.id);
-      const tempComments = tempPosts[postidx].comments.concat();
-      const commentidx = tempComments.findIndex(c => c.id === this.comment.id);
-      const tempAnswers = tempPosts[postidx].comments[commentidx].answers.concat();
-      const answeridx = tempAnswers.findIndex(a => a.id === this.answer.id);
-      if (postidx !== -1 && commentidx !== -1 && answeridx !== -1) {
-        tempPosts[postidx].comments[commentidx].answers = tempAnswers
-          .filter(a => a.id !== this.answer.id);
-      }
     },
   },
 };
